@@ -34,6 +34,7 @@
       <ul class="nav__links">
         <li><a href="#prace">Jak pracuje</a></li>
         <li><a href="#bezpeci">Bezpečí</a></li>
+        <li><a href="#instalace">Instalace</a></li>
         <li><a href="#cena">Cena</a></li>
         <li><a href="#otazky">Otázky</a></li>
       </ul>
@@ -243,11 +244,30 @@
     </div>
   </section>
 
+  <!-- 9b. Install -->
+  <section class="sec" id="instalace" aria-labelledby="inst-h">
+    <div class="wrap install">
+      <p class="eyebrow">09 · Instalace</p>
+      <h2 id="inst-h" class="statement">Jedno vložení <em>a jedete.</em></h2>
+      <p class="install__lead">Nemusíte nic hledat ani stahovat. Příkaz sám doinstaluje, co chybí (Git, Python, Claude Code), a spustí úvodní nastavení Martyho.</p>
+      <ol class="install__steps">
+        <li><span>1</span>Stiskněte <kbd>Win</kbd> + <kbd>X</kbd> a vyberte <strong>Terminál</strong> (nebo PowerShell).</li>
+        <li><span>2</span>Zkopírujte příkaz, vložte ho (<kbd>Ctrl</kbd> + <kbd>V</kbd>) a stiskněte <kbd>Enter</kbd>.</li>
+        <li><span>3</span>Přihlaste se do svého účtu Claude v prohlížeči a odpovězte Martymu na pár otázek.</li>
+      </ol>
+      <div class="cmd">
+        <code id="cmd-text">irm https://jachym-kulhavy.github.io/dema-public/marty/install.ps1 | iex</code>
+        <button class="btn btn--sm cmd__copy" type="button" data-copy="#cmd-text">Kopírovat</button>
+      </div>
+      <p class="install__note">Co přesně příkaz dělá, si můžete přečíst v <a class="link" href="install.ps1" target="_blank" rel="noopener">install.ps1</a>. Co už máte, přeskočí. Trvá to 5–15 minut.</p>
+    </div>
+  </section>
+
   <!-- 10. Pricing -->
   <section class="sec" id="cena" aria-labelledby="cena-h">
     <div class="wrap price">
       <div class="price__text">
-        <p class="eyebrow">09 · Cena</p>
+        <p class="eyebrow">10 · Cena</p>
         <h2 id="cena-h">200 Kč měsíčně. K tomu Vaše předplatné Claude.</h2>
         <p>Plánovaná cena při spuštění. Marty běží v Claude Code, takže k němu potřebujete i vlastní předplatné Claude, které platíte přímo společnosti Anthropic.</p>
       </div>
@@ -269,7 +289,7 @@
   <section class="sec sec--alt" id="otazky" aria-labelledby="faq-h">
     <div class="wrap faq">
       <div>
-        <p class="eyebrow">10 · Otázky</p>
+        <p class="eyebrow">11 · Otázky</p>
         <h2 id="faq-h">Časté otázky</h2>
       </div>
       <div class="faq__list">

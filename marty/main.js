@@ -103,3 +103,16 @@ const WAITLIST_URL = "#"; // TODO: Google Form URL
     state.textContent = ok ? "Schváleno. Teprve teď by e-mail odešel. (Ukázka, nic se neposílá.)" : "Zamítnuto. Draft zůstane uložený, nic neodešlo.";
   });
 })();
+
+// Copy-to-clipboard for the install command
+document.querySelectorAll("[data-copy]").forEach((b) => {
+  b.addEventListener("click", async () => {
+    const text = document.querySelector(b.dataset.copy).textContent.trim();
+    try { await navigator.clipboard.writeText(text); } catch {
+      const r = document.createRange(); r.selectNodeContents(document.querySelector(b.dataset.copy));
+      getSelection().removeAllRanges(); getSelection().addRange(r); document.execCommand("copy");
+    }
+    const old = b.textContent; b.textContent = "Zkopírováno ✓";
+    setTimeout(() => { b.textContent = old; }, 1600);
+  });
+});

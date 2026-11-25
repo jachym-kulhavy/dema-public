@@ -281,3 +281,16 @@ em { font-style: italic; color: var(--gold-2); }
 @media (max-width: 860px) {
   .hero__orb { position: relative; top: auto; right: auto; width: 128px; transform: none; margin: 0 0 22px -6px; }
 }
+
+/* Install: one-paste command */
+.install { max-width: 60rem; }
+.install__lead { color: var(--muted, #b9b0a2); max-width: 40rem; }
+.install__steps { list-style: none; padding: 0; margin: 2rem 0; display: grid; gap: .9rem; }
+.install__steps li { position: relative; padding-left: 2.8rem; line-height: 1.8; }
+.install__steps span { font: 500 .8rem/1 var(--sans); color: var(--gold); border: 1px solid var(--gold); border-radius: 50%; width: 1.8rem; height: 1.8rem; display: grid; place-items: center; position: absolute; left: 0; top: 0; }
+kbd { font: 500 .85em/1 var(--mono, ui-monospace, monospace); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: .15em .4em; }
+.cmd { display: flex; gap: .75rem; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: .75rem .75rem .75rem 1.1rem; background: rgba(0,0,0,.25); }
+.cmd code { flex: 1; min-width: 0; font: 500 .86rem/1.5 var(--mono, ui-monospace, monospace); color: var(--gold-2); overflow-x: auto; white-space: nowrap; }
+.cmd__copy { flex: none; }
+.install__note { margin-top: 1rem; font-size: .9rem; opacity: .8; }
+@media (max-width: 600px) { .cmd { flex-direction: column; align-items: stretch; } .cmd code { white-space: normal; word-break: break-all; font-size: .8rem; } }
