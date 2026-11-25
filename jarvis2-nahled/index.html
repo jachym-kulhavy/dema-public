@@ -54,11 +54,11 @@ h2{font-size:1.6rem;margin:3rem 0 1rem;letter-spacing:-.01em}
 <section class="hero">
   <div>
     <span class="tag">Pracovní náhled · jarvis2</span>
-    <h1>Tvůj vlastní <span>Jarvis</span>, nastavený podle tebe.</h1>
-    <p class="lead">Plugin do oficiálního Claude Code. Projde s tebou onboarding, pamatuje si věci v souborech, pracuje na pozadí po blocích a ovládáš ho z mobilu. Platíš jen svoje Claude předplatné.</p>
+    <h1>Jeden <span>Jarvis</span> na úplně všechno.</h1>
+    <p class="lead">Univerzální AI parťák v Claude Code: weby, oslovování zákazníků, YouTube automatizace, copy trading, cokoli dalšího. Sám se zlepšuje, hlídá nové nástroje a má kritický tým, který každý výstup zkontroluje. Nastavíš si ho do posledního detailu.</p>
     <div class="btns">
-      <a class="btn p" href="tutorialy/index.html">Tutoriály krok za krokem</a>
-      <a class="btn g" href="web/index.html">Web produktu a moduly</a>
+      <a class="btn p" href="#nastaveni">Co všechno nastavíš</a>
+      <a class="btn g" href="tutorialy/index.html">Tutoriály</a>
     </div>
   </div>
   <div class="phone" aria-label="Ukázka: Jarvis v Claude appce na mobilu">
@@ -66,11 +66,11 @@ h2{font-size:1.6rem;margin:3rem 0 1rem;letter-spacing:-.01em}
       <div class="bar"><div class="dot"></div><div><b>Jarvis</b><small>Remote Control · PC doma</small></div></div>
       <div class="toast">Jarvis online.</div>
       <div class="chat">
-        <div class="m u">Najdi mi 3 kavárny v Brně, co nemají web</div>
-        <div class="m j">Jdu na to. Hledám podle tvého oboru z onboardingu.</div>
-        <div class="tool">⚙ oslovení · research podniků</div>
-        <div class="m j">Hotovo: 3 kavárny + osobní drafty e-mailů v <code>outreach/</code>. Nic jsem neodeslal, čeká na tvoje OK.</div>
-        <div class="m u">Pošli první dva</div>
+        <div class="m u">Udělej z dnešního streamu 3 shortsy</div>
+        <div class="m j">Střih hotový. Než ti je pošlu, prošel je kritický tým.</div>
+        <div class="tool">⚙ kritický tým · kontrola videí</div>
+        <div class="m j">Klip 2 měl 3 s černý pruh mezi hrou a kamerou a titulek ujížděl o 0,4 s. Opraveno a zkontrolováno znovu. Všechny 3 jsou OK.</div>
+        <div class="m u">Super, nahraj je</div>
       </div>
       <div class="status"><i></i>Jarvis · připraven</div>
       <div class="inp">Napiš Jarvisovi…</div>
@@ -78,34 +78,53 @@ h2{font-size:1.6rem;margin:3rem 0 1rem;letter-spacing:-.01em}
   </div>
 </section>
 
-<h2>Jak to funguje</h2>
+<h2>Co umí každý Jarvis</h2>
+<p class="lead">Tohle je v každé instalaci, ať ho nastavíš na cokoli.</p>
 <div class="grid">
-  <div class="card"><span class="n">01</span><h3>Instalace</h3><p>Spustíš <code>instalace.bat</code>. Stačí Windows, Python a Claude Code s tvým účtem.</p></div>
-  <div class="card"><span class="n">02</span><h3>Onboarding</h3><p>30–45 minut otázek po oblastech, jedna zpráva = jedna otázka. Dá se pauznout a navázat.</p></div>
-  <div class="card"><span class="n">03</span><h3>Jen tvoje moduly</h3><p>Podle odpovědí doporučí moduly a nainstaluje jen ty, které vybereš.</p></div>
-  <div class="card"><span class="n">04</span><h3>Z mobilu</h3><p>Dvojklik na <code>Jarvis.bat</code> a v Claude appce vybereš session „Jarvis“.</p></div>
+  <div class="card"><span class="n">01</span><h3>Efektivně se zlepšuje</h3><p>Učí se z tvých oprav a vlastních chyb. Upravuje svoje postupy a zapisuje, co změnil, takže to jde kdykoli vrátit.</p></div>
+  <div class="card"><span class="n">02</span><h3>Posoudí reel i video</h3><p>Pošleš reel, YouTube video nebo TikTok. Přepíše ho, najde, o jaký nástroj nebo postup jde, vyzkouší ho a řekne, jestli stojí za to.</p></div>
+  <div class="card"><span class="n">03</span><h3>Research nástrojů</h3><p>Sám hledá skilly a nástroje, které by ti pomohly. Čte novinky, sleduje videa a nosí ti jen to, co se tě týká.</p></div>
+  <div class="card"><span class="n">04</span><h3>Kritický tým</h3><p>Skupina kontrolorů, kteří výstup posoudí dřív, než ho uvidíš. Co neprojde, vrátí k opravě.</p></div>
 </div>
 
-<h2>Moduly</h2>
-<div class="grid">
-  <div class="card"><h3>Základ</h3><p>Onboarding, paměť v souborech, spouštěč pro mobil a pojistka: bez tvého OK nic neodejde.</p></div>
-  <div class="card"><h3>Scout</h3><p>Pošleš odkaz na nástroj nebo reel, otestuje ho v izolované složce, doladí a vrátí verdikt.</p></div>
-  <div class="card"><h3>Oslovení</h3><p>Research podniků, osobní drafty e-mailů a jednoduché CRM. Odesílá jen po schválení.</p></div>
-  <div class="card"><h3>Bloky</h3><p>Práce na pozadí podle plánu, hlídá limity předplatného, ranní report.</p></div>
-</div>
-
-<h2>Vzhled (mod)</h2>
-<p class="lead">Mod přebarví Claude appku na námořnickou modř s tyrkysovým akcentem, přidá stavový řádek, uvítání a povahu Jarvise. Takhle vypadá start v terminálu:</p>
+<h2>Kritický tým u videí</h2>
 <div class="term">
-<span class="c">PS C:\Users\ty\Jarvis&gt;</span> .\Jarvis.bat<br>
-<span class="k">✓</span> Claude Code nalezen, přihlášení OK<br>
-<span class="k">✓</span> Aktualizace: zaklad, scout, mod jsou aktuální<br>
-<span class="k">✓</span> Remote Control běží (session „Jarvis“)<br>
-<span class="w">i</span> Otevři Claude appku na mobilu → Code → Jarvis<br>
-<span class="c">Jarvis · připraven</span>
+<span class="k">✓</span> sekání a zamrzlé snímky (kontrola snímek po snímku)<br>
+<span class="k">✓</span> titulky: překlepy, časování, useknutý nebo překrytý text<br>
+<span class="k">✓</span> synchronizace zvuku s obrazem, ticho, přebuzení<br>
+<span class="k">✓</span> černé čáry a pruhy, třeba mezi hrou a kamerou<br>
+<span class="k">✓</span> ořez, čitelnost na mobilu, přechody, AI artefakty<br>
+<span class="w">!</span> neprošlo → oprava → nová kontrola, až pak k tobě
+</div>
+<p class="lead" style="margin-top:1rem">Stejný tým kontroluje i weby (vzhled na mobilu, chyby), e-maily (tón, fakta) a obchodní nápady (dává to smysl?).</p>
+
+<h2>Na čem můžeš pracovat</h2>
+<div class="grid">
+  <div class="card"><h3>Weby</h3><p>Dema, celé weby, úpravy, kontrola na mobilu.</p></div>
+  <div class="card"><h3>Zákazníci</h3><p>Hledání podniků, osobní e-maily, follow-upy, CRM. Odesílá jen s tvým OK.</p></div>
+  <div class="card"><h3>YouTube a shortsy</h3><p>Střih, titulky, automatizace kanálu, plán nahrávání.</p></div>
+  <div class="card"><h3>Copy trading</h3><p>Rešerše, backtesty, sledování. Se skutečnými penězi jen v mezích, které nastavíš.</p></div>
+  <div class="card"><h3>Cokoli dalšího</h3><p>Škola, nástroje, vlastní projekty. Jarvis není zamčený na jeden obor.</p></div>
 </div>
 
-<p class="note">Pracovní náhled, ne finální produkt. Název, ceník a platby ještě nejsou rozhodnuté. Chat i výpis terminálu nahoře jsou ilustrační, tutoriály se generují přímo z pravidel pluginu.</p>
+<h2 id="nastaveni">Nastavíš 100 %</h2>
+<p class="lead">Žádné „přizpůsobitelné“ jen na obalu. V appce v nastavení změníš všechno:</p>
+<div class="grid">
+  <div class="card"><h3>Zábrany</h3><p>Co smí sám a co jen s tvým OK: e-maily, publikování, peníze, mazání, instalace. Každou pojistku zapneš nebo vypneš (s varováním).</p></div>
+  <div class="card"><h3>Chování</h3><p>Povaha, tón, jazyk, délka odpovědí, jestli se ptá, nebo rozhoduje sám, jak moc ti oponuje.</p></div>
+  <div class="card"><h3>Práce na pozadí</h3><p>Kolik bloků denně, v kolik hodin, kolik limitu předplatného smí spotřebovat, co dělá, když nemá práci.</p></div>
+  <div class="card"><h3>Kritický tým a zlepšování</h3><p>Kteří kontroloři běží, jak přísní jsou, jak často hledá nové nástroje a z jakých zdrojů.</p></div>
+  <div class="card"><h3>Reporty a vzhled</h3><p>Kam a kdy hlásí výsledky, barvy, jméno Jarvise.</p></div>
+</div>
+
+<h2>Plán</h2>
+<div class="grid">
+  <div class="card"><span class="n">01</span><h3>Univerzální Jarvis</h3><p>Priorita: jádro, které zvládne všechno, plus kompletní nastavení.</p></div>
+  <div class="card"><span class="n">02</span><h3>Test jako začátečník</h3><p>Instalace a nastavení od nuly, bez znalostí, tak, jak to uvidí zákazník.</p></div>
+  <div class="card"><span class="n">03</span><h3>Srovnání</h3><p>Nastavený jarvis2 proti současnému Jarvisovi na stejných úkolech.</p></div>
+</div>
+
+<p class="note">Pracovní náhled, ne finální produkt. Popisuje, kam jarvis2 směřuje. Část věcí ještě není hotová. Chat nahoře je ilustrační. Tutoriály ukazují současný stav.</p>
 </main>
 </body>
 </html>
