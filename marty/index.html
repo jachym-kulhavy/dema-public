@@ -39,7 +39,7 @@
         <li><a href="#otazky">Otázky</a></li>
       </ul>
     </nav>
-    <a class="btn btn--ghost btn--sm" href="#cekaci-listina">Chci mezi prvními</a>
+    <a class="btn btn--ghost btn--sm" href="#instalace">Vyzkoušet Martyho</a>
   </div>
 </header>
 
@@ -55,7 +55,7 @@
       <p class="hero__line" data-enter>Pravá ruka pro všechno, co děláte.</p>
       <p class="hero__sub" data-enter>Jeden software místo deseti nástrojů. Nastaví se podle Vás, pracuje sám a nic důležitého se nestane bez Vašeho ano.</p>
       <div class="hero__cta" data-enter>
-        <a class="btn" href="#cekaci-listina">Chci mezi prvními</a>
+        <a class="btn" href="#instalace">Vyzkoušet Martyho</a>
         <a class="link" href="#prace">Jak to funguje</a>
       </div>
       <dl class="hero__facts" data-enter>
@@ -251,14 +251,18 @@
       <h2 id="inst-h" class="statement">Jedno vložení <em>a jedete.</em></h2>
       <p class="install__lead">Nemusíte nic hledat ani stahovat. Příkaz sám doinstaluje, co chybí (Git, Python, Claude Code), a spustí úvodní nastavení Martyho.</p>
       <ol class="install__steps">
+        <li><span>0</span>Mějte předplatné <a class="link" href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Pro</a> (platíte přímo Anthropicu).</li>
         <li><span>1</span>Stiskněte <kbd>Win</kbd> + <kbd>X</kbd> a vyberte <strong>Terminál</strong> (nebo PowerShell).</li>
         <li><span>2</span>Zkopírujte příkaz, vložte ho (<kbd>Ctrl</kbd> + <kbd>V</kbd>) a stiskněte <kbd>Enter</kbd>.</li>
-        <li><span>3</span>Přihlaste se do svého účtu Claude v prohlížeči a odpovězte Martymu na pár otázek.</li>
       </ol>
       <div class="cmd">
         <code id="cmd-text">irm https://jachym-kulhavy.github.io/dema-public/marty/install.ps1 | iex</code>
         <button class="btn btn--sm cmd__copy" type="button" data-copy="#cmd-text">Kopírovat</button>
       </div>
+      <ol class="install__steps">
+        <li><span>3</span>Až se instalace zeptá, vložte <strong>přístupový kód</strong>, který jste dostali po zaplacení. Pak se přihlaste do svého účtu Claude v prohlížeči a odpovězte Martymu na pár otázek.</li>
+        <li><span>4</span>Hotovo. Martyho příště spustíte dvojklikem na <strong>Marty.bat</strong> ve složce <strong>Marty</strong> (ve Vaší uživatelské složce). Na mobilu ho pak najdete v appce Claude v záložce Code.</li>
+      </ol>
       <p class="install__note">Co přesně příkaz dělá, si můžete přečíst v <a class="link" href="install.ps1" target="_blank" rel="noopener">install.ps1</a>. Co už máte, přeskočí. Trvá to 5–15 minut.</p>
     </div>
   </section>
@@ -280,7 +284,7 @@
           <li>Průběžné aktualizace</li>
         </ul>
         <p class="price__plus"><strong>Navíc</strong> Vaše vlastní předplatné Claude Pro, placené zvlášť Anthropicu. <a class="link" href="https://claude.com/pricing" rel="noopener" target="_blank">Ceník Claude</a></p>
-        <a class="btn btn--full" href="#cekaci-listina">Chci mezi prvními</a>
+        <a class="btn btn--full" href="#instalace">Vyzkoušet Martyho</a>
       </div>
     </div>
   </section>
@@ -325,11 +329,10 @@
   <section class="sec close" id="cekaci-listina" aria-labelledby="cl-h">
     <div class="hero__glow hero__glow--low" aria-hidden="true"></div>
     <div class="wrap close__in">
-      <p class="eyebrow">Čekací listina</p>
-      <h2 id="cl-h" class="statement">Buďte mezi prvními.</h2>
-      <p>Martyho připravujeme. Zapište se a dáme Vám vědět, až bude připravený k vyzkoušení.</p>
-      <!-- TODO: Google Form URL (set WAITLIST_URL at the top of main.js) -->
-      <a class="btn" href="#" data-waitlist>Zapsat se na čekací listinu</a>
+      <p class="eyebrow">Začněte</p>
+      <h2 id="cl-h" class="statement">Marty je připravený.</h2>
+      <p>Jedno vložení do PowerShellu a za pár minut s ním mluvíte.</p>
+      <a class="btn" href="#instalace">Nainstalovat Martyho</a>
     </div>
   </section>
 

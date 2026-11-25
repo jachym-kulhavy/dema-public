@@ -72,11 +72,26 @@ foreach ($c in "git", "claude") {
 }
 if (-not (Has-Python)) { Write-Host "Python se nepodarilo nainstalovat. Zavrete PowerShell, otevrete novy a vlozte prikaz znovu." -ForegroundColor Red; return }
 
-Say "4/4 Stahuji Martyho (muze se otevrit prihlaseni ke GitHubu)..."
-$src = Join-Path $env:LOCALAPPDATA "Marty\instalator"
-if (Test-Path "$src\.git") { git -C $src pull --quiet } else {
-  New-Item -ItemType Directory -Force -Path (Split-Path $src) | Out-Null
-  git clone --quiet --depth 1 https://github.com/jachym-kulhavy/jarvis-produkt $src
+Say "4/4 Stahuji Martyho..."
+# The release repo is private: the access code from the purchase e-mail is a read-only GitHub token for it.
+# It is kept only in the Marty source URL on this PC (Claude Code uses it for updates); never typed into a prompt
+# window of Git, so it does not replace the user's own GitHub login.
+$env:GIT_TERMINAL_PROMPT = "0"
+$url = "https://github.com/jachym-kulhavy/marty.git"
+function Can-Read([string]$u) { & git -c credential.helper= ls-remote $u 2>$null | Out-Null; return ($LASTEXITCODE -eq 0) }
+if (-not (Can-Read $url)) {
+  for ($i = 0; $i -lt 3; $i++) {
+    $code = (Read-Host "Zadejte pristupovy kod (dostali jste ho po zaplaceni)").Trim()
+    $try = "https://x-access-token:$code@github.com/jachym-kulhavy/marty.git"
+    if ($code -and (Can-Read $try)) { $url = $try; break }
+    Write-Host "Kod nefunguje. Zkontrolujte ho (bez mezer) a zkuste znovu." -ForegroundColor Red
+  }
+  if ($url -notmatch "x-access-token") { Write-Host "Bez platneho kodu Martyho stahnout nejde." -ForegroundColor Red; return }
 }
-if (-not (Test-Path "$src\instalace.bat")) { Write-Host "Martyho se nepodarilo stahnout. Mate pristup a internet?" -ForegroundColor Red; return }
+$src = Join-Path $env:LOCALAPPDATA "Marty\instalator"
+if (Test-Path $src) { Remove-Item $src -Recurse -Force }
+New-Item -ItemType Directory -Force -Path (Split-Path $src) | Out-Null
+git -c credential.helper= clone --quiet --depth 1 $url $src
+if (-not (Test-Path "$src\instalace.bat")) { Write-Host "Martyho se nepodarilo stahnout. Mate internet?" -ForegroundColor Red; return }
+$env:MARTY_SOURCE = $url
 & cmd /c "`"$src\instalace.bat`""

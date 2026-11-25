@@ -1,12 +1,8 @@
-const WAITLIST_URL = "#"; // TODO: Google Form URL
 
 (() => {
   const doc = document.documentElement;
   doc.classList.add("js");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Waitlist button
-  document.querySelectorAll("[data-waitlist]").forEach((a) => { a.href = WAITLIST_URL; });
 
   // Hero entrance
   requestAnimationFrame(() => requestAnimationFrame(() => doc.classList.add("is-loaded")));
