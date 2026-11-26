@@ -5,7 +5,7 @@
   --pad:clamp(20px,5vw,48px);--ease:cubic-bezier(0.23,1,0.32,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-bottom:84px}
 body{font:400 17px/1.6 Figtree,system-ui,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:76px}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
@@ -51,6 +51,7 @@ address{font:normal 1.6rem/1.35 var(--serif)}
 .facts li{padding:10px 0;border-bottom:1px solid var(--line);font-weight:600}
 
 .offer{padding-top:0}
+.offer-text{max-width:36em;margin:-8px 0 28px;color:var(--muted)}
 .tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 8px}
 .tiles div{overflow:hidden}
 .tiles img{width:100%;aspect-ratio:1;object-fit:cover}
@@ -61,7 +62,7 @@ address{font:normal 1.6rem/1.35 var(--serif)}
 
 .split{display:grid;gap:32px}
 .split-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:999px 999px 8px 8px}
-.split p{margin-bottom:24px;max-width:32em}
+.split p{max-width:32em}
 
 .xmas{background:var(--rasp-dark);color:var(--white);padding-block:clamp(56px,8vw,104px)}
 .xmas :focus-visible{outline-color:var(--white)}
@@ -88,6 +89,7 @@ footer a{display:inline-block;padding-block:10px}
   .split-photo img,.xmas img{max-width:440px;margin-inline:auto}
 }
 @media (min-width:900px){
+  html{scroll-padding-bottom:0}
   body{padding-bottom:0}
   .bar{display:none}
   .nav nav{display:flex;gap:28px;font-weight:600}
