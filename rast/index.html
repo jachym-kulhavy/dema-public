@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>RAST coffee &amp; bistro – Brno-Královo Pole, denně 7:30–22:00</title>
+<meta name="description" content="Kavárna a bistro na Jarmily Kurandové 8 v Brně-Králově Poli. Brunch od úterka do neděle od 8:30, obědy od 11:30, otevřeno každý den 7:30–22:00.">
+<meta name="theme-color" content="#232527">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23232527'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='900' font-size='20' text-anchor='middle' fill='white'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+
+<header class="nav">
+  <a class="logo" href="#obsah" translate="no">RAST <small>coffee &amp; bistro</small></a>
+  <nav aria-label="Hlavní">
+    <a href="#brunch">Brunch</a>
+    <a href="#obedy">Obědy</a>
+    <a href="#kde">Kde jsme</a>
+  </nav>
+  <a class="btn nav-call" href="tel:+420776678196">776 678 196</a>
+</header>
+
+<main id="obsah">
+
+<section class="day" data-phase="rano" aria-labelledby="h-day">
+  <div class="wrap day-grid">
+    <div class="day-head">
+      <h1 id="h-day">Kavárna a&nbsp;bistro v&nbsp;Králově Poli</h1>
+      <p class="lead">Otevřeno každý den <b>7:30–22:00</b> na ulici Jarmily Kurandové&nbsp;8.</p>
+      <p class="now" id="now" hidden></p>
+    </div>
+
+    <div class="frame">
+      <img class="on" data-for="rano" src="img/rano.jpg" width="1200" height="1600" alt="Šálek kávy s mléčnou kresbou na dřevěných prknech v ranním slunci">
+      <img data-for="brunch" src="img/brunch.jpg" width="1200" height="1599" alt="Talíř s volskými oky, klobásou, slaninou a pečivem" aria-hidden="true">
+      <img data-for="obed" src="img/obed.jpg" width="1200" height="1800" alt="Talíř s bramborami, masovou placičkou a salátem" aria-hidden="true">
+      <img data-for="odpoledne" src="img/odpoledne.jpg" width="1200" height="1539" alt="Káva v tmavém šálku na dřevěném stole v odpoledním světle" aria-hidden="true">
+      <img data-for="vecer" src="img/vecer.jpg" width="1200" height="1798" alt="Šálek kávy a zapálená svíčka na stole ve večerním šeru" aria-hidden="true">
+    </div>
+
+    <div class="dial">
+      <p class="clock" aria-hidden="true"><span id="clock">7:30</span></p>
+      <div class="say" aria-live="polite">
+        <p data-for="rano" class="on"><b>Otevíráme.</b> Den začíná kávou.</p>
+        <p data-for="brunch"><b>Brunch.</b> Od 8:30, úterý až neděle.</p>
+        <p data-for="obed"><b>Oběd.</b> Od 11:30, dokud se nevyprodá.</p>
+        <p data-for="odpoledne"><b>Odpoledne.</b> Máme otevřeno.</p>
+        <p data-for="vecer"><b>Večer.</b> Otevřeno do 22:00.</p>
+      </div>
+      <div class="controls" hidden>
+        <label for="time">Posuňte si den</label>
+        <input id="time" type="range" min="450" max="1320" step="15" value="450">
+        <div class="ends" aria-hidden="true"><span>7:30</span><span>22:00</span></div>
+        <div class="stops" role="group" aria-label="Části dne">
+          <button type="button" data-t="450" data-p="rano">Ráno</button>
+          <button type="button" data-t="570" data-p="brunch">Brunch</button>
+          <button type="button" data-t="720" data-p="obed">Oběd</button>
+          <button type="button" data-t="930" data-p="odpoledne">Odpoledne</button>
+          <button type="button" data-t="1200" data-p="vecer">Večer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brunch" id="brunch" aria-labelledby="h-brunch">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="big-time" aria-hidden="true">8:30</p>
+      <div>
+        <h2 id="h-brunch">Brunch</h2>
+        <p>Podáváme od úterka do neděle, dopoledne od&nbsp;8:30.</p>
+      </div>
+    </div>
+    <div class="brunch-grid">
+      <ul class="dishes">
+        <li><h3>Míchaná vajíčka s&nbsp;krůtí šunkou</h3><p>míchaná vajíčka, krůtí šunka, parmezán, šlehaný sýr, lehký salát, kváskový chléb</p></li>
+        <li><h3>Turecká vejce</h3><p>zastřená vejce, náš jogurt s&nbsp;kořením, kopr, chilli máslo, kváskový chléb</p></li>
+        <li><h3>RAST talíř</h3><p>míchaná vajíčka, grilované klobásky, slanina, žampiony, fazole, kváskový chléb</p></li>
+        <li><h3>Topinka s&nbsp;vajíčkem</h3><p>topinka s&nbsp;česnekem, krůtí šunka, gouda, šlehaný sýr, volské oko</p></li>
+        <li><h3>Bavorské klobásky</h3><p>3&nbsp;druhy omáček, kváskový chléb, kysané zelí</p></li>
+      </ul>
+      <div class="shots">
+        <div class="shot"><img src="img/vejce.jpg" width="1400" height="933" loading="lazy" alt="Dvě volská oka na talíři"></div>
+        <div class="shot tall"><img src="img/volske-oko.jpg" width="1000" height="1500" loading="lazy" alt="Vejce se šunkou na opečeném pečivu"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lunch" id="obedy" aria-labelledby="h-lunch">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="big-time" aria-hidden="true">11:30</p>
+      <div>
+        <h2 id="h-lunch">Obědové menu</h2>
+        <p>Od 11:30, dokud se nevyprodá.</p>
+      </div>
+    </div>
+    <table class="week">
+      <caption>Ukázka jednoho týdne z&nbsp;listopadu. Jídelníček se mění každý týden.</caption>
+      <thead>
+        <tr><th scope="col">Den</th><th scope="col">Jídlo</th><th scope="col" class="price">Klasická</th><th scope="col" class="price">Velká</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><abbr title="Pondělí">Po</abbr></th><td>Zeleninové karbanátky se sýrem, bylinková omáčka, brambory</td><td class="price">165&nbsp;Kč</td><td class="price">195&nbsp;Kč</td></tr>
+        <tr><th scope="row"><abbr title="Úterý">Út</abbr></th><td>Vepřová kýta na smetaně, knedlík</td><td class="price">160&nbsp;Kč</td><td class="price">190&nbsp;Kč</td></tr>
+        <tr><th scope="row"><abbr title="Středa">St</abbr></th><td>Smažená ryba, pečené brambory, naše majo</td><td class="price">170&nbsp;Kč</td><td class="price">210&nbsp;Kč</td></tr>
+        <tr><th scope="row"><abbr title="Čtvrtek">Čt</abbr></th><td>Pečené kuře, nádivka, rýže, okurkový salát</td><td class="price">165&nbsp;Kč</td><td class="price">210&nbsp;Kč</td></tr>
+        <tr><th scope="row"><abbr title="Pátek">Pá</abbr></th><td>Švédské kuličky, americké brambory, omáčka</td><td class="price">170&nbsp;Kč</td><td class="price">215&nbsp;Kč</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="visit" id="kde" aria-labelledby="h-visit">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="big-time" aria-hidden="true">22:00</p>
+      <div>
+        <h2 id="h-visit">Kde nás najdete</h2>
+        <p>Otevřeno máme každý den až do&nbsp;22:00.</p>
+      </div>
+    </div>
+    <p class="street"><a href="https://mapy.cz/zakladni?q=Jarmily%20Kurandov%C3%A9%208%2C%20612%2000%20Brno" target="_blank" rel="noopener">Jarmily Kurandové&nbsp;8</a></p>
+    <div class="visit-grid">
+      <address>
+        <p>612&nbsp;00 Brno-Královo Pole</p>
+        <p><a href="tel:+420776678196">776 678 196</a></p>
+        <p><a href="mailto:rastcoffeebrno@gmail.com">rastcoffeebrno@gmail.com</a></p>
+        <p><a href="https://www.facebook.com/people/RAST-coffee-Brno/100087549812805/" target="_blank" rel="noopener">Facebook</a></p>
+      </address>
+      <dl class="hours">
+        <div><dt>Pondělí – neděle</dt><dd>7:30 – 22:00</dd></div>
+        <div><dt>Brunch</dt><dd>út – ne od 8:30</dd></div>
+        <div><dt>Obědy</dt><dd>od 11:30</dd></div>
+      </dl>
+      <div class="go">
+        <a class="btn" href="https://mapy.cz/zakladni?q=Jarmily%20Kurandov%C3%A9%208%2C%20612%2000%20Brno" target="_blank" rel="noopener">Otevřít v mapách</a>
+        <p>Najdete nás i&nbsp;v&nbsp;Žabovřeskách jako <b>RAST garden bistro</b>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>RAST</b> coffee &amp; bistro · Jarmily Kurandové 8, Brno-Královo Pole · denně 7:30–22:00</p>
+    <p class="small">Ukázkový návrh webu. Fotografie jsou ilustrační (Pexels), nezachycují podnik ani jeho jídla.</p>
+  </div>
+</footer>
+
+<div class="bar">
+  <a href="tel:+420776678196">Zavolat</a>
+  <a href="https://mapy.cz/zakladni?q=Jarmily%20Kurandov%C3%A9%208%2C%20612%2000%20Brno" target="_blank" rel="noopener">Trasa</a>
+</div>
+
+<script>
+(() => {
+  const day = document.querySelector('.day');
+  const input = document.getElementById('time');
+  const clock = document.getElementById('clock');
+  const stops = [...day.querySelectorAll('.stops button')];
+  const phaseOf = t => t < 510 ? 'rano' : t < 690 ? 'brunch' : t < 840 ? 'obed' : t < 1080 ? 'odpoledne' : 'vecer';
+  const fmt = t => Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
+
+  function show(t) {
+    const p = phaseOf(t);
+    day.dataset.phase = p;
+    clock.textContent = fmt(t);
+    input.value = t;
+    input.setAttribute('aria-valuetext', fmt(t));
+    input.style.setProperty('--fill', (t - 450) / 870 * 100 + '%');
+    day.querySelectorAll('[data-for]').forEach(el => {
+      const on = el.dataset.for === p;
+      el.classList.toggle('on', on);
+      if (el.tagName === 'IMG') el.toggleAttribute('aria-hidden', !on);
+    });
+    stops.forEach(b => b.setAttribute('aria-pressed', b.dataset.p === p));
+  }
+
+  // Current time in Brno, regardless of the visitor's own time zone
+  const parts = new Intl.DateTimeFormat('cs-CZ', { timeZone: 'Europe/Prague', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date());
+  const val = type => Number(parts.find(p => p.type === type).value);
+  const mins = val('hour') * 60 + val('minute');
+  const open = mins >= 450 && mins < 1320;
+  const now = document.getElementById('now');
+  now.textContent = open ? 'Právě je ' + fmt(mins) + ', máme otevřeno do 22:00.' : 'Právě je ' + fmt(mins) + ', otevíráme v 7:30.';
+  now.classList.toggle('open', open);
+  now.hidden = false;
+
+  day.querySelector('.controls').hidden = false;
+  input.addEventListener('input', () => show(Number(input.value)));
+  stops.forEach(b => b.addEventListener('click', () => show(Number(b.dataset.t))));
+  show(open ? Math.floor(mins / 15) * 15 : 450);
+})();
+</script>
+</body>
+</html>
