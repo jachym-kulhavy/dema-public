@@ -78,7 +78,11 @@ Say "4/4 Stahuji Martyho..."
 # window of Git, so it does not replace the user's own GitHub login.
 $env:GIT_TERMINAL_PROMPT = "0"
 $url = "https://github.com/jachym-kulhavy/marty.git"
-function Can-Read([string]$u) { & git -c credential.helper= ls-remote $u 2>$null | Out-Null; return ($LASTEXITCODE -eq 0) }
+function Can-Read([string]$u) {
+  # PowerShell 5.1: with "Stop", redirected stderr of git ends the whole script before the code prompt.
+  $ErrorActionPreference = "Continue"
+  & git -c credential.helper= ls-remote $u 2>$null | Out-Null; return ($LASTEXITCODE -eq 0)
+}
 if (-not (Can-Read $url)) {
   for ($i = 0; $i -lt 3; $i++) {
     $code = (Read-Host "Zadejte pristupovy kod (dostali jste ho po zaplaceni)").Trim()
