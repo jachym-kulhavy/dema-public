@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nastavení</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=swap">
+<style>
+/* Colours and type of the Marty website (site/styles.css). Fonts fall back to system ones offline. */
+:root{--bg:#0c0b09;--bg2:#13110e;--s1:#17140f;--s2:#1f1b15;--ln:rgba(236,228,214,.12);--ln2:rgba(236,228,214,.22);
+  --tx:#ece4d6;--mu:#a39a8a;--gold:#c9a56b;--gold2:#e3c48f;--ok:#9fb89a;--wa:#d9b46b;--da:#e0806f;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;--sans:"Manrope","Segoe UI",system-ui,sans-serif;--ease:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:radial-gradient(900px 500px at 85% -10%,rgba(201,165,107,.10),transparent 60%),var(--bg);color:var(--tx);
+  font:400 15px/1.55 var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:300;margin:0;letter-spacing:-.01em;line-height:1.1}
+a{color:var(--gold2)}
+code{background:var(--s2);padding:1px 6px;border-radius:5px;font-size:.92em;overflow-wrap:anywhere}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:18px;padding:22px 16px;border-right:1px solid var(--ln);background:rgba(19,17,14,.7)}
+.brand{display:flex;gap:12px;align-items:center;padding:0 6px}
+.orb{width:40px;height:40px;flex:none;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font:italic 400 22px var(--serif);color:var(--gold2);
+  background:radial-gradient(circle at 35% 30%,rgba(227,196,143,.25),transparent 60%);box-shadow:0 0 26px rgba(201,165,107,.18)}
+.brand h1{font-size:24px}.brand .sub{font-size:12px;overflow-wrap:anywhere}
+nav{display:flex;flex-direction:column;gap:2px}
+nav button{display:flex;align-items:center;gap:10px;text-align:left;background:none;border:0;color:var(--mu);padding:9px 12px;border-radius:10px;cursor:pointer;transition:background .2s,color .2s}
+nav button:hover{color:var(--tx);background:rgba(236,228,214,.04)}
+nav button.act{background:var(--s2);color:var(--tx);box-shadow:inset 2px 0 0 var(--gold)}
+nav .ic{width:18px;text-align:center;opacity:.8}
+.status{margin-top:auto;display:flex;flex-direction:column;gap:6px;padding:0 6px}
+.chip{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--mu)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mu);flex:none}.dot.on{background:var(--ok);box-shadow:0 0 8px var(--ok)}.dot.wa{background:var(--wa)}.dot.da{background:var(--da)}
+main{padding:30px clamp(16px,4vw,48px) 80px;max-width:920px;width:100%}
+.pagehead{margin:0 0 20px}.pagehead h2{font-size:clamp(30px,4vw,40px)}.pagehead p{color:var(--mu);margin:6px 0 0;max-width:60ch}
+section{display:none}section.act{display:block;animation:in .35s var(--ease)}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:linear-gradient(180deg,var(--s1),var(--bg2));border:1px solid var(--ln);border-radius:16px;padding:20px 22px;margin-bottom:16px}
+.card h3{font-size:22px;margin-bottom:4px}
+.sub{color:var(--mu);font-size:13.5px}
+.lbl{font-weight:600;margin:18px 0 8px;font-size:14px}.lbl:first-child{margin-top:4px}
+.lbl small{display:block;font-weight:400;color:var(--mu);font-size:12.5px}
+.row{display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--ln)}
+.row:first-child{border-top:0}
+.row .t{flex:1;min-width:0}.row .t small{display:block;color:var(--mu);font-size:12.5px}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid var(--ln2);color:var(--mu);margin-left:6px;white-space:nowrap}
+.badge.gold{border-color:var(--gold);color:var(--gold2)}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{background:var(--s2);border:1px solid var(--ln);border-radius:99px;padding:7px 14px;cursor:pointer;transition:border-color .2s,background .2s;color:var(--tx)}
+.seg button:hover{border-color:var(--ln2)}
+.seg button[aria-pressed=true]{border-color:var(--gold);background:rgba(201,165,107,.16);color:var(--gold2)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.cards button{text-align:left;background:var(--s2);border:1px solid var(--ln);border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--tx)}
+.cards button small{display:block;color:var(--mu);font-size:12.5px;margin-top:2px}
+.cards button[aria-pressed=true]{border-color:var(--gold);background:rgba(201,165,107,.12)}
+input[type=text],input[type=number],input[type=time],textarea{background:var(--bg);border:1px solid var(--ln2);border-radius:10px;padding:8px 12px;outline:none;transition:border-color .2s}
+input:focus,textarea:focus{border-color:var(--gold)}
+input[type=time]{color-scheme:dark}
+input.bad{border-color:var(--da)}
+input.w{width:100%;max-width:420px}input.n{width:90px}
+textarea{width:100%;resize:vertical}
+.line{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
+.b{background:var(--gold);color:#1a140b;border:0;border-radius:10px;padding:9px 18px;font-weight:700;cursor:pointer;transition:background .2s,opacity .2s}
+.b:hover{background:var(--gold2)}.b:disabled{opacity:.4;cursor:default;background:var(--gold)}
+.b.g{background:transparent;color:var(--tx);border:1px solid var(--ln2);font-weight:600}.b.g:hover{border-color:var(--gold)}
+.b.big{padding:12px 24px;font-size:16px}
+.sw{position:relative;width:46px;height:26px;flex:none;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.sw span{position:absolute;inset:0;background:var(--s2);border:1px solid var(--ln2);border-radius:99px;transition:.25s var(--ease);pointer-events:none}
+.sw span:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;border-radius:50%;background:var(--mu);transition:.25s var(--ease)}
+.sw input:checked+span{background:rgba(201,165,107,.25);border-color:var(--gold)}
+.sw input:checked+span:before{transform:translateX(20px);background:var(--gold2)}
+.sw input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+.sw.busy span:before{animation:pulse 1s infinite}@keyframes pulse{50%{opacity:.3}}
+.note{border-left:2px solid var(--wa);background:rgba(217,180,107,.07);padding:9px 13px;border-radius:0 8px 8px 0;color:#e8d5ae;font-size:13.5px;margin:12px 0}
+.note.da{border-left-color:var(--da);background:rgba(224,128,111,.08);color:#f0c2b8}
+.note.ok{border-left-color:var(--ok);background:rgba(159,184,154,.08);color:#cfe0cb}
+.foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--ln)}
+.foot .msg{font-size:13.5px;color:var(--mu)}.foot .msg.dirty{color:var(--gold2)}.foot .msg.bad{color:var(--da)}.foot .msg.ok{color:var(--ok)}
+.times{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.time{display:flex;align-items:center;gap:4px;background:rgba(201,165,107,.14);border:1px solid var(--gold);color:var(--gold2);border-radius:99px;padding:4px 6px 4px 12px}
+.time button{background:none;border:0;color:var(--gold2);cursor:pointer;font-size:16px;line-height:1;padding:0 6px}
+.sum{font-family:var(--serif);font-size:20px;margin:14px 0 2px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px}
+.tile{background:var(--s1);border:1px solid var(--ln);border-radius:14px;padding:14px 16px;cursor:pointer;text-align:left;color:var(--tx);transition:border-color .2s}
+.tile:hover{border-color:var(--ln2)}
+.tile .k{font-size:12px;color:var(--mu);display:flex;gap:7px;align-items:center}
+.tile .v{font-family:var(--serif);font-size:19px;margin-top:4px;line-height:1.25}
+#banner{display:none;position:sticky;top:0;z-index:5;margin:-30px calc(-1*clamp(16px,4vw,48px)) 20px;padding:11px clamp(16px,4vw,48px);background:#3a1f1a;border-bottom:1px solid var(--da);color:#f6d4cc;font-size:14px}
+body.off #banner{display:block}
+body.off main section{opacity:.45;pointer-events:none}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--s2);border:1px solid var(--ln2);padding:11px 18px;border-radius:12px;
+  max-width:min(92vw,560px);transition:.3s var(--ease);pointer-events:none;z-index:20;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#toast.show{opacity:1;transform:translateX(-50%)}#toast.bad{border-color:var(--da)}#toast.ok{border-color:var(--ok)}
+dialog{background:var(--s1);color:var(--tx);border:1px solid var(--ln2);border-radius:16px;padding:22px;max-width:min(92vw,480px)}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog h3{font-size:22px;margin-bottom:8px}
+.steps{display:flex;gap:6px;margin:0 0 18px}.steps i{flex:1;height:3px;border-radius:3px;background:var(--ln)}.steps i.on{background:var(--gold)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}.opts label{background:var(--s2);border:1px solid var(--ln);border-radius:99px;padding:7px 14px;cursor:pointer;user-select:none}
+.opts label:has(input:checked){border-color:var(--gold);background:rgba(201,165,107,.16);color:var(--gold2)}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts.col{flex-direction:column}.opts.col label{border-radius:12px}
+.tut li{margin:7px 0}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--ln2);border-top-color:var(--gold);border-radius:50%;animation:r .8s linear infinite;vertical-align:-2px}
+@keyframes r{to{transform:rotate(360deg)}}
+#demo{display:none;background:rgba(201,165,107,.12);border-bottom:1px solid var(--gold);padding:8px 16px;font-size:13px;gap:10px;align-items:center;flex-wrap:wrap}
+body.demo #demo{display:flex}
+@media (max-width:820px){
+  .app{grid-template-columns:minmax(0,1fr)}aside,main{min-width:0}
+  aside{position:sticky;height:auto;z-index:6;padding:12px 16px 8px;gap:10px;border-right:0;border-bottom:1px solid var(--ln);background:rgba(12,11,9,.94);backdrop-filter:blur(8px)}
+  .brand .sub{display:none}.brand h1{font-size:20px}.orb{width:32px;height:32px;font-size:18px}
+  nav{flex-direction:row;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
+  nav button{white-space:nowrap;padding:7px 11px}nav button.act{box-shadow:inset 0 -2px 0 var(--gold)}
+  nav .ic{display:none}
+  .status{position:absolute;right:16px;top:16px;margin:0;flex-direction:row}.status .chip span:last-child{display:none}
+  main{padding:20px 16px 80px}
+  #banner{margin:-20px -16px 16px;padding:10px 16px}
+  .card{padding:16px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="demo"><b>Ukázka</b><span class="sub">Nastavení se ukládá jen v tomhle prohlížeči, na žádný počítač nic nejde.</span>
+  <label class="line" style="margin:0 0 0 auto"><span class="sub">Simulovat výpadek</span><span class="sw"><input type="checkbox" id="demoOff"><span></span></span></label>
+  <button class="b g" id="demoReset">Začít znovu</button></div>
+<div class="app">
+<aside>
+  <div class="brand"><div class="orb" id="logo">M</div><div><h1 id="title">Marty</h1><div class="sub" id="slozka"></div></div></div>
+  <nav id="nav"><span class="sub">Načítám…</span></nav>
+  <div class="status">
+    <div class="chip" title="Ovládání z mobilu"><span class="dot" id="rcdot"></span><span id="rctext">…</span></div>
+    <div class="chip" title="Internet"><span class="dot" id="netdot"></span><span id="nettext">…</span></div>
+  </div>
+</aside>
+<main>
+<div id="banner"></div>
+
+<!-- ============ first setup ============ -->
+<section data-tab="Průvodce" data-ic="✦" data-onb="1">
+  <div class="pagehead"><h2>Ahoj, pojďme tě nastavit</h2>
+    <p>Pět krátkých kroků, asi 5 minut. Všechno půjde později změnit. Marty běží na tvém předplatném Claude a bez tvého „jo“ nic neodešle, nezveřejní ani nezaplatí.</p></div>
+  <div class="steps" id="wsteps"></div>
+
+  <div class="card wstep"><h3>1 · Základ</h3>
+    <div class="lbl">Jmenuju se Marty. Chceš mi říkat jinak?</div>
+    <input type="text" class="w" id="o_asistent" value="Marty" maxlength="30">
+    <div class="lbl">Jak ti mám říkat?</div>
+    <input type="text" class="w" id="o_jmeno" maxlength="40" placeholder="tvoje jméno nebo přezdívka">
+    <div class="lbl">Jaký tón ti sedí?</div><div class="seg" id="o_ton"></div>
+    <div class="row" style="border:0;padding-bottom:0"><div class="t">Klidně s emoji</div><label class="sw"><input type="checkbox" id="o_emoji"><span></span></label></div>
+    <div class="lbl">Jak dlouhé odpovědi?</div><div class="seg" id="o_delka"></div>
+  </div>
+
+  <div class="card wstep"><h3>2 · Co děláš</h3>
+    <div class="lbl">Čím se živíš? <small>Víc možností.</small></div>
+    <div class="opts"><label><input type="checkbox" name="zivi" value="studuju">Studuju</label>
+      <label><input type="checkbox" name="zivi" value="mám práci">Mám práci</label>
+      <label><input type="checkbox" name="zivi" value="podnikám nebo mám vlastní projekt">Podnikám / vlastní projekt</label>
+      <label><input type="checkbox" name="zivi" value="mám koníček, který chci posunout">Koníček, který chci posunout</label></div>
+    <div class="lbl">Na čem teď děláš? <small>Pár slov.</small></div>
+    <textarea id="o_projekt" rows="2" placeholder="např. prodávám ručně dělané svíčky na Instagramu, píšu bakalářku…"></textarea>
+    <div class="lbl">Co tě nejvíc zdržuje?</div>
+    <div class="opts"><label><input type="checkbox" name="zdrzuje" value="málo času">Málo času</label>
+      <label><input type="checkbox" name="zdrzuje" value="nevím, kde začít">Nevím, kde začít</label>
+      <label><input type="checkbox" name="zdrzuje" value="opakovaná rutina">Opakovaná rutina</label>
+      <label><input type="checkbox" name="zdrzuje" value="hledání informací">Hledání informací</label></div>
+    <div class="lbl">Co tě ještě zajímá? <small>Podle toho doporučím moduly.</small></div>
+    <div class="opts"><label><input type="checkbox" name="zajmy" value="web">Vlastní web nebo e-shop</label>
+      <label><input type="checkbox" name="zajmy" value="videa">Videa a sociální sítě</label>
+      <label><input type="checkbox" name="zajmy" value="investice">Investice a krypto</label>
+      <label><input type="checkbox" name="zajmy" value="zakaznici">Hledání zákazníků</label></div>
+    <div class="line"><input type="text" class="w" id="o_zajmy_text" placeholder="něco jiného? napiš to sem"></div>
+  </div>
+
+  <div class="card wstep"><h3>3 · Jak spolu fungujeme</h3>
+    <div class="lbl">Mám se ptát, nebo rozhodovat sám?</div><div class="cards" id="o_rozhodovani"></div>
+    <div class="lbl">Když se spletu, řekneš mi to…</div><div class="seg" id="o_chyby"></div>
+    <div class="lbl">Co smím dělat sám bez ptaní?</div><div class="opts" id="o_smi"></div>
+    <div class="note">Odeslání, zveřejnění, platby, zakládání účtů a mazání dat zůstávají vždy na tvém „jo“.</div>
+    <div class="lbl">Paměť a zprávy</div><div class="opts" id="o_volby"></div>
+  </div>
+
+  <div class="card wstep"><h3>4 · Práce na pozadí a záloha</h3>
+    <div class="lbl">Mám pracovat sám, i když zrovna nepíšeš? <small>Každý blok čerpá z tvého Claude limitu a počítač musí být zapnutý.</small></div>
+    <div id="o_rozvrh"></div>
+    <div class="lbl">Zálohovat paměť a nastavení?</div><div class="seg" id="o_ztyp"></div>
+    <div class="line" id="o_zcilw"><input type="text" class="w" id="o_zcil"><span class="sub" id="o_zhint"></span></div>
+    <div class="lbl">Jaké služby používáš? <small>Jen názvy, nikdy hesla.</small></div>
+    <div class="opts"><label><input type="checkbox" name="nastroje" value="Gmail">Gmail</label>
+      <label><input type="checkbox" name="nastroje" value="Outlook">Outlook</label>
+      <label><input type="checkbox" name="nastroje" value="Google Kalendář">Google Kalendář</label>
+      <label><input type="checkbox" name="nastroje" value="Notion">Notion</label>
+      <label><input type="checkbox" name="nastroje" value="GitHub">GitHub</label>
+      <label><input type="checkbox" name="nastroje" value="Instagram">Instagram</label></div>
+  </div>
+
+  <div class="card wstep"><h3>5 · Moduly</h3>
+    <div class="sub">Vždy zapnuté: paměť a pojistky, design, průzkum nových nástrojů a kritický tým. Podle tvých odpovědí jsem doporučil tyhle:</div>
+    <div class="opts col" id="o_moduly" style="margin-top:12px"></div>
+    <div id="o_vysledek"></div>
+  </div>
+
+  <div class="foot" style="border:0"><button class="b g" id="wzpet">Zpět</button><button class="b" id="wdal">Další</button>
+    <span class="msg" id="o_stav"></span></div>
+</section>
+
+<!-- ============ overview ============ -->
+<section data-tab="Přehled" data-ic="◎">
+  <div class="pagehead"><h2 id="pozdrav">Přehled</h2><p>Co právě běží. Klikni na dlaždici a změníš ji.</p></div>
+  <div class="tiles">
+    <button class="tile" data-go="Přehled" data-scroll="rccard"><div class="k"><span class="dot" id="t_rcdot"></span>Ovládání z mobilu</div><div class="v" id="t_rc"></div></button>
+    <button class="tile" data-go="Práce na pozadí"><div class="k"><span class="dot" id="t_bdot"></span>Práce na pozadí</div><div class="v" id="t_bloky"></div></button>
+    <button class="tile" data-go="Záloha"><div class="k"><span class="dot" id="t_zdot"></span>Záloha</div><div class="v" id="t_zaloha"></div></button>
+    <button class="tile" data-go="Pojistky"><div class="k"><span class="dot" id="t_pdot"></span>Pojistky</div><div class="v" id="t_pojistky"></div></button>
+  </div>
+  <div class="card" id="rccard"><h3>Ovládání z mobilu</h3>
+    <div class="sub">Oficiální Remote Control od Anthropicu. Na mobilu otevři appku Claude, záložku Code, a vyber sezení se jménem asistenta.</div>
+    <div class="row"><div class="t">Zapnuté<small>Když vypadne internet, samo se připojí znovu.</small></div><label class="sw"><input type="checkbox" data-n="rc_zapnuto"><span></span></label></div>
+    <div class="row"><div class="t">Viditelné okno<small>Vypnuto = běží na pozadí bez černého okna.</small></div><label class="sw"><input type="checkbox" data-n="rc_viditelne"><span></span></label></div>
+    <div class="row"><div class="t">Zavřením tohoto okna vypnout i Martyho<small>Vypnuto = běží dál, okno znovu otevřeš ikonou na ploše.</small></div><label class="sw"><input type="checkbox" data-n="zavrit_s_panelem"><span></span></label></div>
+  </div>
+  <div class="card"><h3>Jméno asistenta</h3>
+    <div class="sub">Pod tímhle jménem ho uvidíš v appce.</div>
+    <div class="line"><input type="text" class="w" id="jmeno" maxlength="30"><button class="b" id="jmenoSave" disabled>Uložit</button></div>
+  </div>
+</section>
+
+<!-- ============ work blocks ============ -->
+<section data-tab="Práce na pozadí" data-ic="◷">
+  <div class="pagehead"><h2>Práce na pozadí</h2><p>Marty sám pracuje po blocích, i když zrovna nepíšeš, a výsledky ti nechá v reportu.</p></div>
+  <div class="card"><h3>Kdy mám pracovat</h3>
+    <div id="b_rozvrh"></div>
+    <div class="lbl">Kolik nejvýš bloků za den <small>Pojistka proti vyčerpání limitu.</small></div>
+    <div class="seg" id="b_strop"></div>
+    <div class="lbl">Jak dlouhý blok <small>Kroky = kolikrát Marty v bloku něco udělá.</small></div>
+    <div class="seg" id="b_kroky"></div>
+    <div class="lbl">Co smí v bloku</div>
+    <div class="cards" id="b_perm"></div>
+    <div class="note da" id="b_bpwarn">„Všechno bez ptaní“: v bloku nikdo nehlídá, co Marty spouští. Pojistky dál platí, ale chybný pokyn nebo škodlivá stránka může nadělat skutečnou škodu. Důrazně nedoporučujeme.</div>
+    <div class="note">Počítač musí být zapnutý. Během bloku může na chvíli vyskočit okno a počítač jede zhruba na polovinu výkonu. Když dojde limit, bloky se samy na 5 hodin pozastaví.</div>
+    <div class="foot"><button class="b" id="b_save" disabled>Uložit</button><button class="b g" id="b_cancel" hidden>Zrušit změny</button><span class="msg" id="b_msg"></span></div>
+  </div>
+  <div class="card"><h3>Teď</h3>
+    <div class="row"><div class="t">Pozastavit práci na pozadí<small id="b_stav"></small></div><label class="sw"><input type="checkbox" id="pauza"><span></span></label></div>
+    <div id="b_nesoulad"></div>
+  </div>
+</section>
+
+<!-- ============ behaviour + memory ============ -->
+<section data-tab="Chování" data-ic="❍">
+  <div class="pagehead"><h2>Chování</h2><p>Jak s tebou Marty mluví a co smí sám. Platí od dalšího chatu.</p></div>
+  <div class="card"><h3>Jak spolu mluvíme</h3>
+    <div class="lbl">Jak ti mám říkat?</div><input type="text" class="w" id="c_jmeno" maxlength="40">
+    <div class="lbl">Tón</div><div class="seg" id="c_ton"></div>
+    <div class="row" style="border:0;padding-bottom:0"><div class="t">Klidně s emoji</div><label class="sw"><input type="checkbox" id="c_emoji"><span></span></label></div>
+    <div class="lbl">Délka odpovědí</div><div class="seg" id="c_delka"></div>
+    <div class="lbl">Ptát se, nebo rozhodovat?</div><div class="cards" id="c_rozhodovani"></div>
+    <div class="lbl">Když se spleteš, řeknu ti to…</div><div class="seg" id="c_chyby"></div>
+    <div class="lbl">Co smím dělat sám bez ptaní</div><div class="opts" id="c_smi"></div>
+    <div class="foot"><button class="b" id="c_save" disabled>Uložit</button><button class="b g" id="c_cancel" hidden>Zrušit změny</button><span class="msg" id="c_msg"></span></div>
+  </div>
+  <div class="card"><h3>Paměť a zprávy</h3><div class="sub">Přepínače se ukládají hned.</div><div id="volby"></div></div>
+</section>
+
+<!-- ============ modules ============ -->
+<section data-tab="Moduly" data-ic="▦">
+  <div class="pagehead"><h2>Moduly</h2><p>Co všechno Marty umí. Přepínač se uloží hned, změna platí od dalšího chatu. Zapnutí chvíli trvá a potřebuje internet.</p></div>
+  <div class="card"><div id="moduly"></div></div>
+</section>
+
+<!-- ============ backup ============ -->
+<section data-tab="Záloha" data-ic="⇪">
+  <div class="pagehead"><h2>Záloha</h2><p>Paměť, nastavení a výsledky (bez dočasných souborů, logů a hesel).</p></div>
+  <div class="card"><h3>Kam zálohovat</h3>
+    <div class="seg" id="z_typ"></div>
+    <div id="z_slozkaw"><div class="lbl">Složka <small id="z_disky"></small></div>
+      <div class="line"><input type="text" class="w" id="z_cil"><span class="seg" id="z_navrhy"></span></div></div>
+    <div id="z_gitw"><div class="lbl">Adresa repozitáře <small>Na github.com/new založ <b>soukromý</b> repozitář a vlož sem jeho adresu. Při prvním nahrání se otevře přihlášení do GitHubu.</small></div>
+      <input type="text" class="w" id="z_url" placeholder="https://github.com/jmeno/marty-zaloha.git"></div>
+    <div id="z_kdyw"><div class="lbl">Jak často</div><div class="seg" id="z_kdy"></div></div>
+    <div class="foot"><button class="b" id="z_save" disabled>Uložit</button><button class="b g" id="z_cancel" hidden>Zrušit změny</button>
+      <button class="b g" id="z_ted">Zálohovat teď</button><span class="msg" id="z_msg"></span></div>
+  </div>
+  <div class="card"><h3>Poslední záloha</h3><div class="sub" id="z_stav">Zatím žádná.</div></div>
+</section>
+
+<!-- ============ guards ============ -->
+<section data-tab="Pojistky" data-ic="⛨">
+  <div class="pagehead"><h2>Pojistky</h2><p>Brání tomu, aby Marty bez tebe něco odeslal, zveřejnil, obchodoval nebo přepsal. Vypnutí chce potvrzení a důrazně ho nedoporučujeme.</p></div>
+  <div class="card"><div id="pojistky"></div></div>
+</section>
+
+<!-- ============ guide ============ -->
+<section data-tab="Návod" data-ic="?">
+  <div class="pagehead"><h2>Návod</h2><p>Jak s Martym mluvit a co dělat, když něco nejde.</p></div>
+  <div class="card"><h3>Jak se mnou mluvit</h3>
+    <ol class="tut">
+      <li><b>Na mobilu:</b> otevři appku <b>Claude</b>, dole zvol <b>Code</b> a vyber sezení se jménem asistenta. Na počítači to samé na <b>claude.ai/code</b>.</li>
+      <li><b>Piš normálně česky</b>, jako kamarádovi. Nemusíš znát žádné příkazy.</li>
+      <li>Počítač musí běžet a ovládání z mobilu musí být zapnuté. Zelená tečka v okně = jsem online.</li>
+      <li>Když něco potřebuju schválit (odeslat, zveřejnit…), zeptám se v chatu. Stačí odepsat „jo“.</li>
+    </ol></div>
+  <div class="card"><h3>Co zkusit hned</h3>
+    <ul class="tut">
+      <li>„Pošlu ti odkaz na reel o AI nástroji, řekni mi, jestli se mi hodí.“</li>
+      <li>„Udělej mi plán na tenhle týden podle toho, co dělám.“</li>
+      <li>„Najdi mi levnější alternativu k …“</li>
+      <li>„Co jsi dnes udělal?“ nebo „report“ (výsledky práce na pozadí).</li>
+    </ul></div>
+  <div class="card"><h3>Claude Code v kostce</h3>
+    <ul class="tut">
+      <li>Marty je nastavení pro oficiální <b>Claude Code</b> od Anthropicu. Běží na tvém počítači a pracuje se soubory ve složce <code id="t_slozka"></code>.</li>
+      <li>Paměť má v souborech (<code>memory/</code>), takže si pamatuje i mezi chaty.</li>
+      <li>Každá zpráva i blok na pozadí čerpá z tvého Claude limitu. Kolik zbývá, uvidíš v appce Claude v Nastavení → Využití.</li>
+      <li>Když se limit vyčerpá, počkej na obnovení (obvykle pár hodin), nic se nerozbije.</li>
+    </ul></div>
+  <div class="card"><h3>Když něco nejde</h3>
+    <ul class="tut">
+      <li>Mobil sezení nevidí: tečka „Mobil“ je šedá → v Přehledu zapni Ovládání z mobilu. Je oranžová → chybí internet, připojí se samo.</li>
+      <li>Nahoře svítí červený pruh: okno ztratilo spojení s Martym. Počkej pár sekund, nebo dvojklikni na ikonu na ploše.</li>
+      <li>Okno jsi zavřel: dvojklik na ikonu na ploše.</li>
+      <li>Chyba přihlášení: zavři okno a spusť ikonu znovu, přihlášení se nabídne samo.</li>
+    </ul></div>
+</section>
+</main>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="dlg"><h3 id="dlgT"></h3><p class="sub" id="dlgP"></p>
+  <div id="dlgInW"><div class="sub">Napiš přesně: <code id="dlgPhrase"></code></div><div class="line"><input type="text" class="w" id="dlgIn" autocomplete="off"></div></div>
+  <div class="line" style="justify-content:flex-end;margin-top:14px"><button class="b g" id="dlgNo">Zpět</button><button class="b" id="dlgYes">Potvrdit</button></div></dialog>
+<script>
+"use strict"
+const K = "__TOKEN__"
+const DEMO = K === "__TOK" + "EN__"   // the published copy (GitHub Pages): no Marty behind it, see mockApi
+const CONFIRM = "Beru na vlastní zodpovědnost"
+let S = null, offline = false, stale = false
+const $ = id => document.getElementById(id), val = id => $(id).value
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"})[c])
+const clone = o => JSON.parse(JSON.stringify(o))
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b)
+
+// ---------- talking to Marty ----------
+class NetError extends Error {}
+async function call(path, body, ms = 30000) {
+  if (DEMO) return mockApi(path, body || {})
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms)
+  let r
+  try {
+    r = await fetch(path, {method: "POST", headers: {"X-Marty": K, "Content-Type": "application/json"}, body: JSON.stringify(body || {}), signal: ctl.signal})
+  } catch (e) { throw new NetError(ctl.signal.aborted ? "Marty neodpověděl včas." : "Spojení s Martym se přerušilo.") }
+  finally { clearTimeout(t) }
+  if (r.status === 403) { setStale(); throw new NetError("Okno je ze starého spuštění.") }
+  try { return await r.json() } catch { throw new NetError("Marty poslal nečitelnou odpověď.") }
+}
+function toast(m, ok) {
+  const t = $("toast"); t.textContent = m; t.className = "show" + (ok === false ? " bad" : ok ? " ok" : "")
+  clearTimeout(t._h); t._h = setTimeout(() => t.className = "", ok === false ? 9000 : 4500)
+}
+// One action: runs it, shows the answer, reloads the real state from Marty. Returns the answer (or {ok:false}).
+async function act(path, body, ms) {
+  try {
+    const r = await call(path, body, ms)
+    toast(r.zprava || (r.ok ? "Hotovo" : "Nepovedlo se"), !!r.ok)
+    await load().catch(() => {})
+    return r
+  } catch (e) { toast(e.message + " Nic se neuložilo.", false); return {ok: false, zprava: e.message, net: true} }
+}
+function setOffline(on, why) {
+  if (offline === on && !why) return
+  offline = on; document.body.classList.toggle("off", on || stale)
+  $("banner").textContent = stale ? "Tohle okno je ze starého spuštění Martyho. Zavři ho, nové se otevřelo samo (nebo dvojklik na ikonu na ploše)."
+    : "Spojení s Martym se přerušilo. Zkouším se znovu připojit… Když to trvá dlouho, dvojklikni na ikonu Marty na ploše."
+}
+function setStale() { stale = true; setOffline(true, "stale") }
+let pingFails = 0
+async function ping() {
+  if (DEMO ? demoDown() : false) { if (++pingFails >= 2) setOffline(true); return }
+  if (DEMO) { if (offline) { setOffline(false); load() } pingFails = 0; return }
+  try {
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 4000)
+    const r = await fetch("/api/ping", {method: "POST", headers: {"X-Marty": K}, body: "{}", signal: ctl.signal}); clearTimeout(t)
+    if (r.status === 403) return setStale()
+    pingFails = 0
+    if (offline) { setOffline(false); toast("Spojení je zpátky.", true); load().catch(() => {}) }
+  } catch { if (++pingFails >= 2) setOffline(true) }
+}
+
+// ---------- small building blocks ----------
+function seg(el, options, value, onPick) {   // options: [[value, label], …]
+  el.innerHTML = ""
+  for (const [v, label] of options) {
+    const b = document.createElement("button"); b.type = "button"; b.textContent = label; b.setAttribute("aria-pressed", same(v, value))
+    b.onclick = () => onPick(v); el.append(b)
+  }
+}
+function cardsPick(el, options, value, onPick) {  // options: [[value, title, small], …]
+  el.innerHTML = ""
+  for (const [v, t, s] of options) {
+    const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-pressed", v === value)
+    b.innerHTML = `${esc(t)}<small>${esc(s || "")}</small>`; b.onclick = () => onPick(v); el.append(b)
+  }
+}
+function sw(on, onchange) {
+  const l = document.createElement("label"); l.className = "sw"; l.innerHTML = '<input type="checkbox"><span></span>'
+  const i = l.firstChild; i.checked = on; i.onchange = () => onchange(i.checked, i, l); return l
+}
+function row(title, small, right) {
+  const d = document.createElement("div"); d.className = "row"; d.innerHTML = `<div class="t">${title}<small>${small || ""}</small></div>`; d.append(right); return d
+}
+function confirmDlg(title, text, phrase) {
+  return new Promise(res => {
+    const d = $("dlg"); $("dlgT").textContent = title; $("dlgP").textContent = text
+    $("dlgInW").style.display = phrase ? "" : "none"; $("dlgPhrase").textContent = phrase || ""; $("dlgIn").value = ""; $("dlgIn").classList.remove("bad")
+    const done = v => { d.close(); res(v) }
+    $("dlgNo").onclick = () => done(null)
+    $("dlgYes").onclick = () => { if (phrase && $("dlgIn").value.trim() !== phrase) { $("dlgIn").classList.add("bad"); $("dlgIn").focus(); return } done(phrase ? $("dlgIn").value.trim() : true) }
+    d.oncancel = e => { e.preventDefault(); done(null) }
+    d.showModal(); (phrase ? $("dlgIn") : $("dlgYes")).focus()
+  })
+}
+const mins = t => { const [h, m] = t.split(":").map(Number); return h * 60 + m }
+const okTime = t => /^([01]?\d|2[0-3]):[0-5]\d$/.test(String(t || ""))
+const pad = t => t.padStart(5, "0")
+
+// ---------- schedule editor (same in the first setup and in Práce na pozadí) ----------
+const OKNA = [["00:00-23:59", "Celý den"], ["08:00-22:00", "Přes den 8–22"], ["14:00-23:00", "Odpoledne a večer"], ["22:00-06:00", "V noci 22–6"]]
+const CASTO = [[15, "15 min"], [30, "30 min"], [60, "1 h"], [120, "2 h"], [240, "4 h"]]
+const RYCHLE = [["08:00", "Ráno 8:00"], ["12:00", "Poledne 12:00"], ["16:00", "Odpoledne 16:00"], ["20:00", "Večer 20:00"], ["23:00", "Noc 23:00"]]
+function checkRozvrh(r) {  // the same rules as panel.py plan_bloku()
+  if (r.rezim === "vypnuto") return ""
+  if (r.rezim === "casy") return r.casy.length ? (r.casy.every(okTime) ? "" : "Některý čas není ve tvaru HH:MM.") : "Přidej aspoň jeden čas."
+  if (!okTime(r.od) || !okTime(r.do)) return "Vyplň čas od a do."
+  const span = ((mins(r.do) - mins(r.od)) % 1440 + 1440) % 1440 || 1439, k = Number(r.kazdych)
+  if (!Number.isInteger(k) || k < 1 || k >= span) return `Interval musí být 1 až ${span - 1} min (okno má ${span} min).`
+  return ""
+}
+function pocetBloku(r) {
+  if (r.rezim === "casy") return r.casy.length
+  if (r.rezim !== "interval" || checkRozvrh(r)) return 0
+  const span = ((mins(r.do) - mins(r.od)) % 1440 + 1440) % 1440 || 1439
+  return Math.floor(span / r.kazdych) + 1
+}
+function rozvrhEditor(el, r, changed) {
+  const set = patch => { Object.assign(r, patch); changed(); draw() }
+  function draw() {
+    el.innerHTML = `<div class="seg" data-k="rezim"></div><div data-k="body"></div><div class="sum" data-k="sum"></div><div class="sub" data-k="sum2"></div>`
+    seg(el.querySelector('[data-k=rezim]'), [["vypnuto", "Vypnuto"], ["casy", "V pevné časy"], ["interval", "Pořád dokola"]], r.rezim, v => set({rezim: v}))
+    const body = el.querySelector('[data-k=body]')
+    if (r.rezim === "casy") {
+      body.innerHTML = `<div class="lbl">Časy</div><div class="times"></div>
+        <div class="line"><input type="time" data-k="novy" value="13:00"><button class="b g" type="button" data-k="pridat">Přidat čas</button></div>
+        <div class="lbl">Rychle přidat</div><div class="seg" data-k="rychle"></div>`
+      const times = body.querySelector(".times")
+      if (!r.casy.length) times.innerHTML = '<span class="sub">Zatím žádný čas.</span>'
+      for (const c of r.casy) {
+        const t = document.createElement("span"); t.className = "time"; t.innerHTML = `${esc(c)}<button type="button" aria-label="Odebrat ${esc(c)}">×</button>`
+        t.querySelector("button").onclick = () => set({casy: r.casy.filter(x => x !== c)}); times.append(t)
+      }
+      const add = t => { if (okTime(t) && !r.casy.includes(pad(t))) set({casy: [...r.casy, pad(t)].sort()}) }
+      body.querySelector('[data-k=pridat]').onclick = () => add(body.querySelector('[data-k=novy]').value)
+      body.querySelector('[data-k=novy]').onkeydown = e => { if (e.key === "Enter") add(e.target.value) }
+      seg(body.querySelector('[data-k=rychle]'), RYCHLE.filter(([t]) => !r.casy.includes(t)), null, t => add(t))
+    } else if (r.rezim === "interval") {
+      const okno = r.od + "-" + r.do, known = OKNA.some(([v]) => v === okno), knownK = CASTO.some(([v]) => v === Number(r.kazdych))
+      body.innerHTML = `<div class="lbl">Jak často</div><div class="seg" data-k="casto"></div>
+        <div class="line" data-k="vlastniK" ${knownK && !r._vlK ? "hidden" : ""}>každých <input type="number" class="n" min="1" max="1438" data-k="k" value="${esc(r.kazdych)}"> minut</div>
+        <div class="lbl">Kdy</div><div class="seg" data-k="okno"></div>
+        <div class="line" data-k="vlastniO" ${known && !r._vlO ? "hidden" : ""}>od <input type="time" data-k="od" value="${esc(r.od)}"> do <input type="time" data-k="do" value="${esc(r.do)}"></div>`
+      seg(body.querySelector('[data-k=casto]'), [...CASTO, ["v", "Vlastní"]], knownK && !r._vlK ? Number(r.kazdych) : "v",
+        v => v === "v" ? set({_vlK: true}) : set({kazdych: v, _vlK: false}))
+      seg(body.querySelector('[data-k=okno]'), [...OKNA, ["v", "Vlastní"]], known && !r._vlO ? okno : "v",
+        v => { if (v === "v") return set({_vlO: true}); const [od, d] = v.split("-"); set({od, do: d, _vlO: false}) })
+      body.querySelector('[data-k=k]').oninput = e => { r.kazdych = Number(e.target.value); changed(); sum() }
+      for (const k of ["od", "do"]) body.querySelector(`[data-k=${k}]`).oninput = e => { r[k] = e.target.value; changed(); sum() }
+    }
+    sum()
+  }
+  function sum() {
+    const s = el.querySelector('[data-k=sum]'), s2 = el.querySelector('[data-k=sum2]'), err = checkRozvrh(r), n = pocetBloku(r)
+    s.textContent = r.rezim === "vypnuto" ? "Marty pracuje, jen když mu napíšeš." : err ? "" : `≈ ${n} ${n === 1 ? "blok" : n < 5 ? "bloky" : "bloků"} denně`
+    s2.innerHTML = err ? `<span style="color:var(--da)">${esc(err)}</span>` : n > 24 ? "Hodně bloků rychle vyčerpá limit. Strop níže je pojistka." : ""
+  }
+  draw()
+}
+function rozvrhZeStavu(cfg) {
+  const r = cfg.rozvrh || {rezim: "vypnuto"}
+  return {rezim: r.rezim || "vypnuto", casy: r.casy || [], kazdych: r.kazdych || 30, od: r.od || "00:00", do: r.do || "23:59"}
+}
+const rozvrhProServer = r => ({rezim: r.rezim, casy: r.casy, kazdych: r.kazdych, od: r.od, do: r.do})
+
+// ---------- forms with a draft (edits are never overwritten by background refreshes) ----------
+const forms = {}
+function form(name, fromState, draw, saveFn) {
+  const f = forms[name] = {draft: null, saved: null, msg: "", bad: false}
+  f.reset = () => { f.saved = fromState(); f.draft = clone(f.saved); draw(f.draft, f.changed) }
+  f.dirty = () => !same(strip(f.draft), strip(f.saved))
+  f.changed = (edit = true) => {   // edit: the user changed something, so an old result line goes away
+    if (edit) { f.msg = ""; f.bad = false }
+    const p = name[0], d = f.dirty()
+    $(p + "_save").disabled = !d; $(p + "_cancel").hidden = !d
+    const m = $(p + "_msg"); m.className = "msg" + (f.bad ? " bad" : d ? " dirty" : f.msg ? " ok" : "")
+    m.textContent = f.bad ? f.msg : d ? "Neuložené změny" : f.msg
+  }
+  f.sync = () => {   // after load(): show the real state, but never under the user's hands
+    const sec = $(name[0] + "_save").closest("section")
+    if (!f.draft || (!f.dirty() && !sec.contains(document.activeElement))) f.reset()
+    f.changed(false)
+  }
+  $(name[0] + "_cancel").onclick = () => { f.reset(); f.changed() }
+  $(name[0] + "_save").onclick = async () => {
+    const btn = $(name[0] + "_save"); btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Ukládám'
+    const r = await saveFn(f.draft)
+    btn.textContent = "Uložit"
+    f.msg = r.ok ? "Uloženo ✓ " + new Date().toLocaleTimeString("cs-CZ", {hour: "2-digit", minute: "2-digit"}) : (r.zprava || "Nepovedlo se")
+    f.bad = !r.ok
+    if (r.ok) f.reset()       // load() already ran inside act(): redraw from what Marty really saved
+    f.changed(false)
+  }
+  return f
+}
+const strip = o => JSON.parse(JSON.stringify(o, (k, v) => k.startsWith("_") ? undefined : v))
+addEventListener("beforeunload", e => { if (Object.values(forms).some(f => f.draft && f.dirty())) { e.preventDefault(); e.returnValue = "" } })
+
+// ---------- Práce na pozadí ----------
+const PERM = [["acceptEdits", "Upravovat soubory a spouštět skripty", "doporučeno"], ["plan", "Jen plánovat, nic neměnit", "nejbezpečnější"], ["bypassPermissions", "Všechno bez ptaní ⚠", "na vlastní zodpovědnost"]]
+form("bloky", () => {
+  const c = S.bloky.cfg
+  return {r: rozvrhZeStavu(c), strop: c.strop_vlastni ? String(c.max_denne) : "", kroky: String(c.max_turns || 80), perm: c.permission_mode || "acceptEdits"}
+}, function draw(d, changed) {
+  rozvrhEditor($("b_rozvrh"), d.r, changed)
+  const drawRest = () => {
+    const stropy = [["", "Podle rozvrhu"], ["5", "5"], ["10", "10"], ["20", "20"], ["0", "Bez omezení"]]
+    const vlS = !stropy.some(([v]) => v === d.strop) || d._vlS
+    seg($("b_strop"), [...stropy, ["v", "Vlastní"]], vlS ? "v" : d.strop, v => { if (v === "v") { d._vlS = true } else { d.strop = v; d._vlS = false } changed(); drawRest() })
+    if (vlS) $("b_strop").insertAdjacentHTML("beforeend", `<input type="number" class="n" min="0" id="b_stropN" value="${esc(d.strop)}" placeholder="počet">`)
+    if ($("b_stropN")) $("b_stropN").oninput = e => { d.strop = e.target.value; changed() }
+    const kroky = [["40", "Krátký (40)"], ["80", "Běžný (80)"], ["150", "Dlouhý (150)"]]
+    const vlK = !kroky.some(([v]) => v === d.kroky) || d._vlK
+    seg($("b_kroky"), [...kroky, ["v", "Vlastní"]], vlK ? "v" : d.kroky, v => { if (v === "v") { d._vlK = true } else { d.kroky = v; d._vlK = false } changed(); drawRest() })
+    if (vlK) $("b_kroky").insertAdjacentHTML("beforeend", `<input type="number" class="n" min="1" max="500" id="b_krokyN" value="${esc(d.kroky)}">`)
+    if ($("b_krokyN")) $("b_krokyN").oninput = e => { d.kroky = e.target.value; changed() }
+    cardsPick($("b_perm"), PERM, d.perm, v => { d.perm = v; changed(); drawRest() })
+    $("b_bpwarn").style.display = d.perm === "bypassPermissions" ? "" : "none"
+  }
+  drawRest()
+}, async d => {
+  const err = checkRozvrh(d.r)
+  if (err) return {ok: false, zprava: err}
+  if (d.strop !== "" && !/^\d+$/.test(d.strop)) return {ok: false, zprava: "Strop bloků musí být celé číslo."}
+  if (!/^\d+$/.test(d.kroky) || +d.kroky < 1 || +d.kroky > 500) return {ok: false, zprava: "Délka bloku musí být 1 až 500 kroků."}
+  let potvrzeni = ""
+  if (d.perm === "bypassPermissions" && S.bloky.cfg.permission_mode !== "bypassPermissions") {
+    potvrzeni = await confirmDlg("Všechno bez ptaní?", "V bloku pak nikdo nehlídá, co Marty spouští. Chybný pokyn nebo škodlivá stránka může nadělat skutečnou škodu.", CONFIRM)
+    if (!potvrzeni) return {ok: false, zprava: "Neuloženo, potvrzení chybí."}
+  }
+  if (d.r.rezim !== "vypnuto" && !S.bloky.nainstalovano) toast("Zapínám modul Práce na pozadí, chvíli to trvá…")
+  return act("/api/bloky", {...rozvrhProServer(d.r), max_denne: d.strop, max_turns: d.kroky, permission_mode: d.perm, potvrzeni}, 300000)
+})
+$("pauza").onchange = async e => { const want = e.target.checked; const r = await act("/api/pauza", {zapnuto: want}); if (!r.ok) e.target.checked = !want }
+
+// ---------- Chování ----------
+const TON = [["kamaradsky", "Kamarádský"], ["vecny", "Věcný"], ["formalni", "Formální"]]
+const DELKA = [["kratce", "Stručně, hlavně výsledek"], ["podrobne", "Podrobněji"]]
+const ROZH = [["mix", "Drobnosti sám", "u důležitých věcí se zeptá"], ["sam", "Rozhoduj sám", "a napiš, co a proč"], ["ptat", "Ptej se u všeho", "nic bez tebe"]]
+const CHYBY = [["primo", "Přímo"], ["jemne", "Jemně"]]
+const SMI = ["psát a upravovat soubory ve své složce", "zkoušet nové nástroje v testovací složce", "připravovat koncepty e-mailů a příspěvků", "instalovat programy do testovací složky"]
+function smiOpts(el, list, onChange) {
+  el.innerHTML = ""
+  for (const s of SMI) {
+    const l = document.createElement("label"); l.innerHTML = `<input type="checkbox" value="${esc(s)}">${esc(s[0].toUpperCase() + s.slice(1))}`
+    const i = l.firstChild; i.checked = list.includes(s); el.append(l)
+    i.onchange = () => onChange([...el.querySelectorAll("input:checked")].map(x => x.value))
+  }
+}
+form("chovani", () => clone(S.chovani), function draw(d, changed) {
+  const re = () => draw(d, changed), pick = k => v => { d[k] = v; changed(); re() }
+  $("c_jmeno").value = d.jmeno || ""; $("c_jmeno").oninput = e => { d.jmeno = e.target.value; changed() }
+  seg($("c_ton"), TON, d.ton, pick("ton")); seg($("c_delka"), DELKA, d.delka, pick("delka")); seg($("c_chyby"), CHYBY, d.chyby, pick("chyby"))
+  cardsPick($("c_rozhodovani"), ROZH, d.rozhodovani, pick("rozhodovani"))
+  $("c_emoji").checked = !!d.emoji; $("c_emoji").onchange = e => { d.emoji = e.target.checked; changed() }
+  smiOpts($("c_smi"), d.smi_sam, v => { d.smi_sam = v; changed() })
+}, d => act("/api/chovani", strip(d)))
+
+// ---------- Záloha ----------
+const KDY = [[1, "Každou hodinu"], [6, "Každých 6 h"], [24, "Denně"], [168, "Týdně"]]
+form("zaloha", () => { const z = S.nastaveni.zaloha; return {typ: z.typ || "", cil: z.cil || "", kazdych_h: Number(z.kazdych_h) || 6} },
+function draw(d, changed) {
+  const re = () => draw(d, changed)
+  seg($("z_typ"), [["", "Vypnutá"], ["slozka", "Složka / Google Disk"], ["git", "GitHub"]], d.typ, v => {
+    if (v === "slozka" && (!d.cil || d.cil.startsWith("http"))) d.cil = S.disky[0] || ""
+    if (v === "git" && !d.cil.startsWith("http") && !d.cil.startsWith("git@")) d.cil = ""
+    d.typ = v; changed(); re() })
+  $("z_slozkaw").style.display = d.typ === "slozka" ? "" : "none"; $("z_gitw").style.display = d.typ === "git" ? "" : "none"
+  $("z_kdyw").style.display = d.typ ? "" : "none"; $("z_ted").style.display = S.nastaveni.zaloha.typ ? "" : "none"
+  $("z_disky").textContent = S.disky.length ? "Našel jsem Google Disk, stačí kliknout." : "Google Disk pro počítač jsem nenašel (google.com/drive/download). Můžeš napsat jakoukoli složku."
+  seg($("z_navrhy"), S.disky.filter(x => x !== d.cil).map(x => [x, "Použít " + x]), null, v => { d.cil = v; changed(); re() })
+  $("z_cil").value = d.typ === "slozka" ? d.cil : ""; $("z_url").value = d.typ === "git" ? d.cil : ""
+  $("z_cil").oninput = e => { d.cil = e.target.value; changed() }; $("z_url").oninput = e => { d.cil = e.target.value; changed() }
+  const vl = !KDY.some(([v]) => v === d.kazdych_h) || d._vl
+  seg($("z_kdy"), [...KDY, ["v", "Vlastní"]], vl ? "v" : d.kazdych_h, v => { if (v === "v") d._vl = true; else { d.kazdych_h = v; d._vl = false } changed(); re() })
+  if (vl) { $("z_kdy").insertAdjacentHTML("beforeend", `<span class="line" style="margin:0">každých <input type="number" class="n" min="0.5" step="0.5" id="z_h" value="${esc(d.kazdych_h)}"> h</span>`); $("z_h").oninput = e => { d.kazdych_h = Number(e.target.value); changed() } }
+}, d => {
+  if (d.typ === "slozka" && !d.cil.trim()) return {ok: false, zprava: "Napiš složku pro zálohu."}
+  if (d.typ && !(d.kazdych_h >= 0.5)) return {ok: false, zprava: "Interval zálohy je aspoň 0,5 h."}
+  return act("/api/nastaveni", {zaloha: {typ: d.typ, cil: d.cil.trim(), kazdych_h: d.kazdych_h}})
+})
+$("z_ted").onclick = async () => { const b = $("z_ted"); b.disabled = true; b.innerHTML = '<span class="spin"></span> Zálohuju'; await act("/api/zaloha", {}, 600000); b.disabled = false; b.textContent = "Zálohovat teď" }
+
+// ---------- everything else ----------
+$("jmeno").oninput = () => $("jmenoSave").disabled = !val("jmeno").trim() || val("jmeno").trim() === S.jmeno
+$("jmenoSave").onclick = async () => { $("jmenoSave").disabled = true; await act("/api/jmeno", {jmeno: val("jmeno")}) }
+document.querySelectorAll("[data-n]").forEach(i => i.onchange = async () => { const want = i.checked; const r = await act("/api/nastaveni", {[i.dataset.n]: want}); if (!r.ok) i.checked = !want })
+document.querySelectorAll(".tile").forEach(t => t.onclick = () => { tab(t.dataset.go); if (t.dataset.scroll) $(t.dataset.scroll).scrollIntoView({behavior: "smooth"}) })
+
+function render() {
+  document.title = "Nastavení · " + S.jmeno
+  $("t_slozka").textContent = S.slozka; $("title").textContent = S.jmeno; $("logo").textContent = (S.jmeno[0] || "M").toUpperCase(); $("slozka").textContent = S.slozka
+  const rcOn = S.rc && S.online
+  const rcTxt = S.rc ? (S.online ? "Mobil: připojeno" : "Mobil: čeká na internet") : (S.rc_chyba || "Mobil: vypnuto")
+  $("rcdot").className = $("t_rcdot").className = "dot" + (rcOn ? " on" : S.rc ? " wa" : "")
+  $("rctext").textContent = rcTxt; $("t_rc").textContent = S.rc ? (S.online ? "Připojeno" : "Čeká na internet") : "Vypnuto"
+  $("netdot").className = "dot" + (S.online ? " on" : " da"); $("nettext").textContent = S.online ? "Internet: v pořádku" : "Internet: není"
+  document.querySelectorAll("[data-n]").forEach(i => i.checked = !!S.nastaveni[i.dataset.n])
+  if (document.activeElement !== $("jmeno")) { $("jmeno").value = S.jmeno; $("jmenoSave").disabled = true }
+  $("pozdrav").textContent = S.chovani.jmeno && S.chovani.jmeno !== "uživatel" ? "Ahoj, " + S.chovani.jmeno : "Přehled"
+  // work blocks
+  const b = S.bloky, r = b.cfg.rozvrh || {rezim: "vypnuto"}
+  $("t_bloky").textContent = b.pauza ? "Pozastaveno" : S.popis_rozvrhu[0].toUpperCase() + S.popis_rozvrhu.slice(1)
+  $("t_bdot").className = "dot" + (r.rezim === "vypnuto" ? "" : b.pauza ? " wa" : " on")
+  $("pauza").checked = b.pauza
+  $("b_stav").textContent = (r.rezim === "vypnuto" ? "Nic není naplánované." : "Naplánováno " + S.popis_rozvrhu + ".") + ` Dnes ${b.dnes} ${b.dnes === 1 ? "blok" : "bloků"}.`
+  const chybi = r.rezim !== "vypnuto" && b.nainstalovano && !b.ulohy.length
+  $("b_nesoulad").innerHTML = chybi ? '<div class="note da">Rozvrh je uložený, ale ve Windows chybí naplánované úlohy. <button class="b g" id="b_znovu">Vytvořit je znovu</button></div>' : ""
+  if (chybi) $("b_znovu").onclick = () => act("/api/bloky", {...rozvrhProServer(rozvrhZeStavu(b.cfg)), permission_mode: b.cfg.permission_mode}, 300000)
+  // backup
+  const z = S.nastaveni.zaloha, zs = S.zaloha_stav
+  $("t_zaloha").textContent = !z.typ ? "Vypnutá" : zs.cas ? (zs.ok ? "Poslední " + zs.cas : "Selhala " + zs.cas) : "Zatím neproběhla"
+  $("t_zdot").className = "dot" + (!z.typ ? "" : zs.cas && !zs.ok ? " da" : " on")
+  $("z_stav").innerHTML = zs.cas ? `<span style="color:var(${zs.ok ? "--ok" : "--da"})">${zs.ok ? "✓" : "✗"}</span> ${esc(zs.cas)} · ${esc(zs.zprava)}` : "Zatím žádná."
+  // guards
+  const off = Object.values(S.pojistky).filter(p => !p.zapnuto).length
+  $("t_pojistky").textContent = off ? `${off} vypnut${off === 1 ? "á" : "é"} ⚠` : "Všechny zapnuté"
+  $("t_pdot").className = "dot" + (off ? " da" : " on")
+  const p = $("pojistky"); p.innerHTML = ""
+  for (const [k, o] of Object.entries(S.pojistky)) p.append(row(esc(o.nazev), o.zapnuto ? "zapnutá" : '<span style="color:var(--da)">⚠ vypnutá</span>', sw(o.zapnuto, async (on, i) => {
+    let potvrzeni = ""
+    if (!on) { potvrzeni = await confirmDlg("Vypnout pojistku?", `„${o.nazev}“: bez ní může chybný pokyn nebo škodlivá stránka způsobit skutečnou škodu (peníze, účty, data).`, CONFIRM); if (!potvrzeni) { i.checked = true; return } }
+    const r = await act("/api/pojistka", {klic: k, zapnuto: on, potvrzeni}); if (!r.ok) i.checked = !on })))
+  // memory switches
+  const v = $("volby"); v.innerHTML = ""
+  for (const [k, o] of Object.entries(S.volby)) v.append(row(esc(o.nazev), esc(o.popis), sw(o.zapnuto, async (on, i) => { const r = await act("/api/volba", {klic: k, zapnuto: on}); if (!r.ok) i.checked = !on })))
+  // modules
+  const m = $("moduly"); m.innerHTML = ""
+  for (const o of S.moduly) {
+    const right = o.nazev === "zaklad" ? Object.assign(document.createElement("span"), {className: "badge gold", textContent: "vždy"}) :
+      sw(o.zapnuto, async (on, i, l) => {
+        if (!on && o.jadro && !await confirmDlg("Vypnout jádro?", `Modul ${o.nazev} je součást jádra Martyho. Bez něj přijdeš o část funkcí.`, CONFIRM)) { i.checked = true; return }
+        BUSY.add(o.nazev); i.disabled = true; l.classList.add("busy"); toast(on ? `Zapínám ${NAZVY[o.nazev] || o.nazev}, chvíli to trvá…` : `Vypínám ${NAZVY[o.nazev] || o.nazev}…`)
+        const r = await act("/api/modul", {nazev: o.nazev, zapnuto: on, potvrzeni: on ? "" : CONFIRM}, 300000)
+        BUSY.delete(o.nazev); render() })
+    if (BUSY.has(o.nazev)) { const i = right.querySelector("input"); i.checked = !o.zapnuto; i.disabled = true; right.classList.add("busy") }
+    m.append(row(`<b>${esc(NAZVY[o.nazev] || o.nazev)}</b>${o.jadro ? '<span class="badge">jádro</span>' : ""}`, esc(o.popis), right))
+  }
+  for (const f of Object.values(forms)) f.sync()
+}
+const BUSY = new Set()   // modules being switched (a refresh must not offer the switch again meanwhile)
+const NAZVY = {zaklad: "Základ", mod: "Vzhled a povaha", scout: "Průzkum nástrojů", kritici: "Kritický tým", osloveni: "Hledání klientů", bloky: "Práce na pozadí", weby: "Weby", obsah: "Videa a sítě", trading: "Investice"}
+async function load() { S = await call("/api/stav"); render() }
+
+// ---------- navigation ----------
+function renderNav() {
+  const nav = $("nav"); nav.innerHTML = ""; let first = null
+  document.querySelectorAll("section").forEach(s => {
+    const show = S.nastaveno ? !s.dataset.onb : (s.dataset.onb || s.dataset.tab === "Návod")
+    s.classList.remove("act"); if (!show) return
+    const b = document.createElement("button"); b.innerHTML = `<span class="ic">${s.dataset.ic || ""}</span>${esc(s.dataset.tab)}`; b.dataset.tab = s.dataset.tab
+    b.onclick = () => { document.querySelectorAll("section,nav button").forEach(e => e.classList.remove("act")); s.classList.add("act"); b.classList.add("act"); scrollTo(0, 0); try { sessionStorage.tab = s.dataset.tab } catch {} }
+    nav.append(b); first = first || b
+  })
+  let saved = null; try { saved = sessionStorage.tab } catch {}
+  const pick = [...nav.children].find(b => b.dataset.tab === saved) || first; if (pick) pick.click()
+}
+function tab(name) { const b = [...document.querySelectorAll("nav button")].find(x => x.dataset.tab === name); if (b) b.click() }
+
+// ---------- first setup ----------
+const W = {step: 0, r: {rezim: "vypnuto", casy: ["13:00", "22:00"], kazdych: 30, od: "08:00", do: "22:00"}, ton: "kamaradsky", delka: "kratce", rozhodovani: "mix", chyby: "primo",
+  smi: SMI.slice(0, 3), ztyp: ""}
+const checked = n => [...document.querySelectorAll(`input[name="${n}"]:checked`)].map(i => i.value)
+const ZM = {web: "weby", videa: "obsah", investice: "trading", zakaznici: "osloveni"}
+function wizardInit() {
+  $("o_jmeno").value = S.uzivatel || ""
+  const draw = () => {
+    seg($("o_ton"), TON, W.ton, v => { W.ton = v; draw() }); seg($("o_delka"), DELKA, W.delka, v => { W.delka = v; draw() })
+    cardsPick($("o_rozhodovani"), ROZH, W.rozhodovani, v => { W.rozhodovani = v; draw() }); seg($("o_chyby"), CHYBY, W.chyby, v => { W.chyby = v; draw() })
+    seg($("o_ztyp"), [["", "Zatím ne"], ["slozka", "Složka / Google Disk"], ["git", "GitHub"]], W.ztyp, v => { W.ztyp = v; if (v === "slozka" && !val("o_zcil")) $("o_zcil").value = S.disky[0] || ""; draw() })
+    $("o_zcilw").style.display = W.ztyp ? "" : "none"
+    $("o_zcil").placeholder = W.ztyp === "git" ? "https://github.com/jmeno/marty-zaloha.git" : "např. G:\\Můj disk"
+    $("o_zhint").textContent = W.ztyp === "git" ? "Na github.com/new založ soukromý repozitář (nebo to nech na později)." : W.ztyp === "slozka" ? (S.disky.length ? "Našel jsem Google Disk." : "Google Disk jsem nenašel, napiš jinou složku.") : ""
+  }
+  draw()
+  smiOpts($("o_smi"), W.smi, v => W.smi = v)
+  $("o_volby").innerHTML = Object.entries(S.volby).map(([k, o]) => `<label title="${esc(o.popis)}"><input type="checkbox" name="volby" value="${esc(k)}" checked>${esc(o.nazev)}</label>`).join("")
+  $("o_moduly").innerHTML = S.moduly.filter(o => !o.jadro && o.nazev !== "bloky").map(o => `<label><input type="checkbox" name="moduly" value="${esc(o.nazev)}"><b>${esc(NAZVY[o.nazev] || o.nazev)}</b>&nbsp;· ${esc(o.popis)}</label>`).join("")
+  const rec = () => { const want = checked("zajmy").map(z => ZM[z]); document.querySelectorAll('input[name="moduly"]').forEach(i => i.checked = want.includes(i.value)) }
+  document.querySelectorAll('input[name="zajmy"]').forEach(i => i.onchange = rec)
+  rozvrhEditor($("o_rozvrh"), W.r, () => {})
+  $("wzpet").onclick = () => wstep(W.step - 1)
+  $("wdal").onclick = () => W.step < 4 ? wstep(W.step + 1) : dokoncit()
+  wstep(0)
+}
+function wstep(n) {
+  if (n > W.step && W.step === 3) { const e = checkRozvrh(W.r); if (e) { $("o_stav").textContent = e; $("o_stav").className = "msg bad"; return } }
+  W.step = Math.max(0, Math.min(4, n)); $("o_stav").textContent = ""
+  document.querySelectorAll(".wstep").forEach((c, i) => c.style.display = i === W.step ? "" : "none")
+  $("wsteps").innerHTML = [0, 1, 2, 3, 4].map(i => `<i class="${i <= W.step ? "on" : ""}"></i>`).join("")
+  $("wzpet").style.visibility = W.step ? "" : "hidden"
+  $("wdal").textContent = W.step < 4 ? "Další" : "Nastavit a začít"; $("wdal").classList.toggle("big", W.step === 4)
+  scrollTo(0, 0)
+}
+async function dokoncit() {
+  const btn = $("wdal"); btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Nastavuju'
+  $("o_stav").className = "msg"; $("o_stav").textContent = "Zapínám moduly, může to trvat pár minut. Okno nezavírej."
+  let r
+  try {
+    r = await call("/api/onboarding", {
+      asistent: val("o_asistent"), jmeno: val("o_jmeno"), ton: W.ton, emoji: $("o_emoji").checked, delka: W.delka,
+      zivi: checked("zivi"), projekt: val("o_projekt"), zdrzuje: checked("zdrzuje"), zajmy: checked("zajmy"), zajmy_text: val("o_zajmy_text"),
+      rozhodovani: W.rozhodovani, chyby: W.chyby, smi_sam: W.smi, volby: checked("volby"),
+      bloky: rozvrhProServer(W.r), zaloha: {typ: W.ztyp, cil: val("o_zcil")}, nastroje: checked("nastroje"), moduly: checked("moduly")}, 900000)
+  } catch (e) { r = {ok: false, zprava: e.message + " Zkus to znovu."} }
+  btn.disabled = false; btn.textContent = "Nastavit a začít"
+  if (!r.ok) { $("o_stav").className = "msg bad"; $("o_stav").textContent = r.zprava; return }
+  await load(); renderNav()
+  if (r.chyby && r.chyby.length) {
+    tab("Přehled")
+    $("pozdrav").insertAdjacentHTML("afterend", `<div class="note da">Nastaveno, ale tohle nevyšlo (zkus to znovu v příslušné záložce):<br>${r.chyby.map(esc).join("<br>")}</div>`)
+    toast("Nastaveno, ale něco nevyšlo. Podrobnosti v Přehledu.", false)
+  } else { tab("Návod"); toast("Hotovo, Marty je nastavený.", true) }
+}
+
+// ---------- demo (published copy, no Marty behind it) ----------
+const DKEY = "marty-ukazka"
+function demoDown() { return $("demoOff").checked }
+function demoState() {
+  let s = null; try { s = JSON.parse(localStorage.getItem(DKEY)) } catch {}
+  return s || {nastaveno: false, uzivatel: "", jmeno: "Marty", slozka: "C:\\Users\\ty\\Marty", rc: true, rc_chyba: "",
+    nastaveni: {rc_zapnuto: true, rc_viditelne: true, zavrit_s_panelem: true, zaloha: {typ: "", cil: "", kazdych_h: 6}},
+    chovani: {ton: "kamaradsky", emoji: false, delka: "kratce", rozhodovani: "mix", chyby: "primo", smi_sam: SMI.slice(0, 3), jmeno: ""},
+    pojistky: {email: ["Odesílání e-mailů z kódu"], video: ["Zveřejňování videí a cookies prohlížeče"], obchody: ["Skutečné obchody u brokera nebo na burze"],
+      github: ["Veřejné repozitáře, mazání a změna viditelnosti na GitHubu"], force_push: ["Force-push (přepsání historie v gitu)"]},
+    bloky: {nainstalovano: false, cfg: {rozvrh: {rezim: "vypnuto"}, max_turns: 80, permission_mode: "acceptEdits"}, ulohy: [], dnes: 0, pauza: false},
+    volby: {pamet: {nazev: "Pamatovat si napříč chaty", popis: "Každý nový chat začne z uložené paměti, ne od nuly.", zapnuto: false},
+      ukladani: {nazev: "Ukládat užitečné věci do souborů", popis: "Návody, odkazy, výsledky a rozhodnutí zůstanou na PC, ne jen v jednom chatu.", zapnuto: false},
+      kontrola: {nazev: "Kontrolovat zprávy a reporty", popis: "Nepíše věci, které už jsou vyřešené nebo zastaralé.", zapnuto: false}},
+    moduly: [["zaklad", 1, "Paměť, deník, pojistky, nastavení, Marty se sám zlepšuje (vždy zapnuté)"], ["mod", 1, "Design a povaha Martyho: barvy, stavový řádek, uvítání (vždy zapnuté)"],
+      ["scout", 1, "Posoudí reely, YouTube a TikTok o nových nástrojích, najde zdroj, bezpečně vyzkouší a řekne verdikt (vždy zapnuté)"], ["kritici", 1, "Kritický tým: zkontroluje video, web i text, než ho uvidíte (vždy zapnuté)"],
+      ["osloveni", 0, "Hledání klientů a příprava e-mailů; nic se neodešle bez Vašeho „ano“"], ["bloky", 0, "Práce na pozadí: Marty sám pracuje po blocích a ráno Vám pošle report"],
+      ["weby", 0, "Weby pro Vás nebo Vaše klienty, zkontrolované na mobilu i PC; zveřejnění jen s Vaším „ano“"], ["obsah", 0, "YouTube, TikTok, Instagram: nápady, scénáře, střih na výšku, titulky"],
+      ["trading", 0, "Poctivý backtest strategií z videí na volných datech a papírové obchodování; skutečné obchody ne"]].map(([nazev, j, popis]) => ({nazev, jadro: !!j, popis, zapnuto: !!j})),
+    zaloha_stav: {}, disky: ["G:\\Můj disk"]}
+}
+const ulozDemo = s => { try { localStorage.setItem(DKEY, JSON.stringify(s)) } catch {} }
+function popis(r) {
+  if (r.rezim === "interval") { const span = ((mins(r.do) - mins(r.od)) % 1440 + 1440) % 1440 || 1439; return `každých ${r.kazdych} min, ${span >= 1439 ? "celý den" : r.od + "–" + r.do} (až ${Math.floor(span / r.kazdych) + 1} bloků denně)` }
+  return r.rezim === "casy" ? "v " + r.casy.join(", ") : "vypnuto"
+}
+async function mockApi(path, b) {
+  await new Promise(r => setTimeout(r, /onboarding|modul/.test(path) ? 1400 : path.includes("bloky") ? 700 : 250))
+  if (demoDown()) throw new NetError("Spojení s Martym se přerušilo.")
+  const s = demoState(), ok = (zprava, extra) => { ulozDemo(s); return {ok: true, zprava, ...extra} }, fail = zprava => ({ok: false, zprava})
+  const mod = n => s.moduly.find(m => m.nazev === n)
+  const ulohy = r => r.rezim === "interval" ? ["MartyBlok-kazdych" + r.kazdych] : r.rezim === "casy" ? r.casy.map(c => "MartyBlok-" + c.replace(":", "")) : []
+  if (path === "/api/stav") {
+    const out = clone(s); out.online = navigator.onLine; out.rc = s.nastaveni.rc_zapnuto
+    out.pojistky = Object.fromEntries(Object.entries(s.pojistky).map(([k, v]) => [k, {nazev: v[0], zapnuto: v[1] !== false}]))
+    out.popis_rozvrhu = popis(s.bloky.cfg.rozvrh); return out
+  }
+  if (path === "/api/onboarding") {
+    Object.assign(s, {nastaveno: true, jmeno: (b.asistent || "Marty").trim().slice(0, 30) || "Marty"})
+    s.chovani = {ton: b.ton, emoji: b.emoji, delka: b.delka, rozhodovani: b.rozhodovani, chyby: b.chyby, smi_sam: b.smi_sam, jmeno: (b.jmeno || "").trim() || "uživatel"}
+    for (const k in s.volby) s.volby[k].zapnuto = b.volby.includes(k)
+    for (const m of s.moduly) m.zapnuto = m.jadro || b.moduly.includes(m.nazev) || (m.nazev === "bloky" && b.bloky.rezim !== "vypnuto")
+    s.bloky.nainstalovano = mod("bloky").zapnuto
+    if (b.bloky.rezim !== "vypnuto") { s.bloky.cfg.rozvrh = b.bloky; s.bloky.ulohy = ulohy(b.bloky) }
+    if (b.zaloha.typ) { s.nastaveni.zaloha = {...s.nastaveni.zaloha, typ: b.zaloha.typ, cil: b.zaloha.cil}; s.zaloha_stav = {ok: true, cas: new Date().toLocaleString("cs-CZ"), zprava: "Zkopírováno (ukázka)"} }
+    return ok("Hotovo.", {chyby: []})
+  }
+  if (path === "/api/bloky") {
+    const e = checkRozvrh(b); if (e) return fail(e)
+    if (b.permission_mode === "bypassPermissions" && s.bloky.cfg.permission_mode !== "bypassPermissions" && b.potvrzeni !== CONFIRM) return fail("Chybí potvrzení.")
+    const r = {rezim: b.rezim}; if (b.rezim === "casy") r.casy = [...b.casy].sort(); if (b.rezim === "interval") Object.assign(r, {kazdych: +b.kazdych, od: pad(b.od), do: pad(b.do)})
+    let z = ""
+    if (b.rezim !== "vypnuto" && !s.bloky.nainstalovano) { s.bloky.nainstalovano = mod("bloky").zapnuto = true; z = "Zapnul jsem modul Práce na pozadí. " }
+    Object.assign(s.bloky.cfg, {rozvrh: r, strop_vlastni: b.max_denne !== "", max_turns: +b.max_turns, permission_mode: b.permission_mode})
+    s.bloky.cfg.max_denne = b.max_denne !== "" ? +b.max_denne : pocetBloku(r)
+    s.bloky.ulohy = ulohy(r); return ok(z + "Uloženo: " + popis(r) + ".")
+  }
+  if (path === "/api/pauza") { s.bloky.pauza = !!b.zapnuto; return ok(b.zapnuto ? "Práce na pozadí je pozastavená." : "Práce na pozadí zase běží.") }
+  if (path === "/api/chovani") { s.chovani = {...s.chovani, ...b}; return ok("Uloženo, platí od dalšího chatu.") }
+  if (path === "/api/nastaveni") {
+    for (const k of ["rc_zapnuto", "rc_viditelne", "zavrit_s_panelem"]) if (k in b) s.nastaveni[k] = !!b[k]
+    if (b.zaloha) {
+      const z = {...s.nastaveni.zaloha, ...b.zaloha}
+      if (z.typ === "git" && z.cil && !/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+?(\.git)?\/?$/.test(z.cil)) return fail("Adresa repozitáře má tvar https://github.com/jmeno/marty-zaloha.git")
+      s.nastaveni.zaloha = z
+    }
+    return ok("Uloženo.")
+  }
+  if (path === "/api/zaloha") { if (!s.nastaveni.zaloha.typ) return fail("Záloha je vypnutá."); s.zaloha_stav = {ok: true, cas: new Date().toLocaleString("cs-CZ"), zprava: "Zkopírováno (ukázka)"}; return ok("Zkopírováno (ukázka)") }
+  if (path === "/api/jmeno") { const n = (b.jmeno || "").trim().slice(0, 30); if (!n) return fail("Napiš jméno."); s.jmeno = n; return ok(`Jmenuju se ${n}.`) }
+  if (path === "/api/volba") { s.volby[b.klic].zapnuto = !!b.zapnuto; return ok("Uloženo, platí od dalšího chatu.") }
+  if (path === "/api/pojistka") { if (!b.zapnuto && b.potvrzeni !== CONFIRM) return fail("Chybí potvrzení."); s.pojistky[b.klic][1] = !!b.zapnuto; return ok(b.zapnuto ? "Pojistka zapnutá." : "Pojistka vypnutá. Platí hned.") }
+  if (path === "/api/modul") {
+    if (!navigator.onLine) return fail("Bez internetu to nejde (moduly se stahují).")
+    mod(b.nazev).zapnuto = !!b.zapnuto; if (b.nazev === "bloky") { s.bloky.nainstalovano = !!b.zapnuto; if (!b.zapnuto) { s.bloky.ulohy = []; s.bloky.cfg.rozvrh = {rezim: "vypnuto"} } }
+    return ok("Hotovo, platí od dalšího chatu.")
+  }
+  return fail("Neznámý požadavek.")
+}
+
+// ---------- start ----------
+(async () => {
+  if (DEMO) {
+    document.body.classList.add("demo")
+    $("demoReset").onclick = () => { try { localStorage.removeItem(DKEY); sessionStorage.removeItem("tab") } catch {} ; location.reload() }
+    addEventListener("online", () => load()); addEventListener("offline", () => load())
+  }
+  for (let i = 0; ; i++) {
+    try { await load(); break } catch (e) { setOffline(true); await new Promise(r => setTimeout(r, Math.min(5000, 1000 + i * 500))) }
+  }
+  setOffline(false); renderNav(); if (!S.nastaveno) wizardInit()
+  setInterval(ping, 3000)
+  setInterval(() => { if (!offline && !document.hidden) load().catch(() => {}) }, 20000)
+  if (!DEMO) addEventListener("pagehide", () => navigator.sendBeacon("/zavreno?k=" + K))
+})()
+</script>
+</body>
+</html>
