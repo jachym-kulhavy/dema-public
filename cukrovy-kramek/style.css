@@ -1,0 +1,121 @@
+:root{
+  --cream:#fbf5ec;--white:#fff;--ink:#2e1c18;--muted:#6d564f;
+  --rasp:#a8102f;--rasp-dark:#850a23;--line:#e7dacb;--grout:#f1eae0;
+  --serif:"Young Serif",Georgia,serif;--script:"Dancing Script",cursive;
+  --pad:clamp(20px,5vw,48px);--ease:cubic-bezier(0.23,1,0.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:400 17px/1.6 Figtree,system-ui,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:76px}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+ul{list-style:none}
+:focus-visible{outline:3px solid var(--rasp);outline-offset:3px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:8px;top:8px;background:var(--white);padding:12px;z-index:10}
+.wrap{width:min(1200px,100% - 2*var(--pad));margin-inline:auto}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(1.65rem,3.2vw,2.7rem)}
+h2{font-size:clamp(1.8rem,3.6vw,2.8rem);margin-bottom:24px}
+h3{font-size:1.05rem}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 24px;border:2px solid var(--rasp);border-radius:999px;background:var(--rasp);color:var(--white);font-weight:700;text-decoration:none;text-align:center;transition:background-color .16s var(--ease),transform .16s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn-line{background:transparent;color:var(--rasp)}
+.btn-light{background:var(--white);border-color:var(--white);color:var(--rasp)}
+.btn-line-light{background:transparent;border-color:var(--white)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.logo{display:inline-flex;align-items:center;min-height:48px;font-family:var(--script);font-size:1.75rem;color:var(--rasp);text-decoration:none;white-space:nowrap}
+.nav nav,.nav .nav-cta{display:none}
+
+/* hero: the white tiled wall of the shop behind the name */
+.hero{display:grid}
+.hero-photo{order:-1;height:30svh;min-height:200px;overflow:hidden}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 68%}
+.hero-text{
+  padding:18px var(--pad) 36px;
+  background:
+    linear-gradient(90deg,var(--grout) 1px,transparent 1px) 0 0/44px 100%,
+    linear-gradient(var(--grout) 1px,transparent 1px) 0 0/100% 112px,
+    var(--white);
+}
+.hero-name{font-family:var(--script);color:var(--rasp);font-size:clamp(2.7rem,12.5vw,6.2rem);line-height:1.1;margin-bottom:8px}
+.lead{margin-top:12px;color:var(--muted);max-width:32em}
+
+.visit,.offer,.split,.order{padding-block:clamp(56px,8vw,104px)}
+.visit-cols{display:grid;gap:28px;border-top:2px solid var(--ink);padding-top:24px}
+address{font:normal 1.6rem/1.35 var(--serif)}
+.link{display:flex;align-items:center;min-height:44px;width:fit-content;color:var(--rasp);font-weight:700;text-underline-offset:4px}
+.facts li{padding:10px 0;border-bottom:1px solid var(--line);font-weight:600}
+
+.offer{padding-top:0}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 8px}
+.tiles div{overflow:hidden}
+.tiles img{width:100%;aspect-ratio:1;object-fit:cover}
+.tiles h3{padding-top:10px;overflow-wrap:break-word}
+
+.words{background:var(--white);border-block:1px solid var(--line);padding-block:clamp(56px,9vw,120px)}
+.words p{font:400 clamp(1.4rem,3vw,2.3rem)/1.45 var(--serif);max-width:28em;margin-inline:auto;text-align:center;text-wrap:balance}
+
+.split{display:grid;gap:32px}
+.split-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:999px 999px 8px 8px}
+.split p{margin-bottom:24px;max-width:32em}
+
+.xmas{background:var(--rasp-dark);color:var(--white);padding-block:clamp(56px,8vw,104px)}
+.xmas :focus-visible{outline-color:var(--white)}
+.xmas-in{display:grid;gap:36px}
+.xmas p{max-width:30em;margin-bottom:12px}
+.xmas img{width:100%;aspect-ratio:4/5;object-fit:cover;border:8px solid var(--white)}
+
+.order{text-align:center}
+.order p{max-width:30em;margin:0 auto 28px}
+.big{display:block;width:fit-content;max-width:100%;margin:0 auto;padding:8px 0;font:400 clamp(1.8rem,6vw,4rem)/1.25 var(--serif);color:var(--rasp);text-decoration:none}
+.big-fb{padding-block:12px;font-size:clamp(1.2rem,3.6vw,2.2rem);color:var(--ink)}
+
+footer{border-top:1px solid var(--line);padding-block:32px 40px;text-align:center}
+footer a{display:inline-block;padding-block:10px}
+.small{font-size:.875rem;color:var(--muted)}
+
+.bar{position:fixed;inset:auto 0 0;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:var(--cream);border-top:1px solid var(--line);z-index:5;transition:transform .2s var(--ease),visibility .2s}
+.bar.off{transform:translateY(100%);visibility:hidden}
+
+@media (min-width:700px){
+  .tiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 12px}
+  .visit-cols{grid-template-columns:1fr 1.3fr .8fr}
+  .split,.xmas-in{grid-template-columns:1fr 1fr;align-items:center;gap:56px}
+  .split-photo img,.xmas img{max-width:440px;margin-inline:auto}
+}
+@media (min-width:900px){
+  body{padding-bottom:0}
+  .bar{display:none}
+  .nav nav{display:flex;gap:28px;font-weight:600}
+  .nav nav a{text-decoration:none;padding-block:10px}
+  .nav .nav-cta{display:inline-flex}
+  .hero{grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1fr);height:calc(100svh - 68px);min-height:580px;max-height:820px}
+  .hero-photo{order:0;height:100%;min-height:0}
+  .hero-text{display:flex;flex-direction:column;justify-content:center;padding-inline:max(var(--pad),(100vw - 1200px)/2) var(--pad)}
+}
+
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{background:var(--rasp-dark);border-color:var(--rasp-dark);color:var(--white)}
+  .btn-light:hover,.btn-line-light:hover{background:var(--cream);border-color:var(--cream);color:var(--rasp)}
+  .tiles img{transition:transform .35s var(--ease)}
+  .tiles li:hover img{transform:scale(1.03)}
+  .nav nav a:hover,.big:hover{text-decoration:underline;text-underline-offset:6px}
+}
+
+/* one entrance, hero only */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes fade{from{opacity:0}}
+.hero-text>*{animation:rise .35s var(--ease) backwards}
+.hero-text>:nth-child(2){animation-delay:.07s}
+.hero-text>:nth-child(3){animation-delay:.14s}
+.hero-text>:nth-child(4){animation-delay:.21s}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .bar{transition:none}
+  .hero-text>*{animation-name:fade}
+  .btn:active,.tiles li:hover img{transform:none}
+}

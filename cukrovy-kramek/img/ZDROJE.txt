@@ -1,0 +1,46 @@
+Fotografie z Unsplash (licence https://unsplash.com/license), stazeno 2026-11-26. Ilustracni, nejsou to vyrobky Cukroveho kramku.
+
+dort.jpg
+  foto: https://unsplash.com/photos/round-cake-with-white-frosting-topped-with-red-raspberries-IAYQuCqD00g
+  autor: https://unsplash.com/@alinasagirova
+  soubor: https://images.unsplash.com/photo-1557925923-33b27f891f88
+makronky.jpg
+  foto: https://unsplash.com/photos/french-macaroons-with-different-colors-hV1gChgMa-k
+  autor: https://unsplash.com/@chelseaaudibert
+  soubor: https://images.unsplash.com/photo-1569864358642-9d1684040f43
+zakusek.jpg
+  foto: https://unsplash.com/photos/a-slice-of-layered-cake-with-fresh-berries-on-top-AXF6s3IvEFw
+  autor: https://unsplash.com/@chriscreations__
+  soubor: https://images.unsplash.com/photo-1761637604927-e3656dc81383
+dezert.jpg
+  foto: https://unsplash.com/photos/a-small-pink-cake-topped-with-raspberry-and-red-glaze--wOczGwXJOk
+  autor: https://unsplash.com/@chriscreations__
+  soubor: https://images.unsplash.com/photo-1761637604698-0f9e9d3278ee
+croissant.jpg
+  foto: https://unsplash.com/photos/a-bunch-of-croissants-that-are-on-a-table-sqkXyyj4WdE
+  autor: https://unsplash.com/@commonboxturtle
+  soubor: https://images.unsplash.com/photo-1623334044303-241021148842
+pecivo.jpg
+  foto: https://unsplash.com/photos/danish-pastries-with-blackberries-and-crumble-oPBKD1bLCwM
+  autor: https://unsplash.com/@alingavriliuc
+  soubor: https://images.unsplash.com/photo-1786806568394-e9bb9389cf79
+chleb.jpg
+  foto: https://unsplash.com/photos/two-loaves-of-crusty-artisan-bread-on-a-cooling-rack-p9h7jrVuJDY
+  autor: https://unsplash.com/@sklepacki
+  soubor: https://images.unsplash.com/photo-1774043213144-c74be4fd335b
+chleby.jpg
+  foto: https://unsplash.com/photos/assorted-foods-VRB1LJoTZ6w
+  autor: https://unsplash.com/@olamishchenko
+  soubor: https://images.unsplash.com/photo-1521986329282-0436c1f1e212
+kava.jpg
+  foto: https://unsplash.com/photos/a-cup-of-coffee-with-latte-art-on-a-saucer-T3fFz5W0Foc
+  autor: https://unsplash.com/@unidentifieduser
+  soubor: https://images.unsplash.com/photo-1760163178873-7644a924519e
+svatebni.jpg
+  foto: https://unsplash.com/photos/white-and-green-floral-table-cloth-Jb9WQIvR4YQ
+  autor: https://unsplash.com/@davidholifield
+  soubor: https://images.unsplash.com/photo-1629576690723-bb3a22ae7126
+cukrovi.jpg
+  foto: https://unsplash.com/photos/star-cookies-near-acorn-9LfcAIYcl9o
+  autor: https://unsplash.com/@lydia_norstad
+  soubor: https://images.unsplash.com/photo-1513806562344-c75007ad303f
