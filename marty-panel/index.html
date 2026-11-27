@@ -23,8 +23,9 @@ code{background:var(--s2);padding:1px 6px;border-radius:5px;font-size:.92em;over
 .app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
 aside{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:18px;padding:22px 16px;border-right:1px solid var(--ln);background:rgba(19,17,14,.7)}
 .brand{display:flex;gap:12px;align-items:center;padding:0 6px}
-.orb{width:40px;height:40px;flex:none;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font:italic 400 22px var(--serif);color:var(--gold2);
-  background:radial-gradient(circle at 35% 30%,rgba(227,196,143,.25),transparent 60%);box-shadow:0 0 26px rgba(201,165,107,.18)}
+.orb{width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 50%,rgba(227,196,143,.28),transparent 68%);box-shadow:0 0 26px rgba(201,165,107,.18)}
+.orb.has-orb{background:none}.orb canvas{display:block}
 .brand h1{font-size:24px}.brand .sub{font-size:12px;overflow-wrap:anywhere}
 nav{display:flex;flex-direction:column;gap:2px}
 nav button{display:flex;align-items:center;gap:10px;text-align:left;background:none;border:0;color:var(--mu);padding:9px 12px;border-radius:10px;cursor:pointer;transition:background .2s,color .2s}
@@ -111,7 +112,7 @@ body.demo #demo{display:flex}
 @media (max-width:820px){
   .app{grid-template-columns:minmax(0,1fr)}aside,main{min-width:0}
   aside{position:sticky;height:auto;z-index:6;padding:12px 16px 8px;gap:10px;border-right:0;border-bottom:1px solid var(--ln);background:rgba(12,11,9,.94);backdrop-filter:blur(8px)}
-  .brand .sub{display:none}.brand h1{font-size:20px}.orb{width:32px;height:32px;font-size:18px}
+  .brand .sub{display:none}.brand h1{font-size:20px}.orb{width:42px;height:42px}
   nav{flex-direction:row;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
   nav button{white-space:nowrap;padding:7px 11px}nav button.act{box-shadow:inset 0 -2px 0 var(--gold)}
   nav .ic{display:none}
@@ -129,7 +130,7 @@ body.demo #demo{display:flex}
   <button class="b g" id="demoReset">Začít znovu</button></div>
 <div class="app">
 <aside>
-  <div class="brand"><div class="orb" id="logo">M</div><div><h1 id="title">Marty</h1><div class="sub" id="slozka"></div></div></div>
+  <div class="brand"><div class="orb" data-orb="searching" aria-hidden="true"></div><div><h1 id="title">Marty</h1><div class="sub" id="slozka"></div></div></div>
   <nav id="nav"><span class="sub">Načítám…</span></nav>
   <div class="status">
     <div class="chip" title="Ovládání z mobilu"><span class="dot" id="rcdot"></span><span id="rctext">…</span></div>
@@ -332,6 +333,23 @@ body.demo #demo{display:flex}
 <dialog id="dlg"><h3 id="dlgT"></h3><p class="sub" id="dlgP"></p>
   <div id="dlgInW"><div class="sub">Napiš přesně: <code id="dlgPhrase"></code></div><div class="line"><input type="text" class="w" id="dlgIn" autocomplete="off"></div></div>
   <div class="line" style="justify-content:flex-end;margin-top:14px"><button class="b g" id="dlgNo">Zpět</button><button class="b" id="dlgYes">Potvrdit</button></div></dialog>
+<script type="module">
+// Animated orb in place of the letter logo (thinking-orbs engine, MIT, same as the website).
+// Offline or CDN down: the import fails and the CSS glow stays.
+import { resolvePreset, MODE_FRAMES, paintFrame } from "https://esm.sh/thinking-orbs@0.3.2/engine";
+const GOLD = { r: 227, g: 196, b: 143 }, dpr = Math.min(2, devicePixelRatio || 1);
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+for (const slot of document.querySelectorAll("[data-orb]")) {
+  const size = Math.round(slot.getBoundingClientRect().width) || 40;
+  const preset = resolvePreset(slot.dataset.orb, size >= 40 ? 64 : 20), draw = MODE_FRAMES[preset.mode];
+  const c = document.createElement("canvas"), ctx = c.getContext("2d");
+  c.width = c.height = Math.round(size * dpr); c.style.width = c.style.height = size + "px";
+  const paint = (t) => { ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, size, size); paintFrame(ctx, draw(size, t, preset.opts), true, GOLD) };
+  slot.appendChild(c); slot.classList.add("has-orb");
+  const loop = (now) => { if (!document.hidden) paint(now / 1000 * preset.speed); requestAnimationFrame(loop) };
+  still ? paint(0.6) : requestAnimationFrame(loop);
+}
+</script>
 <script>
 "use strict"
 const K = "__TOKEN__"
@@ -618,7 +636,7 @@ document.querySelectorAll(".tile").forEach(t => t.onclick = () => { tab(t.datase
 
 function render() {
   document.title = "Nastavení · " + S.jmeno
-  $("t_slozka").textContent = S.slozka; $("title").textContent = S.jmeno; $("logo").textContent = (S.jmeno[0] || "M").toUpperCase(); $("slozka").textContent = S.slozka
+  $("t_slozka").textContent = S.slozka; $("title").textContent = S.jmeno; $("slozka").textContent = S.slozka
   const rcOn = S.rc && S.online
   const rcTxt = S.rc ? (S.online ? "Mobil: připojeno" : "Mobil: čeká na internet") : (S.rc_chyba || "Mobil: vypnuto")
   $("rcdot").className = $("t_rcdot").className = "dot" + (rcOn ? " on" : S.rc ? " wa" : "")
