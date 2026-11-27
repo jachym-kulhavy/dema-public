@@ -337,6 +337,7 @@ body.demo #demo{display:flex}
 // Animated orb in place of the letter logo (thinking-orbs engine, MIT, same as the website).
 // Offline or CDN down: the import fails and the CSS glow stays.
 import { resolvePreset, MODE_FRAMES, paintFrame } from "https://esm.sh/thinking-orbs@0.3.2/engine";
+const SLOW = 0.35;  // calmer than the engine default
 const GOLD = { r: 227, g: 196, b: 143 }, dpr = Math.min(2, devicePixelRatio || 1);
 const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 for (const slot of document.querySelectorAll("[data-orb]")) {
@@ -346,7 +347,7 @@ for (const slot of document.querySelectorAll("[data-orb]")) {
   c.width = c.height = Math.round(size * dpr); c.style.width = c.style.height = size + "px";
   const paint = (t) => { ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, size, size); paintFrame(ctx, draw(size, t, preset.opts), true, GOLD) };
   slot.appendChild(c); slot.classList.add("has-orb");
-  const loop = (now) => { if (!document.hidden) paint(now / 1000 * preset.speed); requestAnimationFrame(loop) };
+  const loop = (now) => { if (!document.hidden) paint(now / 1000 * preset.speed * SLOW); requestAnimationFrame(loop) };
   still ? paint(0.6) : requestAnimationFrame(loop);
 }
 </script>
