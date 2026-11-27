@@ -42,12 +42,12 @@ Write-Host ""
 if (-not (Has git)) {
   Say "1/4 Instaluji Git..."
   if (-not (Install-Winget "Git.Git")) {
-    # Official signed installer, per user: no admin prompt to hang on. Not MinGit: App Control blocks its git.exe
-    # (exit 0xC0E90002, Sandbox test 27. 11.). WaitForExit, not -Wait, which also waits for processes Git leaves running.
+    # Portable MinGit, no installer and no admin: the full Git installer hangs on a fresh Windows (Sandbox 25. and 27. 11.).
     $rel = Invoke-RestMethod "https://api.github.com/repos/git-for-windows/git/releases/latest" -UseBasicParsing
-    $url = ($rel.assets | Where-Object { $_.name -match '^Git-[\d.]+-64-bit\.exe$' } | Select-Object -First 1).browser_download_url
-    $p = Start-Process (Download $url) -ArgumentList "/VERYSILENT", "/CURRENTUSER", "/NORESTART", "/SUPPRESSMSGBOXES" -PassThru
-    $p.WaitForExit()
+    $url = ($rel.assets | Where-Object { $_.name -match '^MinGit-[\d.]+-64-bit\.zip$' } | Select-Object -First 1).browser_download_url
+    $dir = Join-Path $env:LOCALAPPDATA "Programs\Git"
+    Expand-Archive (Download $url) -DestinationPath $dir -Force
+    Add-UserPath "$dir\cmd"
   }
   Refresh-Path
 } else { Say "1/4 Git uz mate." }
@@ -77,6 +77,11 @@ foreach ($c in "git", "claude") {
   if (-not (Has $c)) { Write-Host "Chybi $c. Zavrete PowerShell, otevrete novy a vlozte prikaz znovu." -ForegroundColor Red; return }
 }
 if (-not (Has-Python)) { Write-Host "Python se nepodarilo nainstalovat. Zavrete PowerShell, otevrete novy a vlozte prikaz znovu." -ForegroundColor Red; return }
+# Found is not enough: Windows Smart App Control can block git.exe, which then exits silently (seen in Sandbox 27. 11.).
+$ErrorActionPreference = "Continue"; $gv = & git --version 2>$null; $gitOk = ($LASTEXITCODE -eq 0); $ErrorActionPreference = "Stop"
+if (-not $gitOk) {
+  Write-Host "Windows zablokoval Git (asi Smart App Control). Nainstalujte Git z https://git-scm.com/download/win, pak vlozte prikaz znovu." -ForegroundColor Red; return
+}
 
 Say "4/4 Stahuji Martyho..."
 # The release repo is private: the access code from the purchase e-mail is a read-only GitHub token for it.
@@ -91,7 +96,7 @@ function Can-Read([string]$u) {
 }
 if (-not (Can-Read $url)) {
   for ($i = 0; $i -lt 3; $i++) {
-    $code = (Read-Host "Zadejte pristupovy kod (dostali jste ho po zaplaceni)").Trim()
+    $code = "$(Read-Host "Zadejte pristupovy kod (dostali jste ho po zaplaceni)")".Trim()
     $try = "https://x-access-token:$code@github.com/jachym-kulhavy/marty.git"
     if ($code -and (Can-Read $try)) { $url = $try; break }
     Write-Host "Kod nefunguje. Zkontrolujte ho (bez mezer) a zkuste znovu." -ForegroundColor Red
