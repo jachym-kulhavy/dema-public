@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Zmrzlinová kavárna Líšeň – horká čokoláda, punč a zmrzlina</title>
+<meta name="description" content="Zmrzlinová kavárna, Kotlanova 2521/1b, Brno-Líšeň. 22 druhů horké čokolády, punč, grog, zákusky a kopečková zmrzlina. Otevřeno po–ne 10–19.">
+<meta name="theme-color" content="#25130d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23f2cb02'/%3E%3Cpath d='M9 15h14l-7 14z' fill='%2325130d'/%3E%3Ccircle cx='16' cy='11' r='7' fill='%23b8321c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,600..800&amp;family=Figtree:wght@400;600;700&amp;display=swap">
+<style>
+:root{
+  --choc:#25130d;--choc-2:#3a1f15;--cream:#f7eee0;--ink:#25130d;--muted:#6a5348;
+  --orange:#f0741f;--yellow:#f2cb02;--berry:#6e1631;
+  --display:"Bricolage Grotesque","Arial Narrow",sans-serif;
+  --pad:clamp(20px,5vw,72px);--ease:cubic-bezier(0.23,1,0.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:12px}
+body{font:400 17px/1.55 Figtree,system-ui,sans-serif;background:var(--cream);color:var(--ink);overflow-x:clip}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:clamp(2.4rem,6vw,5rem)}
+h3{font-size:1.45rem;line-height:1.1}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:12px;top:12px;z-index:9;background:var(--cream);color:var(--ink);padding:10px 14px}
+
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px var(--pad);background:var(--choc);color:var(--cream)}
+.logo{font:800 1.25rem/1 var(--display);text-decoration:none}
+.nav nav{display:none;gap:28px}
+.nav nav a{text-decoration:none;font-weight:600;padding:8px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 22px;border-radius:999px;background:var(--orange);color:var(--choc);font-weight:700;text-decoration:none;border:2px solid var(--orange);transition:transform .15s var(--ease),background-color .15s var(--ease)}
+.btn-line{background:transparent;color:inherit;border-color:currentColor}
+.btn:active{transform:scale(.97)}
+.nav .btn{min-height:44px;padding:8px 18px;white-space:nowrap}
+
+.hero{display:grid;background:var(--choc);color:var(--cream)}
+.hero-photo{height:42svh;min-height:260px;overflow:hidden}
+.hero-photo img{object-position:50% 48%}
+.hero-text{padding:28px var(--pad) 40px;align-self:center}
+.hero h1{font-size:clamp(3rem,14vw,4.6rem);font-stretch:80%}
+.hero h1 span{color:var(--orange);display:block}
+.hero p{margin-top:18px;max-width:34ch;font-size:1.1rem;color:#e9d9c6}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.ice{display:flex;flex-direction:column;justify-content:space-between;background:var(--yellow);color:var(--choc);text-decoration:none;overflow:hidden}
+.ice div{padding:28px var(--pad) 0}
+.ice strong{display:block;font:800 clamp(2.2rem,9vw,3rem)/.95 var(--display);font-stretch:80%}
+.ice p{margin-top:10px;color:var(--choc);font-size:1rem;font-weight:600}
+.ice img{height:auto;aspect-ratio:9/7;margin-top:8px;-webkit-mask-image:linear-gradient(transparent,#000 60%);mask-image:linear-gradient(transparent,#000 60%);transition:transform .35s var(--ease)}
+
+section{padding:clamp(64px,9vw,130px) var(--pad)}
+
+.visit{display:grid;gap:34px;border-bottom:2px solid var(--ink)}
+.visit h2{font-size:clamp(2.4rem,5vw,4rem)}
+address{font:800 clamp(1.9rem,3.4vw,2.8rem)/1.05 var(--display);font-style:normal}
+.link{display:inline-block;padding:10px 0;font-weight:700;text-underline-offset:5px;text-decoration-thickness:2px;overflow-wrap:anywhere}
+.links{display:flex;flex-direction:column;align-items:flex-start;margin-top:8px}
+.hours{font:800 clamp(1.9rem,3.4vw,2.8rem)/1.05 var(--display)}
+.state{display:flex;align-items:center;gap:9px;margin-top:12px;font-weight:600}
+.state::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--muted)}
+.state.open::before{background:#1f8a4c}
+.state:empty{display:none}
+.facts{list-style:none;align-self:start}
+.facts li{padding:9px 0;border-bottom:1px solid #25130d2e;font-weight:600}
+.facts li:first-child{padding-top:0}
+
+.choc{background:var(--choc-2);color:var(--cream);display:grid;gap:44px}
+.big22{display:block;width:max-content;margin-bottom:24px;font-size:clamp(12rem,52vw,26rem);line-height:.78;font-stretch:75%;color:var(--orange);letter-spacing:-.04em;transform-origin:left bottom}
+.nw{white-space:nowrap}
+.choc p{margin-top:20px;max-width:42ch;color:#e9d9c6}
+.round{aspect-ratio:1;border-radius:50%;overflow:hidden;width:min(100%,560px);justify-self:center;align-self:center}
+.round img{object-position:68% 50%}
+
+.winter{display:grid;gap:36px}
+.winter-photo{aspect-ratio:4/5;overflow:hidden;border-radius:999px 999px 0 0}
+.rows{list-style:none;margin-top:30px}
+.rows li{padding:18px 0;border-top:2px solid var(--ink)}
+.rows p{margin-top:6px;color:var(--muted)}
+
+.cakes{padding:0;background:var(--choc);color:var(--cream);display:grid}
+.cakes-photo{overflow:hidden;min-height:280px}
+.cakes-text{padding:48px var(--pad) 64px;align-self:center}
+.cakes p{margin-top:20px;max-width:36ch;color:#e9d9c6;font-size:1.15rem}
+
+.summer{background:var(--yellow)}
+.summer-head h2{font-size:clamp(3.2rem,13vw,10rem);font-stretch:78%}
+.summer-head p{margin-top:20px;max-width:46ch;font-weight:600;font-size:1.15rem}
+.summer-body{display:grid;gap:40px;margin-top:48px}
+.summer-photo{aspect-ratio:4/5;overflow:hidden;border-radius:18px}
+.flavors{list-style:none}
+.flavors li{padding:16px 0;border-top:2px solid var(--ink);font:800 clamp(1.6rem,3.6vw,2.8rem)/1.05 var(--display)}
+.flavors small{display:block;margin-top:6px;font:600 1rem/1.4 Figtree,sans-serif}
+
+.wine{background:var(--berry);color:var(--cream)}
+.wine h2{font-size:clamp(1.5rem,3vw,2rem)}
+.wine ul{list-style:none;margin-top:26px}
+.wine li{font:800 clamp(3.4rem,12vw,9.5rem)/1 var(--display);font-stretch:75%}
+.wine li:nth-child(2){color:#c9b2f0}
+.wine li:nth-child(3){color:#ff8a8a}
+
+.contact h2{max-width:14ch}
+.phone{display:inline-block;margin-top:30px;font:800 clamp(2.5rem,10.5vw,8rem)/1 var(--display);font-stretch:80%;white-space:nowrap;text-decoration:none;border-bottom:6px solid var(--orange)}
+.contact .links{margin-top:26px;font-size:1.15rem}
+
+footer{padding:40px var(--pad) 110px;background:var(--choc);color:#e9d9c6;display:grid;gap:8px}
+footer .logo{color:var(--cream)}
+footer small{font-size:.9rem}
+
+.bar{position:fixed;z-index:5;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;border-radius:999px;background:var(--cream);box-shadow:0 8px 30px #0005;transition:transform .25s var(--ease),visibility .25s}
+.bar.off{transform:translateY(160%);visibility:hidden}
+
+@media (min-width:760px){
+  .visit{grid-template-columns:1fr 1fr 1fr}
+  .visit h2{grid-column:1/-1}
+  .choc,.winter{grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,96px)}
+  .cakes{grid-template-columns:3fr 2fr}
+  .cakes-photo{min-height:560px}
+  .summer-body{grid-template-columns:2fr 3fr;gap:clamp(36px,6vw,96px)}
+  .flavors{align-self:center}
+  .bar{display:none}
+  footer{padding-bottom:40px}
+}
+@media (min-width:1000px){
+  .nav nav{display:flex}
+  .hero{grid-template-columns:minmax(0,10fr) minmax(0,9fr) minmax(0,5fr);height:calc(100svh - 76px);min-height:600px;max-height:920px}
+  .hero-text{order:-1;padding-right:36px}
+  .hero-photo{height:100%;min-height:0}
+  .hero h1{font-size:clamp(3.8rem,6.6vw,7.4rem)}
+  .hero > *{min-height:0}
+  .ice div{padding:40px 28px 0}
+  .ice strong{font-size:clamp(2.4rem,3.4vw,3.8rem)}
+  .ice img{aspect-ratio:4/5;min-height:0;flex:0 1 auto}
+}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{transform:translateY(-2px)}
+  .btn:not(.btn-line):hover{background:#ff8a3a}
+  .ice:hover img{transform:scale(1.04)}
+  .nav nav a:hover,.logo:hover{color:var(--orange)}
+}
+/* one entrance for the hero, one scroll moment for the "22" */
+@keyframes rise{from{opacity:0;transform:translateY(22px)}}
+@keyframes settle{from{transform:scale(1.07)}}
+@keyframes grow{from{transform:scale(.7)}}
+@keyframes fade{from{opacity:0}}
+.hero-text > *{animation:rise .7s var(--ease) backwards}
+.hero-text > :nth-child(2){animation-delay:.08s}
+.hero-text > :nth-child(3){animation-delay:.16s}
+.hero-photo img{animation:settle 1.4s var(--ease) backwards}
+@supports (animation-timeline:view()){
+  .big22{animation:grow linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero-text > *{animation-name:fade}
+  .hero-photo img,.big22{animation:none}
+  .btn,.btn:hover,.ice img,.ice:hover img,.bar{transition:none;transform:none}
+  .bar.off{transform:translateY(160%)}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+
+<header class="nav">
+  <a class="logo" href="#obsah">Zmrzlinová kavárna</a>
+  <nav aria-label="Hlavní">
+    <a href="#cokolada">Horká čokoláda</a>
+    <a href="#zakusky">Zákusky</a>
+    <a href="#zmrzlina">Zmrzlina</a>
+    <a href="#kde">Kde jsme</a>
+  </nav>
+  <a class="btn" href="tel:+420608988028">Zavolat</a>
+</header>
+
+<main id="obsah">
+  <div class="hero">
+    <div class="hero-photo"><img src="img/hero.jpg" width="1000" height="1200" alt="Hrnek horké čokolády s marshmallows na dřevěném schodu" fetchpriority="high"></div>
+    <div class="hero-text">
+      <h1>Zima chutná <span>po&nbsp;čokoládě</span></h1>
+      <p>Horká čokoláda, punč, grog a&nbsp;zákusky. Zmrzlinová kavárna na Kotlanově v&nbsp;<span class="nw">Brně-Líšni</span>, otevřeno po–ne 10–19.</p>
+      <div class="actions">
+        <a class="btn" href="#cokolada">Co vás zahřeje</a>
+        <a class="btn btn-line" href="#kde">Kde nás najdete</a>
+      </div>
+    </div>
+    <a class="ice" href="#zmrzlina">
+      <div>
+        <strong>A zmrzlina? Celý rok.</strong>
+        <p>Desítky druhů kopečkové z&nbsp;Mimoně.</p>
+      </div>
+      <img src="img/kopecky.jpg" width="900" height="700" alt="Čtyři kornouty s barevnou kopečkovou zmrzlinou v rukou">
+    </a>
+  </div>
+
+  <section class="visit" id="kde" aria-labelledby="h-kde">
+    <h2 id="h-kde">Stavte se v&nbsp;Líšni</h2>
+    <div>
+      <address>Kotlanova 2521/1b<br>628 00 Brno-Líšeň</address>
+      <div class="links">
+        <a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Zmrzlinov%C3%A1+kav%C3%A1rna%2C+Kotlanova+2521%2F1b%2C+628+00+Brno" target="_blank" rel="noopener">Ukázat na mapě</a>
+        <a class="link" href="tel:+420608988028">+420&nbsp;608&nbsp;988&nbsp;028</a>
+      </div>
+    </div>
+    <div>
+      <p class="hours">Po–Ne<br>10:00–19:00</p>
+      <p class="state" id="state"></p>
+    </div>
+    <ul class="facts">
+      <li>Platba kartou</li>
+      <li>Zahrádka</li>
+      <li>Dětský koutek</li>
+      <li>Psi vítáni</li>
+      <li>Bezbariérový přístup</li>
+    </ul>
+  </section>
+
+  <section class="choc" id="cokolada" aria-labelledby="h-cok">
+    <div>
+      <h2 id="h-cok"><span class="big22">22</span> druhů horké čokolády</h2>
+      <p>Belgická a&nbsp;italská. Přijďte si vybrat tu svou a&nbsp;příště zkuste jinou.</p>
+    </div>
+    <div class="round"><img src="img/cokolada.jpg" width="1000" height="1000" alt="Černý hrnek horké čokolády se lžičkou a trubičkami" loading="lazy"></div>
+  </section>
+
+  <section class="winter" aria-labelledby="h-zima">
+    <div class="winter-photo"><img src="img/punc.jpg" width="900" height="1125" alt="Sklenice horkého nápoje se sušeným pomerančem" loading="lazy"></div>
+    <div>
+      <h2 id="h-zima">Na zahřátí</h2>
+      <ul class="rows">
+        <li><h3>Punč a&nbsp;grog</h3><p>Když venku mrzne.</p></li>
+        <li><h3>Káva a&nbsp;čaj</h3><p>Na krátkou zastávku i&nbsp;dlouhé povídání.</p></li>
+        <li><h3>Víno a&nbsp;koktejly</h3><p>Na pozdní odpoledne.</p></li>
+        <li><h3>Bubble waffle</h3><p>Bublinková vafle k&nbsp;něčemu teplému.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cakes" id="zakusky" aria-labelledby="h-zak">
+    <div class="cakes-photo"><img src="img/zakusky.jpg" width="1400" height="950" alt="Dva čokoládové řezy s krémem a oříšky na tmavém pozadí" loading="lazy"></div>
+    <div class="cakes-text">
+      <h2 id="h-zak">K&nbsp;tomu zákusek</h2>
+      <p>Zákusky od b-cake i&nbsp;klasické. K&nbsp;čokoládě, ke kávě nebo jen tak.</p>
+    </div>
+  </section>
+
+  <section class="summer" id="zmrzlina" aria-labelledby="h-zmrz">
+    <div class="summer-head">
+      <h2 id="h-zmrz">Zmrzlina nezimuje</h2>
+      <p>Kopečková zmrzlina řemeslné výroby z&nbsp;Mimoně, desítky druhů. Jsme zmrzlinová kavárna i&nbsp;v&nbsp;zimě.</p>
+    </div>
+    <div class="summer-body">
+      <div class="summer-photo"><img src="img/kornout.jpg" width="900" height="1125" alt="Kornout se dvěma kopečky barevné zmrzliny" loading="lazy"></div>
+      <ul class="flavors">
+        <li>Ovocné sorbety</li>
+        <li>Alkoholové sorbety</li>
+        <li>Speciální příchutě</li>
+        <li>Milkshake <small>A&nbsp;také domácí limonády a&nbsp;ledové tříště.</small></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wine" aria-labelledby="h-vino">
+    <h2 id="h-vino">Ovocná vína</h2>
+    <ul>
+      <li>Rybízák</li>
+      <li>Borůvčák</li>
+      <li>Višňák</li>
+    </ul>
+  </section>
+
+  <section class="contact" id="kontakt" aria-labelledby="h-kontakt">
+    <h2 id="h-kontakt">Chcete se na něco zeptat?</h2>
+    <a class="phone" href="tel:+420608988028">608&nbsp;988&nbsp;028</a>
+    <div class="links">
+      <a class="link" href="mailto:Zmrzlinova.kavarna@email.cz">Zmrzlinova.kavarna@email.cz</a>
+      <a class="link" href="https://www.facebook.com/zmrzlinovakavarnacukrarna" target="_blank" rel="noopener">Zmrzlinová kavárna na Facebooku</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p class="logo">Zmrzlinová kavárna</p>
+  <p>Kotlanova 2521/1b, 628 00 Brno-Líšeň. Po–Ne 10–19.</p>
+  <small>Ukázkový návrh webu, fotografie ilustrační. Fotografie z&nbsp;<a href="https://www.pexels.com" target="_blank" rel="noopener">Pexels</a>.</small>
+</footer>
+
+<div class="bar off">
+  <a class="btn" href="tel:+420608988028">Zavolat</a>
+  <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Zmrzlinov%C3%A1+kav%C3%A1rna%2C+Kotlanova+2521%2F1b%2C+628+00+Brno" target="_blank" rel="noopener">Trasa</a>
+</div>
+<script>
+/* open/closed from the listed daily hours 10-19, in Czech time */
+const h=Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Prague',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
+const state=document.getElementById('state'),open=h>=10&&h<19;
+state.textContent=open?'Teď máme otevřeno, do 19:00':'Teď máme zavřeno, otevíráme v 10:00';
+state.classList.toggle('open',open);
+/* mobile bar stays hidden while the hero buttons are on screen */
+const bar=document.querySelector('.bar');
+new IntersectionObserver(([e])=>bar.classList.toggle('off',e.isIntersecting||e.boundingClientRect.top>0)).observe(document.querySelector('.hero .actions'));
+</script>
+</body>
+</html>
