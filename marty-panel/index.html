@@ -242,7 +242,7 @@ body.demo #demo{display:flex}
     <div class="lbl">Co smí v bloku</div>
     <div class="cards" id="b_perm"></div>
     <div class="note da" id="b_bpwarn">„Všechno bez ptaní“: v bloku nikdo nehlídá, co Marty spouští. Pojistky dál platí, ale chybný pokyn nebo škodlivá stránka může nadělat skutečnou škodu. Důrazně nedoporučujeme.</div>
-    <div class="note">Počítač musí být zapnutý. Během bloku může na chvíli vyskočit okno a počítač jede zhruba na polovinu výkonu. Když dojde limit, bloky se samy na 5 hodin pozastaví.</div>
+    <div class="note">Během bloku jede počítač zhruba na polovinu výkonu. Když dojde limit, bloky se samy na 5 hodin pozastaví.</div>
     <div class="foot"><button class="b" id="b_save" disabled>Uložit</button><button class="b g" id="b_cancel" hidden>Zrušit změny</button><span class="msg" id="b_msg"></span></div>
   </div>
   <div class="card"><h3>Teď</h3>
@@ -466,7 +466,8 @@ function pocetBloku(r) {
 function rozvrhEditor(el, r, changed) {
   const set = patch => { Object.assign(r, patch); changed(); draw() }
   function draw() {
-    el.innerHTML = `<div class="seg" data-k="rezim"></div><div data-k="body"></div><div class="sum" data-k="sum"></div><div class="sub" data-k="sum2"></div>`
+    el.innerHTML = `<div class="seg" data-k="rezim"></div><div data-k="body"></div><div class="sum" data-k="sum"></div><div class="sub" data-k="sum2"></div>
+      ${r.rezim === "vypnuto" ? "" : `<div class="note">Při každém bloku může na chvíli vyskočit okno. To je v pořádku, nech ho být. Počítač musí být zapnutý a nesmí spát.</div>`}`
     seg(el.querySelector('[data-k=rezim]'), [["vypnuto", "Vypnuto"], ["casy", "V pevné časy"], ["interval", "Pořád dokola"]], r.rezim, v => set({rezim: v}))
     const body = el.querySelector('[data-k=body]')
     if (r.rezim === "casy") {
