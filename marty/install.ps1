@@ -16,9 +16,10 @@ function Has-Python {
   # "python" can be the Microsoft Store stub that only opens the Store; ask for a real version.
   try { return ((& python -c "import sys; print(sys.version_info[:2] >= (3, 10))" 2>$null) -eq "True") } catch { return $false }
 }
-function Winget([string]$id) {
-  if (-not (Has winget)) { return $false }
-  & winget install --id $id -e --silent --accept-package-agreements --accept-source-agreements | Out-Host
+function Install-Winget([string]$id) {
+  # Named apart from winget.exe: a function called "Winget" finds itself in Has and calls itself forever.
+  if (-not (Has winget.exe)) { return $false }
+  & winget.exe install --id $id -e --silent --accept-package-agreements --accept-source-agreements | Out-Host
   return ($LASTEXITCODE -eq 0)
 }
 function Download([string]$url) {
@@ -34,7 +35,7 @@ Write-Host ""
 
 if (-not (Has git)) {
   Say "1/4 Instaluji Git..."
-  if (-not (Winget "Git.Git")) {
+  if (-not (Install-Winget "Git.Git")) {
     $rel = Invoke-RestMethod "https://api.github.com/repos/git-for-windows/git/releases/latest" -UseBasicParsing
     $exe = ($rel.assets | Where-Object { $_.name -match '^Git-[\d.]+-64-bit\.exe$' } | Select-Object -First 1).browser_download_url
     Start-Process (Download $exe) -ArgumentList "/VERYSILENT", "/NORESTART", "/SUPPRESSMSGBOXES" -Wait
@@ -44,7 +45,7 @@ if (-not (Has git)) {
 
 if (-not (Has-Python)) {
   Say "2/4 Instaluji Python 3.12..."
-  if (-not (Winget "Python.Python.3.12")) {
+  if (-not (Install-Winget "Python.Python.3.12")) {
     $exe = Download "https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe"
     Start-Process $exe -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_launcher=1" -Wait
   }
@@ -61,7 +62,7 @@ if (-not (Has claude)) {
 if (-not (Test-Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64")) {
   Say "    Doinstaluji Microsoft Visual C++ (prepis reci z videi)..."
   try {
-    if (-not (Winget "Microsoft.VCRedist.2015+.x64")) {
+    if (-not (Install-Winget "Microsoft.VCRedist.2015+.x64")) {
       Start-Process (Download "https://aka.ms/vs/17/release/vc_redist.x64.exe") -ArgumentList "/install", "/quiet", "/norestart" -Wait
     }
   } catch { Write-Host "    Nepovedlo se, Marty funguje i bez nej (jen neprepise rec z videi)." }
