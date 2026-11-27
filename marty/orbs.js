@@ -9,6 +9,7 @@
 import { resolvePreset, MODE_FRAMES, paintFrame } from "https://esm.sh/thinking-orbs@0.3.2/engine";
 
 const GOLD = { r: 227, g: 196, b: 143 };
+const SLOW = 0.35;  // calmer than the engine default
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const dpr = Math.min(2, devicePixelRatio || 1);
 
@@ -33,10 +34,10 @@ function mount(slot) {
   if (reduce) { paint(0.6); return; }
 
   let raf = 0, running = false, visible = false;
-  const loop = (now) => { paint((now / 1000) * preset.speed); if (running) raf = requestAnimationFrame(loop); };
+  const loop = (now) => { paint((now / 1000) * preset.speed * SLOW); if (running) raf = requestAnimationFrame(loop); };
   const start = () => { if (!running && visible && !document.hidden) { running = true; raf = requestAnimationFrame(loop); } };
   const stop = () => { running = false; cancelAnimationFrame(raf); };
-  paint((performance.now() / 1000) * preset.speed);
+  paint((performance.now() / 1000) * preset.speed * SLOW);
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? start() : stop(); }).observe(slot);
   document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
 }
