@@ -42,12 +42,12 @@ Write-Host ""
 if (-not (Has git)) {
   Say "1/4 Instaluji Git..."
   if (-not (Install-Winget "Git.Git")) {
-    # Portable MinGit, no installer and no admin: the full Git installer hangs on a fresh Windows (Sandbox, 27. 11.).
+    # Official signed installer, per user: no admin prompt to hang on. Not MinGit: App Control blocks its git.exe
+    # (exit 0xC0E90002, Sandbox test 27. 11.). WaitForExit, not -Wait, which also waits for processes Git leaves running.
     $rel = Invoke-RestMethod "https://api.github.com/repos/git-for-windows/git/releases/latest" -UseBasicParsing
-    $url = ($rel.assets | Where-Object { $_.name -match '^MinGit-[\d.]+-64-bit\.zip$' } | Select-Object -First 1).browser_download_url
-    $dir = Join-Path $env:LOCALAPPDATA "Programs\Git"
-    Expand-Archive (Download $url) -DestinationPath $dir -Force
-    Add-UserPath "$dir\cmd"
+    $url = ($rel.assets | Where-Object { $_.name -match '^Git-[\d.]+-64-bit\.exe$' } | Select-Object -First 1).browser_download_url
+    $p = Start-Process (Download $url) -ArgumentList "/VERYSILENT", "/CURRENTUSER", "/NORESTART", "/SUPPRESSMSGBOXES" -PassThru
+    $p.WaitForExit()
   }
   Refresh-Path
 } else { Say "1/4 Git uz mate." }
