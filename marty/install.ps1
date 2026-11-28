@@ -35,8 +35,7 @@ function Download([string]$url) {
 }
 
 # Record what Marty installs (and what was there before), so the uninstaller can offer to remove exactly that.
-$recFile = Join-Path $env:LOCALAPPDATA "Marty
-ainstalovano.json"
+$recFile = Join-Path $env:LOCALAPPDATA "Marty\nainstalovano.json"
 $rec = [ordered]@{}
 if (Test-Path $recFile) { try { (Get-Content $recFile -Raw | ConvertFrom-Json).PSObject.Properties | ForEach-Object { $rec[$_.Name] = $_.Value } } catch {} }
 if (-not $rec.Contains("pred")) { $rec["pred"] = [ordered]@{ git = (Has git); python = (Has-Python); claude = (Has claude); ffmpeg = (Has ffmpeg) } }
