@@ -13,6 +13,7 @@
   --tx:#ece4d6;--mu:#a39a8a;--gold:#c9a56b;--gold2:#e3c48f;--ok:#9fb89a;--wa:#d9b46b;--da:#e0806f;
   --serif:"Newsreader",Georgia,"Times New Roman",serif;--sans:"Manrope","Segoe UI",system-ui,sans-serif;--ease:cubic-bezier(.23,1,.32,1)}
 *{box-sizing:border-box}
+[hidden]{display:none!important}  /* .line etc. set display:flex, which would beat the hidden attribute */
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:radial-gradient(900px 500px at 85% -10%,rgba(201,165,107,.10),transparent 60%),var(--bg);color:var(--tx);
   font:400 15px/1.55 var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh}
@@ -102,13 +103,42 @@ dialog h3{font-size:22px;margin-bottom:8px}
 .steps{display:flex;gap:6px;margin:0 0 18px}.steps i{flex:1;height:3px;border-radius:3px;background:var(--ln)}.steps i.on{background:var(--gold)}
 .opts{display:flex;flex-wrap:wrap;gap:8px}.opts label{background:var(--s2);border:1px solid var(--ln);border-radius:99px;padding:7px 14px;cursor:pointer;user-select:none}
 .opts label:has(input:checked){border-color:var(--gold);background:rgba(201,165,107,.16);color:var(--gold2)}
-.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts input{position:absolute;opacity:0;pointer-events:none}.opts label:has(input:disabled){opacity:.55;cursor:default}
 .opts.col{flex-direction:column}.opts.col label{border-radius:12px}
 .tut li{margin:7px 0}
 .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--ln2);border-top-color:var(--gold);border-radius:50%;animation:r .8s linear infinite;vertical-align:-2px}
 @keyframes r{to{transform:rotate(360deg)}}
 #demo{display:none;background:rgba(201,165,107,.12);border-bottom:1px solid var(--gold);padding:8px 16px;font-size:13px;gap:10px;align-items:center;flex-wrap:wrap}
 body.demo #demo{display:flex}
+/* "+" = the user's own answer to any question (M51) */
+.plus{background:transparent;border:1px dashed var(--ln2);border-radius:99px;padding:7px 14px;cursor:pointer;color:var(--mu);transition:border-color .2s,color .2s}
+.plus:hover{border-color:var(--gold);color:var(--gold2)}.plus[aria-pressed=true]{border-style:solid;border-color:var(--gold);color:var(--gold2)}
+.cards .plus{border:1px dashed var(--ln2);background:transparent;color:var(--mu);border-radius:12px;text-align:left}
+.cards .plus[aria-pressed=true]{border:1px solid var(--gold);color:var(--gold2);background:transparent}
+.plusin{margin:8px 0 0}.plusin input{flex:1;min-width:0}
+/* report (M42) */
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.rep{position:relative;background:linear-gradient(180deg,var(--s1),var(--bg2));border:1px solid var(--ln);border-radius:18px;padding:22px 24px;margin-bottom:16px}
+.rep.need{border-color:rgba(201,165,107,.45);box-shadow:0 0 0 1px rgba(201,165,107,.08),0 18px 50px -24px rgba(201,165,107,.35)}
+.rep .hd{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.rep .hd h3{font-size:24px}.rep .hd .n{font-family:var(--serif);font-size:15px;color:var(--gold2)}
+.rep ol,.rep ul{list-style:none;margin:0;padding:0}
+.rep li{display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--ln);overflow-wrap:anywhere}
+.rep li:first-child{border-top:0}
+.rep .ix{flex:none;width:24px;height:24px;border-radius:50%;border:1px solid var(--gold);color:var(--gold2);font:600 12px/22px var(--sans);text-align:center}
+.rep .ck{flex:none;width:24px;text-align:center;color:var(--ok)}
+.rep.tip p{font-family:var(--serif);font-size:20px;line-height:1.35;margin:4px 0 0}
+.rep .more{background:none;border:0;color:var(--mu);cursor:pointer;padding:8px 0 0;font-size:13px}.rep .more:hover{color:var(--gold2)}
+.empty{color:var(--mu);font-size:14px;padding:4px 0}
+/* wishes (M43) */
+.wish{display:flex;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--ln)}.wish:first-child{border-top:0}
+.wish .t{flex:1;min-width:0;overflow-wrap:anywhere}.wish .t small{display:block;color:var(--mu);font-size:12px}
+.wish .acts{display:flex;gap:6px;flex:none}
+.ib{min-width:36px;height:34px;border-radius:10px;border:1px solid var(--ln2);background:var(--s2);color:var(--tx);cursor:pointer;padding:0 10px;transition:border-color .2s,color .2s}
+.ib.y:hover{border-color:var(--ok);color:var(--ok)}.ib.x:hover{border-color:var(--da);color:var(--da)}.ib.d:hover{border-color:var(--gold);color:var(--gold2)}
+.wish.closed .t{color:var(--mu)}.wish.closed.s-- .t span{text-decoration:line-through}
+details summary{cursor:pointer;color:var(--mu);font-size:13.5px;padding:6px 0}
+.est{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(201,165,107,.07);border:1px solid rgba(201,165,107,.25);font-size:13.5px;color:#e8d5ae}
 @media (max-width:820px){
   .app{grid-template-columns:minmax(0,1fr)}aside,main{min-width:0}
   aside{position:sticky;height:auto;z-index:6;padding:12px 16px 8px;gap:10px;border-right:0;border-bottom:1px solid var(--ln);background:rgba(12,11,9,.94);backdrop-filter:blur(8px)}
@@ -119,7 +149,8 @@ body.demo #demo{display:flex}
   .status{position:absolute;right:16px;top:16px;margin:0;flex-direction:row}.status .chip span:last-child{display:none}
   main{padding:20px 16px 80px}
   #banner{margin:-20px -16px 16px;padding:10px 16px}
-  .card{padding:16px}
+  .card{padding:16px}.rep{padding:18px}
+  .wish{flex-wrap:wrap}.wish .acts{width:100%;justify-content:flex-end}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -158,14 +189,14 @@ body.demo #demo{display:flex}
 
   <div class="card wstep"><h3>2 · Co děláš</h3>
     <div class="lbl">Čím se živíš? <small>Víc možností.</small></div>
-    <div class="opts"><label><input type="checkbox" name="zivi" value="studuju">Studuju</label>
+    <div class="opts" id="o_zivi"><label><input type="checkbox" name="zivi" value="studuju">Studuju</label>
       <label><input type="checkbox" name="zivi" value="mám práci">Mám práci</label>
       <label><input type="checkbox" name="zivi" value="podnikám nebo mám vlastní projekt">Podnikám / vlastní projekt</label>
       <label><input type="checkbox" name="zivi" value="mám koníček, který chci posunout">Koníček, který chci posunout</label></div>
     <div class="lbl">Na čem teď děláš? <small>Pár slov.</small></div>
     <textarea id="o_projekt" rows="2" placeholder="např. prodávám ručně dělané svíčky na Instagramu, píšu bakalářku…"></textarea>
     <div class="lbl">Co tě nejvíc zdržuje?</div>
-    <div class="opts"><label><input type="checkbox" name="zdrzuje" value="málo času">Málo času</label>
+    <div class="opts" id="o_zdrzuje"><label><input type="checkbox" name="zdrzuje" value="málo času">Málo času</label>
       <label><input type="checkbox" name="zdrzuje" value="nevím, kde začít">Nevím, kde začít</label>
       <label><input type="checkbox" name="zdrzuje" value="opakovaná rutina">Opakovaná rutina</label>
       <label><input type="checkbox" name="zdrzuje" value="hledání informací">Hledání informací</label></div>
@@ -187,11 +218,13 @@ body.demo #demo{display:flex}
 
   <div class="card wstep"><h3>4 · Práce na pozadí a záloha</h3>
     <div class="lbl">Mám pracovat sám, i když zrovna nepíšeš? <small>Každý blok čerpá z tvého Claude limitu a počítač musí být zapnutý.</small></div>
-    <div id="o_rozvrh"></div>
+    <div id="o_rozvrh"></div><div class="opts" id="o_bplus"></div>
+    <div class="lbl">Spotřeba <small>Jak moc smím čerpat z tvého limitu. Změníš kdykoli v Práci na pozadí.</small></div>
+    <div class="cards" id="o_spotreba"></div>
     <div class="lbl">Zálohovat paměť a nastavení?</div><div class="seg" id="o_ztyp"></div>
     <div class="line" id="o_zcilw"><input type="text" class="w" id="o_zcil"><span class="sub" id="o_zhint"></span></div>
     <div class="lbl">Jaké služby používáš? <small>Jen názvy, nikdy hesla.</small></div>
-    <div class="opts"><label><input type="checkbox" name="nastroje" value="Gmail">Gmail</label>
+    <div class="opts" id="o_nastroje"><label><input type="checkbox" name="nastroje" value="Gmail">Gmail</label>
       <label><input type="checkbox" name="nastroje" value="Outlook">Outlook</label>
       <label><input type="checkbox" name="nastroje" value="Google Kalendář">Google Kalendář</label>
       <label><input type="checkbox" name="nastroje" value="Notion">Notion</label>
@@ -207,6 +240,24 @@ body.demo #demo{display:flex}
 
   <div class="foot" style="border:0"><button class="b g" id="wzpet">Zpět</button><button class="b" id="wdal">Další</button>
     <span class="msg" id="o_stav"></span></div>
+</section>
+
+<!-- ============ today's report (M42) ============ -->
+<section data-tab="Dnes" data-ic="☼">
+  <div class="pagehead"><div class="eyebrow" id="r_datum"></div><h2 id="r_titul">Dnes</h2><p id="r_shrnuti"></p></div>
+  <div class="rep need" id="r_need"></div>
+  <div class="rep" id="r_done"></div>
+  <div class="rep tip" id="r_tip"></div>
+</section>
+
+<!-- ============ wishes (M43) ============ -->
+<section data-tab="Přání" data-ic="✧">
+  <div class="pagehead"><h2>Přání</h2><p>Co po mně ještě chceš. Odklikni, co už neplatí: práce na pozadí dělá jen na tom, co tu svítí.</p></div>
+  <div class="card">
+    <div class="line"><input type="text" class="w" id="p_novy" maxlength="300" placeholder="+ přidat přání, třeba „najdi levnější hosting“"><button class="b" id="p_pridat">Přidat</button></div>
+    <div id="p_list"></div>
+    <div id="p_closed"></div>
+  </div>
 </section>
 
 <!-- ============ overview ============ -->
@@ -228,11 +279,26 @@ body.demo #demo{display:flex}
     <div class="sub">Pod tímhle jménem ho uvidíš v appce.</div>
     <div class="line"><input type="text" class="w" id="jmeno" maxlength="30"><button class="b" id="jmenoSave" disabled>Uložit</button></div>
   </div>
+  <div class="card" id="odcard"><h3>Odinstalovat Martyho</h3>
+    <div class="sub">Smaže jen to, co Marty přidal. Tvůj účet Claude, přihlášení ani předplatné se nemění. Paměť (složka <code>memory</code>) si předtím zkopíruj, jestli ji chceš.</div>
+    <div class="line"><button class="b g" id="od_ukaz">Ukázat, co smažu</button></div>
+    <div id="od_box" hidden>
+      <ul class="tut" id="od_plan"></ul>
+      <div class="sub">Programy, které používají i jiné aplikace (nech zaškrtnuté, jestli si nejsi jistý):</div>
+      <div class="opts" id="od_nastroje"></div>
+      <div class="line"><input type="text" class="w" id="od_potvrd" placeholder="Napiš: ANO odinstalovat"><button class="b" id="od_btn" disabled>Odinstalovat</button></div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ work blocks ============ -->
 <section data-tab="Práce na pozadí" data-ic="◷">
   <div class="pagehead"><h2>Práce na pozadí</h2><p>Marty sám pracuje po blocích, i když zrovna nepíšeš, a výsledky ti nechá v reportu.</p></div>
+  <div class="card"><h3>Spotřeba</h3>
+    <div class="sub">Jak moc Marty čerpá z tvého Claude limitu při práci na pozadí a kontrolách. Ukládá se hned.</div>
+    <div class="cards" id="s_volba" style="margin-top:12px"></div>
+    <div class="est" id="s_odhad"></div>
+  </div>
   <div class="card"><h3>Kdy mám pracovat</h3>
     <div id="b_rozvrh"></div>
     <div class="lbl">Kolik nejvýš bloků za den <small>Pojistka proti vyčerpání limitu.</small></div>
@@ -241,6 +307,7 @@ body.demo #demo{display:flex}
     <div class="seg" id="b_kroky"></div>
     <div class="lbl">Co smí v bloku</div>
     <div class="cards" id="b_perm"></div>
+    <div class="opts" id="b_plus" style="margin-top:10px"></div>
     <div class="note da" id="b_bpwarn">„Všechno bez ptaní“: v bloku nikdo nehlídá, co Marty spouští. Pojistky dál platí, ale chybný pokyn nebo škodlivá stránka může nadělat skutečnou škodu. Důrazně nedoporučujeme.</div>
     <div class="note">Během bloku jede počítač zhruba na polovinu výkonu. Když dojde limit, bloky se samy na 5 hodin pozastaví.</div>
     <div class="foot"><button class="b" id="b_save" disabled>Uložit</button><button class="b g" id="b_cancel" hidden>Zrušit změny</button><span class="msg" id="b_msg"></span></div>
@@ -264,13 +331,13 @@ body.demo #demo{display:flex}
     <div class="lbl">Co smím dělat sám bez ptaní</div><div class="opts" id="c_smi"></div>
     <div class="foot"><button class="b" id="c_save" disabled>Uložit</button><button class="b g" id="c_cancel" hidden>Zrušit změny</button><span class="msg" id="c_msg"></span></div>
   </div>
-  <div class="card"><h3>Paměť a zprávy</h3><div class="sub">Přepínače se ukládají hned.</div><div id="volby"></div></div>
+  <div class="card"><h3>Paměť a zprávy</h3><div class="sub">Přepínače se ukládají hned.</div><div id="volby"></div><div class="opts" id="v_plus" style="margin-top:12px"></div></div>
 </section>
 
 <!-- ============ modules ============ -->
 <section data-tab="Moduly" data-ic="▦">
   <div class="pagehead"><h2>Moduly</h2><p>Co všechno Marty umí. Přepínač se uloží hned, změna platí od dalšího chatu. Zapnutí chvíli trvá a potřebuje internet.</p></div>
-  <div class="card"><div id="moduly"></div></div>
+  <div class="card"><div id="moduly"></div><div class="opts" id="m_plus" style="margin-top:12px"></div></div>
 </section>
 
 <!-- ============ backup ============ -->
@@ -283,6 +350,7 @@ body.demo #demo{display:flex}
     <div id="z_gitw"><div class="lbl">Adresa repozitáře <small>Na github.com/new založ <b>soukromý</b> repozitář a vlož sem jeho adresu. Při prvním nahrání se otevře přihlášení do GitHubu.</small></div>
       <input type="text" class="w" id="z_url" placeholder="https://github.com/jmeno/marty-zaloha.git"></div>
     <div id="z_kdyw"><div class="lbl">Jak často</div><div class="seg" id="z_kdy"></div></div>
+    <div class="opts" id="z_plus" style="margin-top:12px"></div>
     <div class="foot"><button class="b" id="z_save" disabled>Uložit</button><button class="b g" id="z_cancel" hidden>Zrušit změny</button>
       <button class="b g" id="z_ted">Zálohovat teď</button><span class="msg" id="z_msg"></span></div>
   </div>
@@ -302,7 +370,7 @@ body.demo #demo{display:flex}
     <ol class="tut">
       <li><b>Na mobilu:</b> otevři appku <b>Claude</b>, dole zvol <b>Code</b> a vyber sezení se jménem asistenta. Na počítači to samé na <b>claude.ai/code</b>.</li>
       <li><b>Piš normálně česky</b>, jako kamarádovi. Nemusíš znát žádné příkazy.</li>
-      <li>Počítač musí běžet a ovládání z mobilu musí být zapnuté. Zelená tečka v okně = jsem online.</li>
+      <li>Počítač musí běžet a ovládání z mobilu musí být zapnuté. Zelená tečka „Mobil“ = můžeš psát („připojený“ = z mobilu přišla zpráva v posledních 15 minutách).</li>
       <li>Když něco potřebuju schválit (odeslat, zveřejnit…), zeptám se v chatu. Stačí odepsat „jo“.</li>
     </ol></div>
   <div class="card"><h3>Co zkusit hned</h3>
@@ -321,7 +389,7 @@ body.demo #demo{display:flex}
     </ul></div>
   <div class="card"><h3>Když něco nejde</h3>
     <ul class="tut">
-      <li>Mobil sezení nevidí: tečka „Mobil“ je šedá → v Přehledu zapni Ovládání z mobilu. Je oranžová → chybí internet, připojí se samo.</li>
+      <li>Mobil sezení nevidí: tečka „Mobil“ je šedá → v Přehledu zapni Ovládání z mobilu. Je oranžová → chybí internet nebo se spojení obnovuje, připojí se samo. Je červená → Remote Control nejde spustit, text vedle tečky říká proč.</li>
       <li>Nahoře svítí červený pruh: okno ztratilo spojení s Martym. Počkej pár sekund, nebo dvojklikni na ikonu na ploše.</li>
       <li>Okno jsi zavřel: dvojklik na ikonu na ploše.</li>
       <li>Chyba přihlášení: zavři okno a spusť ikonu znovu, přihlášení se nabídne samo.</li>
@@ -395,8 +463,9 @@ function setOffline(on, why) {
     : "Spojení s Martym se přerušilo. Zkouším se znovu připojit… Když to trvá dlouho, dvojklikni na ikonu Marty na ploše."
 }
 function setStale() { stale = true; setOffline(true, "stale") }
-let pingFails = 0
+let pingFails = 0, pryc = false  // pryc: uninstall started, the page is only a goodbye now
 async function ping() {
+  if (pryc) return
   if (DEMO ? demoDown() : false) { if (++pingFails >= 2) setOffline(true); return }
   if (DEMO) { if (offline) { setOffline(false); load() } pingFails = 0; return }
   try {
@@ -441,6 +510,24 @@ function confirmDlg(title, text, phrase) {
     d.showModal(); (phrase ? $("dlgIn") : $("dlgYes")).focus()
   })
 }
+// "+" on every question (M51): the user's own answer, saved to CLAUDE.md and respected like the clicked ones.
+// store/changed: part of a draft (wizard, Chování); without them it saves at once through /api/vlastni.
+function plus(el, key, store, changed) {
+  const old = el.nextElementSibling
+  if (old && old.dataset.plus === key) old.remove()
+  const now = !store, src = () => now ? S.vlastni : store
+  const b = document.createElement("button"); b.type = "button"; b.className = "plus"; b.textContent = "+ vlastní…"
+  b.setAttribute("aria-pressed", !!src()[key]); b.title = "Dopiš cokoli vlastního"
+  const box = document.createElement("div"); box.className = "line plusin"; box.dataset.plus = key; box.hidden = !src()[key]
+  box.innerHTML = `<input type="text" maxlength="300" placeholder="Napiš cokoli vlastního, platí to stejně jako volby výš">${now ? '<button class="b g" type="button">Uložit</button>' : ""}`
+  const i = box.querySelector("input"); i.value = src()[key] || ""
+  if (now) {
+    const go = async () => { const r = await act("/api/vlastni", {klic: key, text: i.value}); if (r.ok) b.setAttribute("aria-pressed", !!i.value.trim()) }
+    box.querySelector("button").onclick = go; i.onkeydown = e => { if (e.key === "Enter") go() }
+  } else i.oninput = () => { store[key] = i.value; b.setAttribute("aria-pressed", !!i.value.trim()); changed && changed() }
+  b.onclick = () => { box.hidden = !box.hidden; if (!box.hidden) i.focus() }
+  el.append(b); el.after(box)
+}
 const mins = t => { const [h, m] = t.split(":").map(Number); return h * 60 + m }
 const okTime = t => /^([01]?\d|2[0-3]):[0-5]\d$/.test(String(t || ""))
 const pad = t => t.padStart(5, "0")
@@ -467,7 +554,7 @@ function rozvrhEditor(el, r, changed) {
   const set = patch => { Object.assign(r, patch); changed(); draw() }
   function draw() {
     el.innerHTML = `<div class="seg" data-k="rezim"></div><div data-k="body"></div><div class="sum" data-k="sum"></div><div class="sub" data-k="sum2"></div>
-      ${r.rezim === "vypnuto" ? "" : `<div class="note">Při každém bloku může na chvíli vyskočit okno. To je v pořádku, nech ho být. Počítač musí být zapnutý a nesmí spát.</div>`}`
+      ${r.rezim === "vypnuto" ? "" : `<div class="note">Při každém bloku může na chvíli vyskočit okno. To je v pořádku, nech ho být. Počítač musí být zapnutý a nesmí spát a během bloku může běžet zhruba na polovinu výkonu.</div>`}`
     seg(el.querySelector('[data-k=rezim]'), [["vypnuto", "Vypnuto"], ["casy", "V pevné časy"], ["interval", "Pořád dokola"]], r.rezim, v => set({rezim: v}))
     const body = el.querySelector('[data-k=body]')
     if (r.rezim === "casy") {
@@ -582,6 +669,27 @@ form("bloky", () => {
 })
 $("pauza").onchange = async e => { const want = e.target.checked; const r = await act("/api/pauza", {zapnuto: want}); if (!r.ok) e.target.checked = !want }
 
+// ---------- Spotřeba (M50) ----------
+const SPOT = [["uspora", "Úsporně", "co nejmenší spotřeba, ale dobrý výsledek"], ["vyvazene", "Vyváženě", "doporučeno"],
+  ["naplno", "Naplno", "nejlepší model a víc kontrol, limit mizí rychle"], ["sam", "Kontroluju si sám", "méně sebekontroly, levnější"]]
+const USD = {uspora: 0.1, vyvazene: 0.15, naplno: 0.4, sam: 0.08}   // one block: test blocks on sonnet cost 0.09-0.18 USD (27. 11.)
+function odhad(k, cfg) {
+  const r = rozvrhZeStavu(cfg), n0 = pocetBloku(r), cap = cfg.strop_vlastni ? Number(cfg.max_denne) : 0
+  const n = cap > 0 ? Math.min(n0, cap) : n0, per = USD[k] || 0.1, tot = n * per
+  if (!n) return "Práce na pozadí je vypnutá: spotřeba se týká jen kontrol v chatu."
+  const f = x => x.toLocaleString("cs-CZ", {maximumFractionDigits: 2})
+  return `Hrubý odhad: ${n} ${n === 1 ? "blok" : n < 5 ? "bloky" : "bloků"} denně × ~${f(per)} USD ≈ <b>${f(tot)} USD z limitu denně</b> · ` +
+    (tot < 1 ? "nízká spotřeba" : tot < 5 ? "střední spotřeba" : "vysoká, limit může dojít (bloky se pak samy pozastaví)")
+}
+function drawSpotreba() {
+  const k = S.bloky.cfg.spotreba || "vyvazene", bx = $("s_volba").nextElementSibling
+  if (!(bx && bx.dataset.plus && bx.contains(document.activeElement))) {  // never redraw under the user's typing
+    cardsPick($("s_volba"), SPOT, k, async v => { await act("/api/spotreba", {spotreba: v}) })
+    plus($("s_volba"), "spotreba")
+  }
+  $("s_odhad").innerHTML = odhad(k, S.bloky.cfg)
+}
+
 // ---------- Chování ----------
 const TON = [["kamaradsky", "Kamarádský"], ["vecny", "Věcný"], ["formalni", "Formální"]]
 const DELKA = [["kratce", "Stručně, hlavně výsledek"], ["podrobne", "Podrobněji"]]
@@ -596,13 +704,15 @@ function smiOpts(el, list, onChange) {
     i.onchange = () => onChange([...el.querySelectorAll("input:checked")].map(x => x.value))
   }
 }
-form("chovani", () => clone(S.chovani), function draw(d, changed) {
+const CHKEYS = ["ton", "delka", "rozhodovani", "chyby", "smi_sam"]
+form("chovani", () => ({...clone(S.chovani), vlastni: Object.fromEntries(CHKEYS.map(k => [k, S.vlastni[k] || ""]))}), function draw(d, changed) {
   const re = () => draw(d, changed), pick = k => v => { d[k] = v; changed(); re() }
   $("c_jmeno").value = d.jmeno || ""; $("c_jmeno").oninput = e => { d.jmeno = e.target.value; changed() }
   seg($("c_ton"), TON, d.ton, pick("ton")); seg($("c_delka"), DELKA, d.delka, pick("delka")); seg($("c_chyby"), CHYBY, d.chyby, pick("chyby"))
   cardsPick($("c_rozhodovani"), ROZH, d.rozhodovani, pick("rozhodovani"))
   $("c_emoji").checked = !!d.emoji; $("c_emoji").onchange = e => { d.emoji = e.target.checked; changed() }
   smiOpts($("c_smi"), d.smi_sam, v => { d.smi_sam = v; changed() })
+  for (const [id, k] of [["c_ton", "ton"], ["c_delka", "delka"], ["c_rozhodovani", "rozhodovani"], ["c_chyby", "chyby"], ["c_smi", "smi_sam"]]) plus($(id), k, d.vlastni, changed)
 }, d => act("/api/chovani", strip(d)))
 
 // ---------- Záloha ----------
@@ -630,6 +740,29 @@ function draw(d, changed) {
 })
 $("z_ted").onclick = async () => { const b = $("z_ted"); b.disabled = true; b.innerHTML = '<span class="spin"></span> Zálohuju'; await act("/api/zaloha", {}, 600000); b.disabled = false; b.textContent = "Zálohovat teď" }
 
+// ---------- uninstall ----------
+const OD_TXT = "ANO odinstalovat"
+$("od_ukaz").onclick = async () => {
+  $("od_ukaz").disabled = true
+  let p
+  try { p = await call("/api/odinstalace", {}, 300000) } catch (e) { toast(e.message, false); $("od_ukaz").disabled = false; return }
+  $("od_ukaz").disabled = false
+  if (!p.ok) return toast(p.zprava, false)
+  const n = (k, a) => a.length ? `<li>${k}: ${a.map(esc).join(", ")}</li>` : ""
+  $("od_plan").innerHTML = `<li>Složku <code>${esc(p.slozka)}</code> se vším, co v ní je</li>` + n("Moduly", p.moduly) + n("Naplánované úlohy", p.ulohy)
+    + n("Zástupce", p.zastupci) + n("Další složky Martyho", p.dalsi_slozky) + (p.marketplace ? "<li>Katalog modulů marty v Claude Code</li>" : "")
+    + (p.procesy.length ? `<li>Zastavím, co z Martyho běží (${p.procesy.length}×, i tohle okno)</li>` : "")
+  $("od_nastroje").innerHTML = Object.entries(p.nastroje).map(([k, t]) => `<label title="${esc(t.proc_ne)}"><input type="checkbox" data-nechat="${k}" checked${t.lze_odebrat ? "" : " disabled"}>Nechat ${esc(t.nazev)}${t.lze_odebrat ? "" : ` <small>(${esc(t.proc_ne)})</small>`}</label>`).join("")
+  $("od_box").hidden = false; $("od_potvrd").focus()
+}
+$("od_potvrd").oninput = () => $("od_btn").disabled = val("od_potvrd").trim() !== OD_TXT
+$("od_btn").onclick = async () => {
+  const odebrat = [...document.querySelectorAll("[data-nechat]")].filter(c => !c.checked && !c.disabled).map(c => c.dataset.nechat)
+  $("od_btn").disabled = true
+  const r = await act("/api/odinstalovat", {potvrzeni: val("od_potvrd").trim(), odebrat})
+  if (r.ok) pryc = true, document.body.innerHTML = `<main style="padding:40px;font:16px system-ui"><h2>Odinstalovávám…</h2><p>${esc(r.zprava)}</p><p>Okno se samo zavře. Hotovo je, až zmizí ikona Marty z plochy.</p></main>`
+}
+
 // ---------- everything else ----------
 $("jmeno").oninput = () => $("jmenoSave").disabled = !val("jmeno").trim() || val("jmeno").trim() === S.jmeno
 $("jmenoSave").onclick = async () => { $("jmenoSave").disabled = true; await act("/api/jmeno", {jmeno: val("jmeno")}) }
@@ -639,10 +772,9 @@ document.querySelectorAll(".tile").forEach(t => t.onclick = () => { tab(t.datase
 function render() {
   document.title = "Nastavení · " + S.jmeno
   $("t_slozka").textContent = S.slozka; $("title").textContent = S.jmeno; $("slozka").textContent = S.slozka
-  const rcOn = S.rc && S.online
-  const rcTxt = S.rc ? (S.online ? "Mobil: připojeno" : "Mobil: čeká na internet") : (S.rc_chyba || "Mobil: vypnuto")
-  $("rcdot").className = $("t_rcdot").className = "dot" + (rcOn ? " on" : S.rc ? " wa" : "")
-  $("rctext").textContent = rcTxt; $("t_rc").textContent = S.rc ? (S.online ? "Připojeno" : "Čeká na internet") : "Vypnuto"
+  const mob = S.mobil || {stav: "vypnuto", text: "Mobil: vypnuto", kratce: "Vypnuto"}  // states: panel.py mobil()
+  $("rcdot").className = $("t_rcdot").className = "dot" + ({aktivni: " on", ceka: " on", spousti: " wa", offline: " wa", spadl: " wa", chyba: " da"}[mob.stav] || "")
+  $("rctext").textContent = mob.text; $("t_rc").textContent = mob.kratce
   $("netdot").className = "dot" + (S.online ? " on" : " da"); $("nettext").textContent = S.online ? "Internet: v pořádku" : "Internet: není"
   document.querySelectorAll("[data-n]").forEach(i => i.checked = !!S.nastaveni[i.dataset.n])
   if (document.activeElement !== $("jmeno")) { $("jmeno").value = S.jmeno; $("jmenoSave").disabled = true }
@@ -685,11 +817,56 @@ function render() {
     if (BUSY.has(o.nazev)) { const i = right.querySelector("input"); i.checked = !o.zapnuto; i.disabled = true; right.classList.add("busy") }
     m.append(row(`<b>${esc(NAZVY[o.nazev] || o.nazev)}</b>${o.jadro ? '<span class="badge">jádro</span>' : ""}`, esc(o.popis), right))
   }
+  drawSpotreba(); renderReport(); renderPrani()
+  for (const [id, k] of [["b_plus", "bloky"], ["v_plus", "volby"], ["m_plus", "moduly"], ["z_plus", "zaloha"]]) {
+    const box = $(id).nextElementSibling
+    if (!(box && box.dataset.plus === k && box.contains(document.activeElement))) { $(id).innerHTML = ""; plus($(id), k) }
+  }
   for (const f of Object.values(forms)) f.sync()
 }
+
+// ---------- Dnes: the report (M42) ----------
+const plural = (n, a, b, c) => n === 1 ? a : n > 1 && n < 5 ? b : c
+const DONE_MAX = 6
+let doneAll = false
+function renderReport() {
+  const r = S.report || {potrebuje: [], hotovo: [], navrh: []}, open = S.prani.filter(w => w.stav === " ")
+  const d = new Date()
+  $("r_datum").textContent = d.toLocaleDateString("cs-CZ", {weekday: "long", day: "numeric", month: "long"})
+  const n = r.potrebuje.length
+  $("r_titul").textContent = n ? `${n} ${plural(n, "věc čeká", "věci čekají", "věcí čeká")} na tebe` : "Nic na tebe nečeká"
+  const bits = [r.cas ? "Report z " + r.cas : "Zatím bez reportu", r.hotovo.length + " hotovo",
+    S.bloky.pauza ? "práce na pozadí pozastavená" : "práce na pozadí: " + S.popis_rozvrhu]
+  $("r_shrnuti").textContent = bits.join(" · ")
+  const li = (items, mark) => items.map((x, i) => `<li>${mark(i)}<span>${esc(x)}</span></li>`).join("")
+  $("r_need").innerHTML = `<div class="hd"><h3>Potřebuje tě</h3>${n ? `<span class="n">${n}</span>` : ""}</div>` +
+    (n ? `<ol>${li(r.potrebuje, i => `<span class="ix">${i + 1}</span>`)}</ol>` : '<div class="empty">Nic. Až budu potřebovat tvoje „jo“ nebo rozhodnutí, objeví se to tady jako první.</div>') +
+    (open.length ? `<button class="more" data-go="Přání">${open.length} ${plural(open.length, "otevřené přání", "otevřená přání", "otevřených přání")} → odklikat</button>` : "")
+  const shown = doneAll ? r.hotovo : r.hotovo.slice(0, DONE_MAX)
+  $("r_done").innerHTML = `<div class="hd"><h3>Hotovo</h3>${r.hotovo.length ? `<span class="n">${r.hotovo.length}</span>` : ""}</div>` +
+    (r.hotovo.length ? `<ul>${li(shown, () => '<span class="ck">✓</span>')}</ul>` : `<div class="empty">${r.cas ? "V reportu nic hotového." : "První report přijde po prvním bloku práce na pozadí. Nebo napiš Martymu „report“."}</div>`) +
+    (r.hotovo.length > DONE_MAX ? `<button class="more" id="r_more">${doneAll ? "Méně" : `+ ${r.hotovo.length - DONE_MAX} ${plural(r.hotovo.length - DONE_MAX, "další", "další", "dalších")}`}</button>` : "")
+  $("r_tip").style.display = r.navrh.length ? "" : "none"
+  $("r_tip").innerHTML = `<div class="hd"><h3>Návrh</h3></div>` + r.navrh.slice(0, 2).map(x => `<p>${esc(x)}</p>`).join("")
+  if ($("r_more")) $("r_more").onclick = () => { doneAll = !doneAll; renderReport() }
+  document.querySelectorAll("#r_need [data-go]").forEach(b => b.onclick = () => tab(b.dataset.go))
+}
+
+// ---------- Přání (M43) ----------
+function renderPrani() {
+  const open = S.prani.filter(w => w.stav === " "), closed = S.prani.filter(w => w.stav !== " ").reverse()
+  const row = (w, acts) => `<div class="wish${w.stav !== " " ? " closed s-" + w.stav : ""}" data-t="${esc(w.text)}"><div class="t"><span>${esc(w.text)}</span><small>${w.stav === "x" ? "hotovo" : w.stav === "-" ? "už nechceš" : "chceš"}${w.datum ? " · " + esc(w.datum.split("-").reverse().join(". ").replace(/^0/, "")) : ""}</small></div><div class="acts">${acts}</div></div>`
+  $("p_list").innerHTML = open.length ? open.map(w => row(w, '<button class="ib y" data-a="chci" title="Pořád chci">✓</button><button class="ib x" data-a="nechci" title="Už nechci">✕</button><button class="ib d" data-a="hotovo">Hotovo</button>')).join("")
+    : '<div class="empty" style="padding-top:12px">Žádná otevřená přání. Napiš sem, co chceš, nebo to řekni v chatu.</div>'
+  $("p_closed").innerHTML = closed.length ? `<details${$("p_closed").querySelector("details[open]") ? " open" : ""}><summary>Vyřízené (${closed.length})</summary>${closed.slice(0, 30).map(w => row(w, '<button class="ib" data-a="chci">Vrátit</button>')).join("")}</details>` : ""
+  document.querySelectorAll("#p_list [data-a], #p_closed [data-a]").forEach(b => b.onclick = async () => {
+    b.disabled = true; await act("/api/prani", {akce: b.dataset.a, text: b.closest(".wish").dataset.t }) })
+}
+$("p_pridat").onclick = async () => { const v = val("p_novy").trim(); if (!v) return $("p_novy").focus(); const r = await act("/api/prani", {akce: "pridat", text: v}); if (r.ok) $("p_novy").value = "" }
+$("p_novy").onkeydown = e => { if (e.key === "Enter") $("p_pridat").click() }
 const BUSY = new Set()   // modules being switched (a refresh must not offer the switch again meanwhile)
 const NAZVY = {zaklad: "Základ", mod: "Vzhled a povaha", scout: "Průzkum nástrojů", kritici: "Kritický tým", osloveni: "Hledání klientů", bloky: "Práce na pozadí", weby: "Weby", obsah: "Videa a sítě", trading: "Investice"}
-async function load() { S = await call("/api/stav"); render() }
+async function load() { if (pryc) return; S = await call("/api/stav"); render() }
 
 // ---------- navigation ----------
 function renderNav() {
@@ -708,7 +885,7 @@ function tab(name) { const b = [...document.querySelectorAll("nav button")].find
 
 // ---------- first setup ----------
 const W = {step: 0, r: {rezim: "vypnuto", casy: ["13:00", "22:00"], kazdych: 30, od: "08:00", do: "22:00"}, ton: "kamaradsky", delka: "kratce", rozhodovani: "mix", chyby: "primo",
-  smi: SMI.slice(0, 3), ztyp: ""}
+  smi: SMI.slice(0, 3), ztyp: "", spotreba: "vyvazene", vlastni: {}}
 const checked = n => [...document.querySelectorAll(`input[name="${n}"]:checked`)].map(i => i.value)
 const ZM = {web: "weby", videa: "obsah", investice: "trading", zakaznici: "osloveni"}
 function wizardInit() {
@@ -719,12 +896,16 @@ function wizardInit() {
     seg($("o_ztyp"), [["", "Zatím ne"], ["slozka", "Složka / Google Disk"], ["git", "GitHub"]], W.ztyp, v => { W.ztyp = v; if (v === "slozka" && !val("o_zcil")) $("o_zcil").value = S.disky[0] || ""; draw() })
     $("o_zcilw").style.display = W.ztyp ? "" : "none"
     $("o_zcil").placeholder = W.ztyp === "git" ? "https://github.com/jmeno/marty-zaloha.git" : "např. G:\\Můj disk"
+    cardsPick($("o_spotreba"), SPOT, W.spotreba, v => { W.spotreba = v; draw() }); plus($("o_ztyp"), "zaloha", W.vlastni)
+    for (const [id, k] of [["o_ton", "ton"], ["o_delka", "delka"], ["o_rozhodovani", "rozhodovani"], ["o_chyby", "chyby"], ["o_spotreba", "spotreba"]]) plus($(id), k, W.vlastni)
     $("o_zhint").textContent = W.ztyp === "git" ? "Na github.com/new založ soukromý repozitář (nebo to nech na později)." : W.ztyp === "slozka" ? (S.disky.length ? "Našel jsem Google Disk." : "Google Disk jsem nenašel, napiš jinou složku.") : ""
   }
   draw()
   smiOpts($("o_smi"), W.smi, v => W.smi = v)
+  for (const [id, k] of [["o_zivi", "zivi"], ["o_zdrzuje", "zdrzuje"], ["o_smi", "smi_sam"], ["o_nastroje", "nastroje"]]) plus($(id), k, W.vlastni)
   $("o_volby").innerHTML = Object.entries(S.volby).map(([k, o]) => `<label title="${esc(o.popis)}"><input type="checkbox" name="volby" value="${esc(k)}" checked>${esc(o.nazev)}</label>`).join("")
   $("o_moduly").innerHTML = S.moduly.filter(o => !o.jadro && o.nazev !== "bloky").map(o => `<label><input type="checkbox" name="moduly" value="${esc(o.nazev)}"><b>${esc(NAZVY[o.nazev] || o.nazev)}</b>&nbsp;· ${esc(o.popis)}</label>`).join("")
+  plus($("o_volby"), "volby", W.vlastni); plus($("o_moduly"), "moduly", W.vlastni); plus($("o_bplus"), "bloky", W.vlastni)
   const rec = () => { const want = checked("zajmy").map(z => ZM[z]); document.querySelectorAll('input[name="moduly"]').forEach(i => i.checked = want.includes(i.value)) }
   document.querySelectorAll('input[name="zajmy"]').forEach(i => i.onchange = rec)
   rozvrhEditor($("o_rozvrh"), W.r, () => {})
@@ -750,7 +931,8 @@ async function dokoncit() {
       asistent: val("o_asistent"), jmeno: val("o_jmeno"), ton: W.ton, emoji: $("o_emoji").checked, delka: W.delka,
       zivi: checked("zivi"), projekt: val("o_projekt"), zdrzuje: checked("zdrzuje"), zajmy: checked("zajmy"), zajmy_text: val("o_zajmy_text"),
       rozhodovani: W.rozhodovani, chyby: W.chyby, smi_sam: W.smi, volby: checked("volby"),
-      bloky: rozvrhProServer(W.r), zaloha: {typ: W.ztyp, cil: val("o_zcil")}, nastroje: checked("nastroje"), moduly: checked("moduly")}, 900000)
+      bloky: rozvrhProServer(W.r), zaloha: {typ: W.ztyp, cil: val("o_zcil")}, nastroje: checked("nastroje"), moduly: checked("moduly"),
+      spotreba: W.spotreba, vlastni: W.vlastni}, 900000)
   } catch (e) { r = {ok: false, zprava: e.message + " Zkus to znovu."} }
   btn.disabled = false; btn.textContent = "Nastavit a začít"
   if (!r.ok) { $("o_stav").className = "msg bad"; $("o_stav").textContent = r.zprava; return }
@@ -781,7 +963,13 @@ function demoState() {
       ["osloveni", 0, "Hledání klientů a příprava e-mailů; nic se neodešle bez Vašeho „ano“"], ["bloky", 0, "Práce na pozadí: Marty sám pracuje po blocích a ráno Vám pošle report"],
       ["weby", 0, "Weby pro Vás nebo Vaše klienty, zkontrolované na mobilu i PC; zveřejnění jen s Vaším „ano“"], ["obsah", 0, "YouTube, TikTok, Instagram: nápady, scénáře, střih na výšku, titulky"],
       ["trading", 0, "Poctivý backtest strategií z videí na volných datech a papírové obchodování; skutečné obchody ne"]].map(([nazev, j, popis]) => ({nazev, jadro: !!j, popis, zapnuto: !!j})),
-    zaloha_stav: {}, disky: ["G:\\Můj disk"]}
+    zaloha_stav: {}, disky: ["G:\\Můj disk"], vlastni: {},
+    prani: [{text: "Najdi levnější hosting pro web", stav: " ", datum: "2026-11-25"}, {text: "Každý pátek shrnutí, co se za týden povedlo", stav: " ", datum: "2026-11-26"},
+      {text: "Hlídat ceny letenek do Lisabonu", stav: "-", datum: "2026-11-20"}],
+    report: {cas: "", potrebuje: ["Schválit koncept e-mailu pro kavárnu U Lípy (memory/drafty/u-lipy.md)", "Vybrat jednu ze 2 verzí titulků k videu o svíčkách"],
+      hotovo: ["Otestoval jsem 3 nástroje na titulky, nejlepší je zdarma a běží offline", "Video o svíčkách sestříhané na výšku 9:16 s titulky", "Kritický tým prošel web: opraveny 2 chyby na mobilu",
+        "Záloha na Google Disk proběhla", "Průzkum: 5 levných hostingů porovnáno v reports/hosting.md", "Deník a paměť uklizené, nic zastaralého", "Nový skill na plánování týdne otestován"],
+      navrh: ["Zkusit krátké video každé úterý: podle čísel z minulého týdne to má nejvíc dosahu."]}}
 }
 const ulozDemo = s => { try { localStorage.setItem(DKEY, JSON.stringify(s)) } catch {} }
 function popis(r) {
@@ -796,6 +984,9 @@ async function mockApi(path, b) {
   const ulohy = r => r.rezim === "interval" ? ["MartyBlok-kazdych" + r.kazdych] : r.rezim === "casy" ? r.casy.map(c => "MartyBlok-" + c.replace(":", "")) : []
   if (path === "/api/stav") {
     const out = clone(s); out.online = navigator.onLine; out.rc = s.nastaveni.rc_zapnuto
+    out.mobil = !out.rc ? {stav: "vypnuto", text: "Mobil: vypnuto", kratce: "Vypnuto"} : !out.online ? {stav: "offline", text: "Mobil: čeká na internet", kratce: "Čeká na internet"}
+      : {stav: "ceka", text: "Mobil: připraveno, čeká na tebe", kratce: "Připraveno"}
+    if (s.nastaveno && !out.report.cas) out.report.cas = new Date().toLocaleString("cs-CZ", {day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit"})
     out.pojistky = Object.fromEntries(Object.entries(s.pojistky).map(([k, v]) => [k, {nazev: v[0], zapnuto: v[1] !== false}]))
     out.popis_rozvrhu = popis(s.bloky.cfg.rozvrh); return out
   }
@@ -806,6 +997,7 @@ async function mockApi(path, b) {
     for (const m of s.moduly) m.zapnuto = m.jadro || b.moduly.includes(m.nazev) || (m.nazev === "bloky" && b.bloky.rezim !== "vypnuto")
     s.bloky.nainstalovano = mod("bloky").zapnuto
     if (b.bloky.rezim !== "vypnuto") { s.bloky.cfg.rozvrh = b.bloky; s.bloky.ulohy = ulohy(b.bloky) }
+    s.bloky.cfg.spotreba = b.spotreba || "vyvazene"; s.vlastni = Object.fromEntries(Object.entries(b.vlastni || {}).filter(([, v]) => String(v).trim()))
     if (b.zaloha.typ) { s.nastaveni.zaloha = {...s.nastaveni.zaloha, typ: b.zaloha.typ, cil: b.zaloha.cil}; s.zaloha_stav = {ok: true, cas: new Date().toLocaleString("cs-CZ"), zprava: "Zkopírováno (ukázka)"} }
     return ok("Hotovo.", {chyby: []})
   }
@@ -820,7 +1012,17 @@ async function mockApi(path, b) {
     s.bloky.ulohy = ulohy(r); return ok(z + "Uloženo: " + popis(r) + ".")
   }
   if (path === "/api/pauza") { s.bloky.pauza = !!b.zapnuto; return ok(b.zapnuto ? "Práce na pozadí je pozastavená." : "Práce na pozadí zase běží.") }
-  if (path === "/api/chovani") { s.chovani = {...s.chovani, ...b}; return ok("Uloženo, platí od dalšího chatu.") }
+  if (path === "/api/chovani") { const {vlastni, ...rest} = b; s.chovani = {...s.chovani, ...rest}; Object.assign(s.vlastni, vlastni || {}); return ok("Uloženo, platí od dalšího chatu.") }
+  if (path === "/api/vlastni") { s.vlastni[b.klic] = String(b.text || "").trim(); return ok("Uloženo, platí od dalšího chatu.") }
+  if (path === "/api/spotreba") { if (!SPOT.some(([k]) => k === b.spotreba)) return fail("Neznámá volba spotřeby."); s.bloky.cfg.spotreba = b.spotreba; return ok("Uloženo, platí od dalšího bloku.") }
+  if (path === "/api/prani") {
+    const text = String(b.text || "").trim(), w = s.prani.find(x => x.text === text), today = new Date().toISOString().slice(0, 10)
+    if (!text) return fail("Napiš přání.")
+    if (b.akce === "pridat" && !w) s.prani.push({text, stav: " ", datum: today})
+    else if (!w) return fail("Tohle přání už v souboru není.")
+    else Object.assign(w, {stav: {pridat: " ", chci: " ", nechci: "-", hotovo: "x"}[b.akce], datum: today})
+    return ok({pridat: "Přidáno.", chci: "Dobře, pořád platí.", nechci: "Škrtnuto, už na tom nebudu dělat.", hotovo: "Označeno jako hotové."}[b.akce])
+  }
   if (path === "/api/nastaveni") {
     for (const k of ["rc_zapnuto", "rc_viditelne", "zavrit_s_panelem"]) if (k in b) s.nastaveni[k] = !!b[k]
     if (b.zaloha) {
@@ -839,6 +1041,11 @@ async function mockApi(path, b) {
     mod(b.nazev).zapnuto = !!b.zapnuto; if (b.nazev === "bloky") { s.bloky.nainstalovano = !!b.zapnuto; if (!b.zapnuto) { s.bloky.ulohy = []; s.bloky.cfg.rozvrh = {rezim: "vypnuto"} } }
     return ok("Hotovo, platí od dalšího chatu.")
   }
+  if (path === "/api/odinstalace") return {ok: true, slozka: s.slozka, moduly: s.moduly.filter(m => m.zapnuto).map(m => m.nazev), ulohy: ulohy(s.bloky.cfg.rozvrh),
+    zastupci: ["C:\\Users\\ty\\Desktop\\Marty.lnk"], dalsi_slozky: [], marketplace: true, procesy: [{pid: 1, nazev: "pythonw.exe"}],
+    nastroje: {claude: {nazev: "Claude Code", lze_odebrat: true, proc_ne: ""}, git: {nazev: "Git", lze_odebrat: false, proc_ne: "měl jsi ho už před Martym"},
+      python: {nazev: "Python", lze_odebrat: true, proc_ne: ""}, ffmpeg: {nazev: "ffmpeg", lze_odebrat: false, proc_ne: "Marty ho neinstaloval"}}}
+  if (path === "/api/odinstalovat") return b.potvrzeni === "ANO odinstalovat" ? ok("Tohle je jen ukázka, nic se nesmazalo" + (b.odebrat.length ? ` (odebral bych i: ${b.odebrat.join(", ")})` : "") + ".") : fail("Chybí potvrzení.")
   return fail("Neznámý požadavek.")
 }
 
