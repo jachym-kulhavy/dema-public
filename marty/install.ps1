@@ -34,6 +34,19 @@ function Download([string]$url) {
   return $f
 }
 
+# Record what Marty installs (and what was there before), so the uninstaller can offer to remove exactly that.
+$recFile = Join-Path $env:LOCALAPPDATA "Marty
+ainstalovano.json"
+$rec = [ordered]@{}
+if (Test-Path $recFile) { try { (Get-Content $recFile -Raw | ConvertFrom-Json).PSObject.Properties | ForEach-Object { $rec[$_.Name] = $_.Value } } catch {} }
+if (-not $rec.Contains("pred")) { $rec["pred"] = [ordered]@{ git = (Has git); python = (Has-Python); claude = (Has claude); ffmpeg = (Has ffmpeg) } }
+function Save-Rec([string]$tool, $how) {
+  $rec[$tool] = $how
+  New-Item -ItemType Directory -Force -Path (Split-Path $recFile) | Out-Null
+  $rec | ConvertTo-Json -Depth 4 | Set-Content $recFile -Encoding utf8
+}
+Save-Rec "verze" 1
+
 Write-Host ""
 Write-Host "Marty: instalace" -ForegroundColor Yellow
 Write-Host "Doinstaluji jen to, co chybi. Muze to trvat 5-15 minut, okno nezavirejte."
@@ -41,20 +54,21 @@ Write-Host ""
 
 if (-not (Has git)) {
   Say "1/4 Instaluji Git..."
-  if (-not (Install-Winget "Git.Git")) {
+  if (Install-Winget "Git.Git") { Save-Rec "git" @{ jak = "winget"; id = "Git.Git" } } else {
     # Portable MinGit, no installer and no admin: the full Git installer hangs on a fresh Windows (Sandbox 25. and 27. 11.).
     $rel = Invoke-RestMethod "https://api.github.com/repos/git-for-windows/git/releases/latest" -UseBasicParsing
     $url = ($rel.assets | Where-Object { $_.name -match '^MinGit-[\d.]+-64-bit\.zip$' } | Select-Object -First 1).browser_download_url
     $dir = Join-Path $env:LOCALAPPDATA "Programs\Git"
     Expand-Archive (Download $url) -DestinationPath $dir -Force
     Add-UserPath "$dir\cmd"
+    Save-Rec "git" @{ jak = "slozka"; slozka = $dir; path = @("$dir\cmd") }
   }
   Refresh-Path
 } else { Say "1/4 Git uz mate." }
 
 if (-not (Has-Python)) {
   Say "2/4 Instaluji Python 3.12..."
-  if (-not (Install-Winget "Python.Python.3.12")) {
+  if (Install-Winget "Python.Python.3.12") { Save-Rec "python" @{ jak = "winget"; id = "Python.Python.3.12" } } else {
     # Official Python build from nuget.org: no installer, no admin (the .exe installer hangs on some PCs).
     $pkg = Join-Path $env:TEMP "python.3.12.10.zip"
     Invoke-WebRequest -Uri "https://api.nuget.org/v3-flatcontainer/python/3.12.10/python.3.12.10.nupkg" -OutFile $pkg -UseBasicParsing
@@ -62,6 +76,7 @@ if (-not (Has-Python)) {
     $dir = Join-Path $env:LOCALAPPDATA "Programs\Python312"
     Copy-Item (Join-Path $tmp "tools") $dir -Recurse -Force
     Add-UserPath "$dir\Scripts"; Add-UserPath $dir
+    Save-Rec "python" @{ jak = "slozka"; slozka = $dir; path = @("$dir\Scripts", $dir) }
   }
   Refresh-Path
 } else { Say "2/4 Python uz mate." }
@@ -71,6 +86,7 @@ if (-not (Has claude)) {
   # Own process: the official script may end with "exit", which would end this one too.
   Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"irm https://claude.ai/install.ps1 | iex`"" -NoNewWindow -Wait
   Refresh-Path
+  if (Has claude) { Save-Rec "claude" @{ jak = "oficialni" } }
 } else { Say "3/4 Claude Code uz mate." }
 
 foreach ($c in "git", "claude") {
